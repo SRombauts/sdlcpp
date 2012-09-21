@@ -1,18 +1,17 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include <iostream>
 #include <SDL/SDL.h>
 
-// Les paramètres de notre écran 
-const int SCREEN_WIDTH  = 640; 
-const int SCREEN_HEIGHT = 480; 
+// Les paramètres de notre écran
+const int SCREEN_WIDTH  = 640;
+const int SCREEN_HEIGHT = 480;
 const int SCREEN_BPP    = 32;
 
 int main(void)
 {
     SDL_Surface* screen;
     if (-1 == SDL_Init(SDL_INIT_VIDEO))
-    { 
-        printf("Can't init SDL: %s\n", SDL_GetError());
+    {
+        std::cout << "Can't init SDL: " << SDL_GetError() << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -20,8 +19,8 @@ int main(void)
     screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_HWSURFACE);
     if (NULL == screen)
     {
-        printf("Can't set video mode: %s\n", SDL_GetError());
-        return EXIT_FAILURE; 
+        std::cout << "Can't set video mode: " << SDL_GetError() << std::endl;
+        return EXIT_FAILURE;
     }
 
     // Mise en place de la barre de titre
@@ -39,18 +38,19 @@ int main(void)
         if (0 == err)
         {
             // Mise à jour de l'écran
-            if (-1 == SDL_Flip( screen)) {
-                printf("Flip error: %s\n", SDL_GetError());
+            if (-1 == SDL_Flip( screen))
+            {
+               std::cout << "Flip error: %s\n" << SDL_GetError() << std::endl;
             }
         }
         else
         {
-            printf("Blit error: %s\n", SDL_GetError());
+           std::cout << "Blit error: %s\n" << SDL_GetError() << std::endl;
         }
     }
     else
     {
-        printf("Load error: %s\n", SDL_GetError());
+       std::cout << "Load error: %s\n" << SDL_GetError() << std::endl;
     }
 
     SDL_Delay(3000);

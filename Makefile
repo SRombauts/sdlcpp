@@ -2,7 +2,7 @@
 ### Options: ###
 
 # C++ compiler 
-CXX = gcc
+CXX = g++
 
 # flags for C++ 
 CXXFLAGS ?= -Wall -Wextra
@@ -50,7 +50,7 @@ $(BUILD)/sdl_tutorial: $(SDL_TUTORIAL_OBJECTS)
 	$(CXX) -o $@ $(SDL_TUTORIAL_OBJECTS) $(LINK_FLAGS) -lSDL
 
 
-$(BUILD)/SdlTutorial_main.o: src/main.c
+$(BUILD)/SdlTutorial_main.o: src/main.cpp
 	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
 
 .PHONY: all clean
