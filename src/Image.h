@@ -11,7 +11,7 @@
 class Image : public Surface
 {
 public:
-             Image(const char* apFileName);
+             Image(const char* apFileName, const Sint16 aX = 0, const Sint16 aY = 0);
     virtual ~Image(void);
 
 private:

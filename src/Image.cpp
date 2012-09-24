@@ -5,8 +5,8 @@
 #include "Screen.h"
 
 /// Constructeur RAII (exception en cas d'erreur : l'objet est toujours valide)
-Image::Image(const char* apFileName) :
-    Surface()
+Image::Image(const char* apFileName, const Sint16 aX /* = 0 */, const Sint16 aY /* = 0 */) :
+    Surface(aX, aY)
 {
     // Chargement de l'image
     mpSurface = SDL_LoadBMP(apFileName);

@@ -37,7 +37,7 @@ bool Screen::flip(void)
     bool bRet = (0 == SDL_Flip(mpSurface));
     if (false == bRet)
     {
-       std::cout << "Flip error: %s\n" << SDL_GetError() << std::endl;
+       std::cout << "Flip error: " << SDL_GetError() << std::endl;
     }
     return bRet;
 }
