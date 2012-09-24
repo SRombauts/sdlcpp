@@ -1,16 +1,18 @@
+#pragma once
+
 #include <SDL/SDL.h>
+#include "Surface.h"
 
-class Screen;
-
-/// Objet RAII exception dans le constructeur en cas d'erreur : l'objet est toujours valide)
-class Image
+/**
+ * @brief Encapsulation d'une image
+ *
+ * RAII ; exception dans le constructeur en cas d'erreur : l'objet est toujours valide)
+*/
+class Image : public Surface
 {
-    friend class Screen;
-
 public:
              Image(const char* apFileName);
     virtual ~Image(void);
 
 private:
-    SDL_Surface*    mpSurface;   //!< Surface SDL de la fenêtre de l'application
 };

@@ -6,7 +6,7 @@
 
 /// Constructeur RAII (exception en cas d'erreur : l'objet est toujours valide)
 Image::Image(const char* apFileName) :
-    mpSurface(NULL)
+    Surface()
 {
     // Chargement de l'image
     mpSurface = SDL_LoadBMP(apFileName);
@@ -25,8 +25,4 @@ Image::Image(const char* apFileName) :
 /// Destructeur : libération des ressources
 Image::~Image(void)
 {
-    if (NULL != mpSurface)
-    {
-        SDL_FreeSurface(mpSurface);
-    }
 }
