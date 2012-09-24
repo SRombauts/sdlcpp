@@ -1,20 +1,32 @@
 #include <iostream>
+#include <sstream>
+#include <stdexcept>
 #include "Image.h"
 #include "Screen.h"
 
-Image::Image (const char* apFileName) :
-    mpSurface(NULL),
-    mbValid(false)
+/// Constructeur RAII (exception en cas d'erreur : l'objet est toujours valide)
+Image::Image(const char* apFileName) :
+    mpSurface(NULL)
 {
     // Chargement de l'image
     mpSurface = SDL_LoadBMP(apFileName);
     // Si le chargement se passe bien
     if (NULL != mpSurface)
     {
-        mbValid = true;
     }
     else
     {
-       std::cout << "Load error: %s\n" << SDL_GetError() << std::endl;
+        std::ostringstream streamErr;
+        streamErr << "Image: Load error: " << SDL_GetError();
+        throw std::runtime_error(streamErr.str());
+    }
+}
+
+/// Destructeur : libération des ressources
+Image::~Image(void)
+{
+    if (NULL != mpSurface)
+    {
+        SDL_FreeSurface(mpSurface);
     }
 }

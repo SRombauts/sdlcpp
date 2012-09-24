@@ -23,14 +23,14 @@ int main(void)
 
         // Mise à jour de l'écran
         screen.flip();
+
+        SDL_Delay(3000);
     }
     else
     {
         std::cout << "Can't init SDL: " << SDL_GetError() << std::endl;
         return EXIT_FAILURE;
     }
-
-    SDL_Delay(3000);
 
     SDL_Quit();
 
