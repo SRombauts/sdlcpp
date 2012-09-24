@@ -26,9 +26,22 @@ int main(void)
 
             while (SDL_PollEvent(&event))
             {
-                if (SDL_QUIT == event.type)
+                switch(event.type)
                 {
-                    bRunning = false;
+                    case SDL_QUIT:
+                        // Si l'évènement QUIT est levé
+                        bRunning = false;
+                        break;
+                    case SDL_KEYDOWN:
+                        // Si une touche est pressée
+                        if (SDLK_ESCAPE == event.key.keysym.sym)
+                        {
+                            bRunning = false;
+                        }
+                        break;
+                    default:
+                        // Autre évènement
+                        ;
                 }
             }
             // Blitte l'image sur l'écran
