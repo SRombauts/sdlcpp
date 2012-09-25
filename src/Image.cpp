@@ -6,12 +6,25 @@ Image::Image (const char* apFileName) :
     mpSurface(NULL),
     mbValid(false)
 {
+    SDL_Surface* pSurfaceUnoptimized = NULL; // Surface tampon pour charger l'image non optimisé
+
     // Chargement de l'image
-    mpSurface = SDL_LoadBMP(apFileName);
-    // Si le chargement se passe bien
-    if (NULL != mpSurface)
+    pSurfaceUnoptimized = SDL_LoadBMP(apFileName);
+    // Si le chargement s'est bien passé
+    if (NULL != pSurfaceUnoptimized)
     {
-        mbValid = true;
+       // Création de l'image optimisée
+       mpSurface = SDL_DisplayFormat(pSurfaceUnoptimized);
+       if (NULL != mpSurface)
+       {
+           mbValid = true;
+       }
+       else
+       {
+          std::cout << "Optimize error: %s\n" << SDL_GetError() << std::endl;
+       }
+       // Libération de l'image non optimisée
+       SDL_FreeSurface(pSurfaceUnoptimized);
     }
     else
     {
