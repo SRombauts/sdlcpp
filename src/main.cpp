@@ -18,12 +18,15 @@ int main(void)
     {
         Screen screen(SCREEN_WIDTH, SCREEN_HEIGHT, "Hello World");
 
-        Image image("res/background.bmp");
-        Image sprite("res/sprite.bmp", 64, 48);
+        Image background("res/background.bmp");
+        Image sprite    ("res/sprite.bmp", true, 64, 48);
 
+        Uint32 fpsTick  = SDL_GetTicks();
+        Uint32 lastTick = SDL_GetTicks();
+        Uint32 nbFrame  = 0;
+        Uint32 fps = 0;
         while (bRunning)
         {
-
             while (SDL_PollEvent(&event))
             {
                 switch(event.type)
@@ -39,20 +42,55 @@ int main(void)
                             bRunning = false;
                         }
                         break;
+                    case SDL_MOUSEMOTION:
+                        if (event.motion.state & SDL_BUTTON(1)) // Bouton Gauche appuyé
+                        {
+                            sprite.getOffset().x = event.motion.x - sprite.getSurface().w/2;
+                            sprite.getOffset().y = event.motion.y - sprite.getSurface().h/2;
+                        }
+                        break;
+                    case SDL_MOUSEBUTTONDOWN:
+                        sprite.getOffset().x = event.button.x - sprite.getSurface().w/2;
+                        sprite.getOffset().y = event.button.y - sprite.getSurface().h/2;
+                        break;
                     default:
                         // Autre évènement
                         ;
                 }
             }
-            // Blitte l'image sur l'écran
-            screen.blit(image);
-            screen.blit(sprite);
-            sprite.getOffset().x = (sprite.getOffset().x+ 1)%(640+64);
+            // Incrémente le déplacement du sprite, et le limite à l'affichage sur l'écran
+            sprite.getOffset().x = sprite.getOffset().x + 5;
+            sprite.getOffset().x = (sprite.getOffset().x) % (screen.getSurface().w);
 
-            // Mise à jour de l'écran
+            // Blit le background puis le sprite sur l'écran (en double buffering)
+            screen.blit(background);
+            screen.blit(sprite);
+
+            // Mise à jour de l'écran (utilise le double buffering)
             screen.flip();
+
+            // Calcul du framerate
+            nbFrame++;
+            Uint32 currentTick  = SDL_GetTicks();
+            // Met à jour l'indicateur de FPS seulement une fois par seconde
+            Uint32 deltaFpsTick = (currentTick - fpsTick);
+            if (1000 < deltaFpsTick)
+            {
+                fps = (nbFrame*1000)/deltaFpsTick;
+                std::cout << fps << std::endl;
+
+                fpsTick = currentTick;
+                nbFrame = 0;
+            }
+
+            // Lissage du framerate vers 30 fps (33ms par frame)
+            Uint32 deltaTick = (currentTick - lastTick);
+            if (deltaTick < 33)
+            {
+                SDL_Delay(33 - deltaTick);
+            }
+            lastTick    = currentTick;
         }
-        //SDL_Delay(3000);
     }
     else
     {

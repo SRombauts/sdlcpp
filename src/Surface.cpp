@@ -4,11 +4,11 @@
 #include "Surface.h"
 
 /// Constructeur RAII (exception en cas d'erreur : l'objet est toujours valide)
-Surface::Surface(const Sint16 aX /* = 0 */, const Sint16 aY /* = 0 */) :
+Surface::Surface(const Sint16 aOffsetX /* = 0 */, const Sint16 aOffsetY /* = 0 */) :
     mpSurface(NULL)
 {
-    mOffset.x = aX;
-    mOffset.y = aY;
+    mOffset.x = aOffsetX;
+    mOffset.y = aOffsetY;
 }
 
 
@@ -33,8 +33,8 @@ bool Surface::blit(Surface& aSurface)
 }
 
 /// Met à jour l'offset de la surface courante
-void Surface::set(const Sint16 aX /* = 0 */, const Sint16 aY /* = 0 */)
+void Surface::set(const Sint16 aOffsetX /* = 0 */, const Sint16 aOffsetY /* = 0 */)
 {
-    mOffset.x = aX;
-    mOffset.y = aY;
+    mOffset.x = aOffsetX;
+    mOffset.y = aOffsetY;
 }
