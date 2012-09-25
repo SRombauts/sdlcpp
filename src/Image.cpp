@@ -1,10 +1,12 @@
 #include <iostream>
+#include <sstream>
+#include <stdexcept>
 #include "Image.h"
 #include "Screen.h"
 
-Image::Image (const char* apFileName) :
-    mpSurface(NULL),
-    mbValid(false)
+/// Constructeur RAII (exception en cas d'erreur : l'objet est toujours valide)
+Image::Image(const char* apFileName, const Sint16 aX /* = 0 */, const Sint16 aY /* = 0 */) :
+    Surface(aX, aY)
 {
     SDL_Surface* pSurfaceUnoptimized = NULL; // Surface tampon pour charger l'image non optimisé
 
@@ -17,17 +19,27 @@ Image::Image (const char* apFileName) :
        mpSurface = SDL_DisplayFormat(pSurfaceUnoptimized);
        if (NULL != mpSurface)
        {
-           mbValid = true;
+           // Libération de l'image non optimisée
+           SDL_FreeSurface(pSurfaceUnoptimized);
        }
        else
        {
-          std::cout << "Optimize error: %s\n" << SDL_GetError() << std::endl;
+          std::cout << "Image: Optimize error: %s\n" << SDL_GetError() << std::endl;
+          std::ostringstream streamErr;
+          streamErr << "Image: Load error: " << SDL_GetError();
+          throw std::runtime_error(streamErr.str());
        }
-       // Libération de l'image non optimisée
-       SDL_FreeSurface(pSurfaceUnoptimized);
     }
     else
     {
-       std::cout << "Load error: %s\n" << SDL_GetError() << std::endl;
+        std::ostringstream streamErr;
+        streamErr << "Image: Load error: " << SDL_GetError();
+        throw std::runtime_error(streamErr.str());
     }
+}
+
+/// Destructeur : libération des ressources
+Image::~Image(void)
+{
+    // Tout est fait dans le destructeur Surface::~Surface() de la classe mère
 }
