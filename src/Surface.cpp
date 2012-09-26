@@ -2,15 +2,13 @@
 #include <sstream>
 #include <stdexcept>
 #include "Surface.h"
+#include "Position.h"
 
-/// Constructeur RAII (exception en cas d'erreur : l'objet est toujours valide)
-Surface::Surface(const Sint16 aOffsetX /* = 0 */, const Sint16 aOffsetY /* = 0 */) :
+
+Surface::Surface(void) :
     mpSurface(NULL)
 {
-    mOffset.x = aOffsetX;
-    mOffset.y = aOffsetY;
 }
-
 
 /// Destructeur : libération des ressources
 Surface::~Surface(void)
@@ -24,7 +22,7 @@ Surface::~Surface(void)
 /// Blitte la surface passée en argument (avec son offset) sur la surface courante
 bool Surface::blit(Surface& aSurface)
 {
-    bool bRet = (0 == SDL_BlitSurface(aSurface.mpSurface, NULL, mpSurface, &aSurface.mOffset));
+    bool bRet = (0 == SDL_BlitSurface(aSurface.mpSurface, NULL, mpSurface, NULL));
     if (false == bRet)
     {
        std::cout << "Blit error: " << SDL_GetError() << std::endl;
@@ -32,9 +30,13 @@ bool Surface::blit(Surface& aSurface)
     return bRet;
 }
 
-/// Met à jour l'offset de la surface courante
-void Surface::set(const Sint16 aOffsetX /* = 0 */, const Sint16 aOffsetY /* = 0 */)
+/// Blitte la surface passée en argument (avec son offset) sur la surface courante
+bool Surface::blit(Surface& aSurface, Position& aOffset)
 {
-    mOffset.x = aOffsetX;
-    mOffset.y = aOffsetY;
+    bool bRet = (0 == SDL_BlitSurface(aSurface.mpSurface, NULL, mpSurface, &aOffset.getRect()));
+    if (false == bRet)
+    {
+       std::cout << "Blit error: " << SDL_GetError() << std::endl;
+    }
+    return bRet;
 }

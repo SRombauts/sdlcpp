@@ -5,8 +5,7 @@
 #include "Screen.h"
 
 /// Constructeur RAII (exception en cas d'erreur : l'objet est toujours valide)
-Image::Image(const char* apFileName, const bool abHasTransparence /* = false */, const Sint16 aX /* = 0 */, const Sint16 aY /* = 0 */) :
-    Surface(aX, aY)
+Image::Image(const char* apFileName, const bool abHasTransparence /* = false */)
 {
     SDL_Surface* pSurfaceUnoptimized = NULL; // Surface tampon pour charger l'image non optimisé
 

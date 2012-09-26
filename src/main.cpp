@@ -1,17 +1,24 @@
 #include <iostream>
 #include "Image.h"
 #include "Screen.h"
+#include "Position.h"
+
 
 // Les paramètres de notre écran
 const int SCREEN_WIDTH  = 640;
 const int SCREEN_HEIGHT = 480;
 
 
-int main(void)
+int main(int argc, char* argv[])
 {
     bool        bRunning = true;
     int         res;
     SDL_Event   event;
+
+    for (int arg = 0; arg < argc; arg++)
+    {
+        printf("%s", argv[arg]);
+    }
 
     res = SDL_Init(SDL_INIT_VIDEO);
     if (-1 != res)
@@ -19,7 +26,8 @@ int main(void)
         Screen screen(SCREEN_WIDTH, SCREEN_HEIGHT, "Hello World");
 
         Image background("res/background.bmp");
-        Image sprite    ("res/sprite.bmp", true, 64, 48);
+        Image sprite    ("res/sprite.bmp", true);
+        Position position(64, 48);
 
         Uint32 fpsTick  = SDL_GetTicks();
         Uint32 lastTick = SDL_GetTicks();
@@ -45,13 +53,13 @@ int main(void)
                     case SDL_MOUSEMOTION:
                         if (event.motion.state & SDL_BUTTON(1)) // Bouton Gauche appuyé
                         {
-                            sprite.getOffset().x = event.motion.x - sprite.getSurface().w/2;
-                            sprite.getOffset().y = event.motion.y - sprite.getSurface().h/2;
+                            position.set ((Sint16)(event.motion.x - sprite.getSurface().w/2),
+                                          (Sint16)(event.motion.y - sprite.getSurface().h/2));
                         }
                         break;
                     case SDL_MOUSEBUTTONDOWN:
-                        sprite.getOffset().x = event.button.x - sprite.getSurface().w/2;
-                        sprite.getOffset().y = event.button.y - sprite.getSurface().h/2;
+                        position.set ((Sint16)(event.motion.x - sprite.getSurface().w/2),
+                                      (Sint16)(event.motion.y - sprite.getSurface().h/2));
                         break;
                     default:
                         // Autre évènement
@@ -59,12 +67,16 @@ int main(void)
                 }
             }
             // Incrémente le déplacement du sprite, et le limite à l'affichage sur l'écran
-            sprite.getOffset().x = sprite.getOffset().x + 5;
-            sprite.getOffset().x = (sprite.getOffset().x) % (screen.getSurface().w);
+            position.incr(5, 0);
+            // TODO sprite.getOffset().x = (sprite.getOffset().x) % (screen.getSurface().w);
+            if (position.getRect().x >= (screen.getSurface().w))
+            {
+                position.getRect().x = 0;
+            }
 
             // Blit le background puis le sprite sur l'écran (en double buffering)
             screen.blit(background);
-            screen.blit(sprite);
+            screen.blit(sprite, position);
 
             // Mise à jour de l'écran (utilise le double buffering)
             screen.flip();

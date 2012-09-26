@@ -5,7 +5,11 @@
 CXX = g++
 
 # flags for C++ 
-CXXFLAGS ?= -Wall -Wextra
+# TODO SRombauts :
+# -Weffc++ pose problème
+# -Werror
+# -Wzero-as-null-pointer-constant ?
+CXXFLAGS ?= -Wall -Wextra -pedantic -Wformat-security -Winit-self -Wswitch-default -Wswitch-enum -Wfloat-equal -Wundef -Wshadow -Wcast-qual -Wconversion -Wlogical-op -Wmissing-declarations -Winline -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wsuggest-attribute=noreturn
 
 # [Debug,Release]
 BUILD ?= Debug
@@ -32,9 +36,10 @@ CPPDEPS = -MT $@ -MF`echo $@ | sed -e 's,\.o$$,.d,'` -MD -MP
 SDL_TUTORIAL_CXXFLAGS = $(BUILD_FLAGS) $(CXXFLAGS)
 SDL_TUTORIAL_OBJECTS =  \
 	$(BUILD)/SdlTutorial_main.o \
-	$(BUILD)/SdlTutorial_Surface.o \
-	$(BUILD)/SdlTutorial_Screen.o \
 	$(BUILD)/SdlTutorial_Image.o \
+	$(BUILD)/SdlTutorial_Position.o \
+	$(BUILD)/SdlTutorial_Screen.o \
+	$(BUILD)/SdlTutorial_Surface.o \
 	
 	
 ### Targets: ###
@@ -57,6 +62,9 @@ $(BUILD)/SdlTutorial_main.o: src/main.cpp
 	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlTutorial_Image.o: src/Image.cpp
+	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlTutorial_Position.o: src/Position.cpp
 	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlTutorial_Screen.o: src/Screen.cpp
