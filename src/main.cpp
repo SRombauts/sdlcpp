@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Image.h"
 #include "Screen.h"
+#include "Sprite.h"
 #include "Position.h"
 
 
@@ -25,9 +26,10 @@ int main(int argc, char* argv[])
     {
         Screen screen(SCREEN_WIDTH, SCREEN_HEIGHT, "Hello World");
 
-        Image background("res/background.bmp");
-        Image sprite    ("res/sprite.bmp", true);
-        Position position(64, 48);
+        Image       background  ("res/background.bmp");
+        Image       image       ("res/sprite.bmp", true);
+        Sprite      sprite      (image, 7, 10, 50, 100);
+        Position    position    (64, 48);
 
         Uint32 fpsTick  = SDL_GetTicks();
         Uint32 lastTick = SDL_GetTicks();
@@ -53,13 +55,13 @@ int main(int argc, char* argv[])
                     case SDL_MOUSEMOTION:
                         if (event.motion.state & SDL_BUTTON(1)) // Bouton Gauche appuyé
                         {
-                            position.set ((Sint16)(event.motion.x - sprite.getSurface().w/2),
-                                          (Sint16)(event.motion.y - sprite.getSurface().h/2));
+                            position.set ((Sint16)(event.motion.x - sprite.getSurface().getSurface().w/2),
+                                          (Sint16)(event.motion.y - sprite.getSurface().getSurface().h/2));
                         }
                         break;
                     case SDL_MOUSEBUTTONDOWN:
-                        position.set ((Sint16)(event.motion.x - sprite.getSurface().w/2),
-                                      (Sint16)(event.motion.y - sprite.getSurface().h/2));
+                        position.set ((Sint16)(event.motion.x - sprite.getSurface().getSurface().w/2),
+                                      (Sint16)(event.motion.y - sprite.getSurface().getSurface().h/2));
                         break;
                     default:
                         // Autre évènement
@@ -68,7 +70,6 @@ int main(int argc, char* argv[])
             }
             // Incrémente le déplacement du sprite, et le limite à l'affichage sur l'écran
             position.incr(5, 0);
-            // TODO sprite.getOffset().x = (sprite.getOffset().x) % (screen.getSurface().w);
             if (position.getRect().x >= (screen.getSurface().w))
             {
                 position.getRect().x = 0;

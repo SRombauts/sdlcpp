@@ -15,7 +15,7 @@ public:
              Position(const Sint16 aX = 0, const Sint16 aY = 0);
     virtual ~Position(void);
 
-    /// Met à jour l'offset
+    /// Met à jour la position
     void set(const Sint16 aX = 0, const Sint16 aY = 0);
     void incr(const Sint16 aIncrX = 0, const Sint16 aIncrY = 0);
 
@@ -30,5 +30,5 @@ public:
     }
 
 protected:
-    SDL_Rect    mRect;    //!< Rect (x,y) de la surface dans sa surface parent
+    SDL_Rect    mRect;  //!< Rect contenant la position (x,y)
 };

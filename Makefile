@@ -38,7 +38,9 @@ SDL_TUTORIAL_OBJECTS =  \
 	$(BUILD)/SdlTutorial_main.o \
 	$(BUILD)/SdlTutorial_Image.o \
 	$(BUILD)/SdlTutorial_Position.o \
+	$(BUILD)/SdlTutorial_Rect.o \
 	$(BUILD)/SdlTutorial_Screen.o \
+	$(BUILD)/SdlTutorial_Sprite.o \
 	$(BUILD)/SdlTutorial_Surface.o \
 	
 	
@@ -67,7 +69,13 @@ $(BUILD)/SdlTutorial_Image.o: src/Image.cpp
 $(BUILD)/SdlTutorial_Position.o: src/Position.cpp
 	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
 
+$(BUILD)/SdlTutorial_Rect.o: src/Rect.cpp
+	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+
 $(BUILD)/SdlTutorial_Screen.o: src/Screen.cpp
+	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlTutorial_Sprite.o: src/Sprite.cpp
 	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlTutorial_Surface.o: src/Surface.cpp
