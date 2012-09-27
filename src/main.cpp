@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Animation.h"
 #include "Image.h"
 #include "Screen.h"
 #include "Sprite.h"
@@ -30,6 +31,20 @@ int main(int argc, char* argv[])
         Image::Ptr  imagePtr    (new Image("res/sprite.bmp", true));
         Sprite::Ptr spritePtr   (new Sprite(imagePtr, 7, 10, 50, 100));
         Position    position    (64, 48);
+        Image::Ptr  planchePtr  (new Image("res/animation.bmp", true));
+        Sprite::Ptr sprite0Ptr  (new Sprite(planchePtr, 0, 32+64, 32, 64));
+        Sprite::Ptr sprite3Ptr  (new Sprite(planchePtr, 32, 32+64, 32, 64));
+        Sprite::Ptr sprite2Ptr  (new Sprite(planchePtr, 2*32, 32+64, 32, 64));
+        Sprite::Ptr sprite1Ptr  (new Sprite(planchePtr, 3*32, 32+64, 32, 64));
+        Sprite::Ptr sprite4Ptr  (new Sprite(planchePtr, 4*32, 32+64, 32, 64));
+        Sprite::Ptr sprite5Ptr  (new Sprite(planchePtr, 5*32, 32+64, 32, 64));
+        Animation::Ptr animationPtr (new Animation(sprite1Ptr));
+        animationPtr->addSprite (sprite2Ptr);
+        animationPtr->addSprite (sprite3Ptr);
+        animationPtr->addSprite (sprite1Ptr);
+        animationPtr->addSprite (sprite4Ptr);
+        animationPtr->addSprite (sprite5Ptr);
+        Position    positionFixe(0, 200);
 
         Uint32 fpsTick  = SDL_GetTicks();
         Uint32 lastTick = SDL_GetTicks();
@@ -78,6 +93,12 @@ int main(int argc, char* argv[])
             // Blit le background puis le sprite sur l'écran (en double buffering)
             screen.blit(background);
             screen.blit(*spritePtr, position);
+
+            screen.blit(*(animationPtr->getSprite()), positionFixe);
+            if (0 == (nbFrame%10))
+            {
+                animationPtr->next();
+            }
 
             // Mise à jour de l'écran (utilise le double buffering)
             screen.flip();

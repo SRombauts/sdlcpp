@@ -28,6 +28,10 @@ public:
     {
         return mIndex;
     }
+    inline unsigned long setIndex(unsigned long aIndex)
+    {
+        return mIndex = (aIndex%mSpriteVector.size());
+    }
     inline Sprite::Ptr getSprite(void)
     {
         return mSpriteVector[mIndex];
@@ -37,7 +41,9 @@ public:
         return mSpriteVector[aIndex];
     }
 
-    typedef std::vector<Sprite::Ptr>    SpriteVector;
+    typedef std::vector<Sprite::Ptr>        SpriteVector;
+
+    typedef boost::shared_ptr<Animation>    Ptr;
 
 private:
     SpriteVector    mSpriteVector;  //!< Liste des Sprites de l'Animation
