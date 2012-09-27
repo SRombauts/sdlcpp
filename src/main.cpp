@@ -27,8 +27,8 @@ int main(int argc, char* argv[])
         Screen screen(SCREEN_WIDTH, SCREEN_HEIGHT, "Hello World");
 
         Image       background  ("res/background.bmp");
-        Image       image       ("res/sprite.bmp", true);
-        Sprite      sprite      (image, 7, 10, 50, 100);
+        Image::Ptr  imagePtr    (new Image("res/sprite.bmp", true));
+        Sprite::Ptr spritePtr   (new Sprite(imagePtr, 7, 10, 50, 100));
         Position    position    (64, 48);
 
         Uint32 fpsTick  = SDL_GetTicks();
@@ -55,13 +55,13 @@ int main(int argc, char* argv[])
                     case SDL_MOUSEMOTION:
                         if (event.motion.state & SDL_BUTTON(1)) // Bouton Gauche appuyé
                         {
-                            position.set ((Sint16)(event.motion.x - sprite.getSurface().getSurface().w/2),
-                                          (Sint16)(event.motion.y - sprite.getSurface().getSurface().h/2));
+                            position.set ((Sint16)(event.motion.x - spritePtr->getSurface().getSurface().w/2),
+                                          (Sint16)(event.motion.y - spritePtr->getSurface().getSurface().h/2));
                         }
                         break;
                     case SDL_MOUSEBUTTONDOWN:
-                        position.set ((Sint16)(event.motion.x - sprite.getSurface().getSurface().w/2),
-                                      (Sint16)(event.motion.y - sprite.getSurface().getSurface().h/2));
+                        position.set ((Sint16)(event.motion.x - spritePtr->getSurface().getSurface().w/2),
+                                      (Sint16)(event.motion.y - spritePtr->getSurface().getSurface().h/2));
                         break;
                     default:
                         // Autre évènement
@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 
             // Blit le background puis le sprite sur l'écran (en double buffering)
             screen.blit(background);
-            screen.blit(sprite, position);
+            screen.blit(*spritePtr, position);
 
             // Mise à jour de l'écran (utilise le double buffering)
             screen.flip();

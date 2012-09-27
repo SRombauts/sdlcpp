@@ -1,9 +1,10 @@
 #pragma once
 
 #include <SDL/SDL.h>
-#include "Rect.h"
+#include <boost/shared_ptr.hpp>
 
-class Surface;
+#include "Rect.h"
+#include "Surface.h"
 
 /**
  * @brief Encapsulation d'un sprite sur une surface SDL
@@ -12,20 +13,18 @@ class Surface;
 */
 class Sprite
 {
-    friend class Screen;
-
 public:
-             Sprite(Surface& aSurface, const Sint16 aX, const Sint16 aY, const Uint16 aW, const Uint16 aH);
+             Sprite(Surface::Ptr& aSurfacePtr, const Sint16 aX, const Sint16 aY, const Uint16 aW, const Uint16 aH);
     virtual ~Sprite(void);
 
     /// Accesseurs simples
     inline       Surface&   getSurface(void)
     {
-        return mSurface;
+        return *mSurfacePtr;
     }
     inline const Surface&   getSurface(void) const
     {
-        return mSurface;
+        return *mSurfacePtr;
     }
     inline       Rect&      getRect(void)
     {
@@ -36,7 +35,9 @@ public:
         return mRect;
     }
 
-protected:
-    Surface&    mSurface;   //!< Référence sur la Surface portant le Sprite
-    Rect        mRect;      //!< Rectangle délimitant le Sprite dans la Surface
+    typedef boost::shared_ptr<Sprite>   Ptr;
+
+private:
+    Surface::Ptr    mSurfacePtr;//!< Pointeur sur la Surface portant le Sprite (toujours valable, RAII)
+    Rect            mRect;      //!< Rectangle délimitant le Sprite dans la Surface
 };

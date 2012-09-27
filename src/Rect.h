@@ -10,8 +10,6 @@
 */
 class Rect
 {
-    friend class Screen;
-
 public:
              Rect(const Sint16 aX, const Sint16 aY, const Uint16 aW, const Uint16 aH);
     virtual ~Rect(void);
@@ -50,7 +48,7 @@ public:
         return mY2;
     }
 
-protected:
+private:
     SDL_Rect    mRect;  //!< Rectangle (x,y,w,h) délimitant un morceau de surface
     Sint16      mX2;    //!< X2=x+w calculée une fois pour toute à la construction
     Sint16      mY2;    //!< Y2=y+h calculée une fois pour toute à la construction

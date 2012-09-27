@@ -9,8 +9,6 @@
 */
 class Position
 {
-    friend class Screen;
-
 public:
              Position(const Sint16 aX = 0, const Sint16 aY = 0);
     virtual ~Position(void);
@@ -29,6 +27,6 @@ public:
         return mRect;
     }
 
-protected:
+private:
     SDL_Rect    mRect;  //!< Rect contenant la position (x,y)
 };

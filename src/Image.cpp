@@ -1,4 +1,3 @@
-#include <iostream>
 #include <sstream>
 #include <stdexcept>
 #include "Image.h"

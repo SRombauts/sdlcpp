@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL/SDL.h>
+#include <boost/shared_ptr.hpp>
 
 class Position;
 class Sprite;
@@ -12,8 +13,6 @@ class Sprite;
 */
 class Surface
 {
-    friend class Screen;
-
 public:
              Surface(void);
     virtual ~Surface(void);
@@ -40,6 +39,8 @@ public:
     {
         return (*mpSurface).h; // Jamais NULL une fois l'objet construit
     }
+
+    typedef boost::shared_ptr<Surface>  Ptr;
 
 private:
     /// @{ Interdiction de la copie d'instance, car cette classe gère une ressource allouée dynamiquement

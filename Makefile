@@ -36,6 +36,7 @@ CPPDEPS = -MT $@ -MF`echo $@ | sed -e 's,\.o$$,.d,'` -MD -MP
 SDL_TUTORIAL_CXXFLAGS = $(BUILD_FLAGS) $(CXXFLAGS)
 SDL_TUTORIAL_OBJECTS =  \
 	$(BUILD)/SdlTutorial_main.o \
+	$(BUILD)/SdlTutorial_Animation.o \
 	$(BUILD)/SdlTutorial_Image.o \
 	$(BUILD)/SdlTutorial_Position.o \
 	$(BUILD)/SdlTutorial_Rect.o \
@@ -61,6 +62,9 @@ $(BUILD)/sdl_tutorial: $(SDL_TUTORIAL_OBJECTS)
 
 
 $(BUILD)/SdlTutorial_main.o: src/main.cpp
+	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlTutorial_Animation.o: src/Animation.cpp
 	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlTutorial_Image.o: src/Image.cpp
