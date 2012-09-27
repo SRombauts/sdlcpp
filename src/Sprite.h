@@ -2,6 +2,7 @@
 
 #include <SDL/SDL.h>
 #include <boost/shared_ptr.hpp>
+#include <vector>
 
 #include "Rect.h"
 #include "Surface.h"
@@ -36,6 +37,7 @@ public:
     }
 
     typedef boost::shared_ptr<Sprite>   Ptr;
+    typedef std::vector<Sprite::Ptr>    Vector;
 
 private:
     Surface::Ptr    mSurfacePtr;//!< Pointeur sur la Surface portant le Sprite (toujours valable, RAII)

@@ -37,6 +37,7 @@ SDL_TUTORIAL_CXXFLAGS = $(BUILD_FLAGS) $(CXXFLAGS)
 SDL_TUTORIAL_OBJECTS =  \
 	$(BUILD)/SdlTutorial_main.o \
 	$(BUILD)/SdlTutorial_Animation.o \
+	$(BUILD)/SdlTutorial_Entity.o \
 	$(BUILD)/SdlTutorial_Image.o \
 	$(BUILD)/SdlTutorial_Position.o \
 	$(BUILD)/SdlTutorial_Rect.o \
@@ -65,6 +66,9 @@ $(BUILD)/SdlTutorial_main.o: src/main.cpp
 	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlTutorial_Animation.o: src/Animation.cpp
+	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlTutorial_Entity.o: src/Entity.cpp
 	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlTutorial_Image.o: src/Image.cpp

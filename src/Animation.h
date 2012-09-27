@@ -41,11 +41,10 @@ public:
         return mSpriteVector[aIndex];
     }
 
-    typedef std::vector<Sprite::Ptr>        SpriteVector;
-
     typedef boost::shared_ptr<Animation>    Ptr;
+    typedef std::vector<Animation::Ptr>     Vector;
 
 private:
-    SpriteVector    mSpriteVector;  //!< Liste des Sprites de l'Animation
+    Sprite::Vector  mSpriteVector;  //!< Liste des Sprites de l'Animation
     unsigned long   mIndex;         //!< Index du Sprite courant dans l'Animation
 };
