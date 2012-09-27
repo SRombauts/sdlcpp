@@ -24,4 +24,3 @@ void Position::incr(const Sint16 aIncrX /* = 0 */, const Sint16 aIncrY /* = 0 */
     mRect.x = (Sint16)(mRect.x + aIncrX);
     mRect.y = (Sint16)(mRect.y + aIncrY);
 }
-

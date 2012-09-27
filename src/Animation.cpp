@@ -38,9 +38,11 @@ unsigned long Animation::addSprite(Sprite::Ptr& aSpritePtr)
 }
 
 // Incrémente l'index du Sprite courant, et repasse à zéro en cas de dépassement
+/*
 unsigned long Animation::next(void)
 {
     mIndex++;
     mIndex = mIndex % mSpriteVector.size();
     return mIndex;
 }
+*/

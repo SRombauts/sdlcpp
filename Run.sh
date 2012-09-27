@@ -1,3 +1,3 @@
 #!/bin/sh
 
-Debug/sdl_tutorial
+Debug/sdlcpp

@@ -4,8 +4,9 @@
 #include <vector>
 #include <boost/shared_ptr.hpp>
 
-#include "Sprite.h"
 #include "Animation.h"
+#include "Sprite.h"
+#include "Position.h"
 
 
 /**
@@ -30,7 +31,31 @@ public:
     /// Accesseurs simples
     inline Sprite::Ptr getSprite(void)
     {
-        return mSpritesOrientation[mCurrentOrientation];
+        return mSpritesOrientation[mOrientation];
+    }
+    inline void setPosition(const Position& aPosition)
+    {
+        mPosition = aPosition;
+    }
+    inline       Position& getPosition(void)
+    {
+        return mPosition;
+    }
+    inline const Position& getPosition(void) const
+    {
+        return mPosition;
+    }
+    inline       Orientation& getOrientation(void)
+    {
+        return mOrientation;
+    }
+    inline const Orientation& getOrientation(void) const
+    {
+        return mOrientation;
+    }
+    inline void setOrientation(const Orientation& aOrientation)
+    {
+        mOrientation = aOrientation;
     }
 
     typedef boost::shared_ptr<Entity>    Ptr;
@@ -39,6 +64,7 @@ public:
 private:
     Sprite::Vector      mSpritesOrientation;    //!< Vecteur contenant les 4 sprites d'orientation
     Animation::Vector   mAnimationsOrientation; //!< Vecteur contenant les 4 animations d'orientation
-    Orientation         mCurrentOrientation;    //!< Orientation courante
-    int                 mCurrentSpeed;          //!< Vitesse courante
+    Position            mPosition;              //!< Position de l'Entity
+    Orientation         mOrientation;           //!< Orientation courante
+    int                 mSpeed;                 //!< Vitesse courante
 };

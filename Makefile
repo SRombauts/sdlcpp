@@ -33,61 +33,61 @@ endif
 
 CPPDEPS = -MT $@ -MF`echo $@ | sed -e 's,\.o$$,.d,'` -MD -MP
 
-SDL_TUTORIAL_CXXFLAGS = $(BUILD_FLAGS) $(CXXFLAGS)
-SDL_TUTORIAL_OBJECTS =  \
-	$(BUILD)/SdlTutorial_main.o \
-	$(BUILD)/SdlTutorial_Animation.o \
-	$(BUILD)/SdlTutorial_Entity.o \
-	$(BUILD)/SdlTutorial_Image.o \
-	$(BUILD)/SdlTutorial_Position.o \
-	$(BUILD)/SdlTutorial_Rect.o \
-	$(BUILD)/SdlTutorial_Screen.o \
-	$(BUILD)/SdlTutorial_Sprite.o \
-	$(BUILD)/SdlTutorial_Surface.o \
+SDLCPP_CXXFLAGS = $(BUILD_FLAGS) $(CXXFLAGS)
+SDLCPP_OBJECTS =  \
+	$(BUILD)/SdlCpp_main.o \
+	$(BUILD)/SdlCpp_Animation.o \
+	$(BUILD)/SdlCpp_Entity.o \
+	$(BUILD)/SdlCpp_Image.o \
+	$(BUILD)/SdlCpp_Position.o \
+	$(BUILD)/SdlCpp_Rect.o \
+	$(BUILD)/SdlCpp_Screen.o \
+	$(BUILD)/SdlCpp_Sprite.o \
+	$(BUILD)/SdlCpp_Surface.o \
 	
 	
 ### Targets: ###
 
-all: $(BUILD) $(BUILD)/sdl_tutorial
+all: $(BUILD) $(BUILD)/sdlcpp
 
 clean: 
 	rm -f $(BUILD)/*.o
 	rm -f $(BUILD)/*.d
-	rm -f $(BUILD)/sdl_tutorial
+	rm -f $(BUILD)/sdlcpp
 
 $(BUILD): $(BUILD)/
 	mkdir -p $(BUILD)
 
-$(BUILD)/sdl_tutorial: $(SDL_TUTORIAL_OBJECTS)
-	$(CXX) -o $@ $(SDL_TUTORIAL_OBJECTS) $(LINK_FLAGS) -lSDL
+$(BUILD)/sdlcpp: $(SDLCPP_OBJECTS)
+	$(CXX) -o $@ $(SDLCPP_OBJECTS) $(LINK_FLAGS) -lSDL
 
 
-$(BUILD)/SdlTutorial_main.o: src/main.cpp
-	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+$(BUILD)/SdlCpp_main.o: src/main.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlTutorial_Animation.o: src/Animation.cpp
-	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+$(BUILD)/SdlCpp_Animation.o: src/Animation.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlTutorial_Entity.o: src/Entity.cpp
-	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+$(BUILD)/SdlCpp_Entity.o: src/Entity.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlTutorial_Image.o: src/Image.cpp
-	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+$(BUILD)/SdlCpp_Image.o: src/Image.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlTutorial_Position.o: src/Position.cpp
-	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+$(BUILD)/SdlCpp_Position.o: src/Position.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlTutorial_Rect.o: src/Rect.cpp
-	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+$(BUILD)/SdlCpp_Rect.o: src/Rect.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlTutorial_Screen.o: src/Screen.cpp
-	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+$(BUILD)/SdlCpp_Screen.o: src/Screen.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlTutorial_Sprite.o: src/Sprite.cpp
-	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+$(BUILD)/SdlCpp_Sprite.o: src/Sprite.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlTutorial_Surface.o: src/Surface.cpp
-	$(CXX) -c -o $@ $(SDL_TUTORIAL_CXXFLAGS) $(CPPDEPS) $<
+$(BUILD)/SdlCpp_Surface.o: src/Surface.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 .PHONY: all clean
 

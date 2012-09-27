@@ -32,19 +32,62 @@ int main(int argc, char* argv[])
         Sprite::Ptr spritePtr   (new Sprite(imagePtr, 7, 10, 50, 100));
         Position    position    (64, 48);
         Image::Ptr  planchePtr  (new Image("res/animation.bmp", true));
-        Sprite::Ptr sprite0Ptr  (new Sprite(planchePtr, 0, 32+64, 32, 64));
-        Sprite::Ptr sprite3Ptr  (new Sprite(planchePtr, 32, 32+64, 32, 64));
-        Sprite::Ptr sprite2Ptr  (new Sprite(planchePtr, 2*32, 32+64, 32, 64));
-        Sprite::Ptr sprite1Ptr  (new Sprite(planchePtr, 3*32, 32+64, 32, 64));
-        Sprite::Ptr sprite4Ptr  (new Sprite(planchePtr, 4*32, 32+64, 32, 64));
-        Sprite::Ptr sprite5Ptr  (new Sprite(planchePtr, 5*32, 32+64, 32, 64));
-        Animation::Ptr animationPtr (new Animation(sprite1Ptr));
-        animationPtr->addSprite (sprite2Ptr);
-        animationPtr->addSprite (sprite3Ptr);
-        animationPtr->addSprite (sprite1Ptr);
-        animationPtr->addSprite (sprite4Ptr);
-        animationPtr->addSprite (sprite5Ptr);
-        Position    positionFixe(0, 200);
+        Sprite::Ptr spriteUp0Ptr  (new Sprite(planchePtr,    0, 32, 32, 64));
+        Sprite::Ptr spriteUp3Ptr  (new Sprite(planchePtr,   32, 32, 32, 64));
+        Sprite::Ptr spriteUp2Ptr  (new Sprite(planchePtr, 2*32, 32, 32, 64));
+        Sprite::Ptr spriteUp1Ptr  (new Sprite(planchePtr, 3*32, 32, 32, 64));
+        Sprite::Ptr spriteUp4Ptr  (new Sprite(planchePtr, 4*32, 32, 32, 64));
+        Sprite::Ptr spriteUp5Ptr  (new Sprite(planchePtr, 5*32, 32, 32, 64));
+        Animation::Ptr animationUpPtr (new Animation(spriteUp1Ptr));
+        animationUpPtr->addSprite (spriteUp2Ptr);
+        animationUpPtr->addSprite (spriteUp3Ptr);
+        animationUpPtr->addSprite (spriteUp1Ptr);
+        animationUpPtr->addSprite (spriteUp4Ptr);
+        animationUpPtr->addSprite (spriteUp5Ptr);
+        animationUpPtr->setIndex(0);
+        Sprite::Ptr spriteDown0Ptr  (new Sprite(planchePtr,    0, 32+64, 32, 64));
+        Sprite::Ptr spriteDown3Ptr  (new Sprite(planchePtr,   32, 32+64, 32, 64));
+        Sprite::Ptr spriteDown2Ptr  (new Sprite(planchePtr, 2*32, 32+64, 32, 64));
+        Sprite::Ptr spriteDown1Ptr  (new Sprite(planchePtr, 3*32, 32+64, 32, 64));
+        Sprite::Ptr spriteDown4Ptr  (new Sprite(planchePtr, 4*32, 32+64, 32, 64));
+        Sprite::Ptr spriteDown5Ptr  (new Sprite(planchePtr, 5*32, 32+64, 32, 64));
+        Animation::Ptr animationDownPtr (new Animation(spriteDown1Ptr));
+        animationDownPtr->addSprite (spriteDown2Ptr);
+        animationDownPtr->addSprite (spriteDown3Ptr);
+        animationDownPtr->addSprite (spriteDown1Ptr);
+        animationDownPtr->addSprite (spriteDown4Ptr);
+        animationDownPtr->addSprite (spriteDown5Ptr);
+        animationDownPtr->setIndex(1);
+        Sprite::Ptr spriteRight0Ptr  (new Sprite(planchePtr,    0, 32+2*64, 32, 64));
+        Sprite::Ptr spriteRight3Ptr  (new Sprite(planchePtr,   32, 32+2*64, 32, 64));
+        Sprite::Ptr spriteRight2Ptr  (new Sprite(planchePtr, 2*32, 32+2*64, 32, 64));
+        Sprite::Ptr spriteRight1Ptr  (new Sprite(planchePtr, 3*32, 32+2*64, 32, 64));
+        Sprite::Ptr spriteRight4Ptr  (new Sprite(planchePtr, 4*32, 32+2*64, 32, 64));
+        Sprite::Ptr spriteRight5Ptr  (new Sprite(planchePtr, 5*32, 32+2*64, 32, 64));
+        Animation::Ptr animationRightPtr (new Animation(spriteRight1Ptr));
+        animationRightPtr->addSprite (spriteRight2Ptr);
+        animationRightPtr->addSprite (spriteRight3Ptr);
+        animationRightPtr->addSprite (spriteRight1Ptr);
+        animationRightPtr->addSprite (spriteRight4Ptr);
+        animationRightPtr->addSprite (spriteRight5Ptr);
+        animationRightPtr->setIndex(2);
+        Sprite::Ptr spriteLeft0Ptr  (new Sprite(planchePtr,    0, 32+3*64, 32, 64));
+        Sprite::Ptr spriteLeft3Ptr  (new Sprite(planchePtr,   32, 32+3*64, 32, 64));
+        Sprite::Ptr spriteLeft2Ptr  (new Sprite(planchePtr, 2*32, 32+3*64, 32, 64));
+        Sprite::Ptr spriteLeft1Ptr  (new Sprite(planchePtr, 3*32, 32+3*64, 32, 64));
+        Sprite::Ptr spriteLeft4Ptr  (new Sprite(planchePtr, 4*32, 32+3*64, 32, 64));
+        Sprite::Ptr spriteLeft5Ptr  (new Sprite(planchePtr, 5*32, 32+3*64, 32, 64));
+        Animation::Ptr animationLeftPtr (new Animation(spriteLeft1Ptr));
+        animationLeftPtr->addSprite (spriteLeft2Ptr);
+        animationLeftPtr->addSprite (spriteLeft3Ptr);
+        animationLeftPtr->addSprite (spriteLeft1Ptr);
+        animationLeftPtr->addSprite (spriteLeft4Ptr);
+        animationLeftPtr->addSprite (spriteLeft5Ptr);
+        animationLeftPtr->setIndex(3);
+        Position    positionFixeUp(0, 200);
+        Position    positionFixeDown(100, 200);
+        Position    positionFixeRight(200, 200);
+        Position    positionFixeLeft(300, 200);
 
         Uint32 fpsTick  = SDL_GetTicks();
         Uint32 lastTick = SDL_GetTicks();
@@ -94,10 +137,25 @@ int main(int argc, char* argv[])
             screen.blit(background);
             screen.blit(*spritePtr, position);
 
-            screen.blit(*(animationPtr->getSprite()), positionFixe);
+            screen.blit(*(animationUpPtr->getSprite()), positionFixeUp);
             if (0 == (nbFrame%10))
             {
-                animationPtr->next();
+                animationUpPtr->next();
+            }
+            screen.blit(*(animationDownPtr->getSprite()), positionFixeDown);
+            if (0 == (nbFrame%10))
+            {
+                animationDownPtr->next();
+            }
+            screen.blit(*(animationRightPtr->getSprite()), positionFixeRight);
+            if (0 == (nbFrame%10))
+            {
+                animationRightPtr->next();
+            }
+            screen.blit(*(animationLeftPtr->getSprite()), positionFixeLeft);
+            if (0 == (nbFrame%10))
+            {
+                animationLeftPtr->next();
             }
 
             // Mise à jour de l'écran (utilise le double buffering)
@@ -111,7 +169,7 @@ int main(int argc, char* argv[])
             if (1000 < deltaFpsTick)
             {
                 fps = (nbFrame*1000)/deltaFpsTick;
-                std::cout << fps << std::endl;
+                //std::cout << fps << std::endl;
 
                 fpsTick = currentTick;
                 nbFrame = 0;

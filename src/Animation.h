@@ -21,7 +21,10 @@ public:
     unsigned long addSprite(Sprite::Ptr& aSpritePtr);
 
     // Incrémente l'index du sprite courant
-    unsigned long next(void);
+    inline unsigned long next(void)
+    {
+        return setIndex(++mIndex);
+    }
 
     /// Accesseurs simples
     inline unsigned long getIndex(void)

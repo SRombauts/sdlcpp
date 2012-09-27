@@ -8,8 +8,8 @@
 Entity::Entity(Sprite::Vector& aSpritesOrientation, Animation::Vector& aAnimationsOrientation) :
     mSpritesOrientation(aSpritesOrientation),
     mAnimationsOrientation(aAnimationsOrientation),
-    mCurrentOrientation(eOrientationRight),
-    mCurrentSpeed(0)
+    mOrientation(eOrientationRight),
+    mSpeed(0)
 {
     if (4 != aSpritesOrientation.size())
     {
