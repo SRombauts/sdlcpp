@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Animation.h"
+#include "Entity.h"
 #include "Image.h"
 #include "Screen.h"
 #include "Sprite.h"
@@ -38,56 +39,72 @@ int main(int argc, char* argv[])
         Sprite::Ptr spriteUp1Ptr  (new Sprite(planchePtr, 3*32, 32, 32, 64));
         Sprite::Ptr spriteUp4Ptr  (new Sprite(planchePtr, 4*32, 32, 32, 64));
         Sprite::Ptr spriteUp5Ptr  (new Sprite(planchePtr, 5*32, 32, 32, 64));
-        Animation::Ptr animationUpPtr (new Animation(spriteUp1Ptr));
-        animationUpPtr->addSprite (spriteUp2Ptr);
-        animationUpPtr->addSprite (spriteUp3Ptr);
-        animationUpPtr->addSprite (spriteUp1Ptr);
-        animationUpPtr->addSprite (spriteUp4Ptr);
-        animationUpPtr->addSprite (spriteUp5Ptr);
-        animationUpPtr->setIndex(0);
+        Sprite::Vector spriteUpVector;
+        spriteUpVector.push_back (spriteUp1Ptr);
+        spriteUpVector.push_back (spriteUp2Ptr);
+        spriteUpVector.push_back (spriteUp3Ptr);
+        spriteUpVector.push_back (spriteUp1Ptr);
+        spriteUpVector.push_back (spriteUp4Ptr);
+        spriteUpVector.push_back (spriteUp5Ptr);
+        Animation::Ptr animationUpPtr (new Animation(spriteUpVector, 0));
         Sprite::Ptr spriteDown0Ptr  (new Sprite(planchePtr,    0, 32+64, 32, 64));
         Sprite::Ptr spriteDown3Ptr  (new Sprite(planchePtr,   32, 32+64, 32, 64));
         Sprite::Ptr spriteDown2Ptr  (new Sprite(planchePtr, 2*32, 32+64, 32, 64));
         Sprite::Ptr spriteDown1Ptr  (new Sprite(planchePtr, 3*32, 32+64, 32, 64));
         Sprite::Ptr spriteDown4Ptr  (new Sprite(planchePtr, 4*32, 32+64, 32, 64));
         Sprite::Ptr spriteDown5Ptr  (new Sprite(planchePtr, 5*32, 32+64, 32, 64));
-        Animation::Ptr animationDownPtr (new Animation(spriteDown1Ptr));
-        animationDownPtr->addSprite (spriteDown2Ptr);
-        animationDownPtr->addSprite (spriteDown3Ptr);
-        animationDownPtr->addSprite (spriteDown1Ptr);
-        animationDownPtr->addSprite (spriteDown4Ptr);
-        animationDownPtr->addSprite (spriteDown5Ptr);
-        animationDownPtr->setIndex(1);
+        Sprite::Vector spriteDownVector;
+        spriteDownVector.push_back (spriteDown1Ptr);
+        spriteDownVector.push_back (spriteDown2Ptr);
+        spriteDownVector.push_back (spriteDown3Ptr);
+        spriteDownVector.push_back (spriteDown1Ptr);
+        spriteDownVector.push_back (spriteDown4Ptr);
+        spriteDownVector.push_back (spriteDown5Ptr);
+        Animation::Ptr animationDownPtr (new Animation(spriteDownVector, 1));
         Sprite::Ptr spriteRight0Ptr  (new Sprite(planchePtr,    0, 32+2*64, 32, 64));
         Sprite::Ptr spriteRight3Ptr  (new Sprite(planchePtr,   32, 32+2*64, 32, 64));
         Sprite::Ptr spriteRight2Ptr  (new Sprite(planchePtr, 2*32, 32+2*64, 32, 64));
         Sprite::Ptr spriteRight1Ptr  (new Sprite(planchePtr, 3*32, 32+2*64, 32, 64));
         Sprite::Ptr spriteRight4Ptr  (new Sprite(planchePtr, 4*32, 32+2*64, 32, 64));
         Sprite::Ptr spriteRight5Ptr  (new Sprite(planchePtr, 5*32, 32+2*64, 32, 64));
-        Animation::Ptr animationRightPtr (new Animation(spriteRight1Ptr));
-        animationRightPtr->addSprite (spriteRight2Ptr);
-        animationRightPtr->addSprite (spriteRight3Ptr);
-        animationRightPtr->addSprite (spriteRight1Ptr);
-        animationRightPtr->addSprite (spriteRight4Ptr);
-        animationRightPtr->addSprite (spriteRight5Ptr);
-        animationRightPtr->setIndex(2);
+        Sprite::Vector spriteRightVector;
+        spriteRightVector.push_back (spriteRight1Ptr);
+        spriteRightVector.push_back (spriteRight2Ptr);
+        spriteRightVector.push_back (spriteRight3Ptr);
+        spriteRightVector.push_back (spriteRight1Ptr);
+        spriteRightVector.push_back (spriteRight4Ptr);
+        spriteRightVector.push_back (spriteRight5Ptr);
+        Animation::Ptr animationRightPtr (new Animation(spriteRightVector, 2));
         Sprite::Ptr spriteLeft0Ptr  (new Sprite(planchePtr,    0, 32+3*64, 32, 64));
         Sprite::Ptr spriteLeft3Ptr  (new Sprite(planchePtr,   32, 32+3*64, 32, 64));
         Sprite::Ptr spriteLeft2Ptr  (new Sprite(planchePtr, 2*32, 32+3*64, 32, 64));
         Sprite::Ptr spriteLeft1Ptr  (new Sprite(planchePtr, 3*32, 32+3*64, 32, 64));
         Sprite::Ptr spriteLeft4Ptr  (new Sprite(planchePtr, 4*32, 32+3*64, 32, 64));
         Sprite::Ptr spriteLeft5Ptr  (new Sprite(planchePtr, 5*32, 32+3*64, 32, 64));
-        Animation::Ptr animationLeftPtr (new Animation(spriteLeft1Ptr));
-        animationLeftPtr->addSprite (spriteLeft2Ptr);
-        animationLeftPtr->addSprite (spriteLeft3Ptr);
-        animationLeftPtr->addSprite (spriteLeft1Ptr);
-        animationLeftPtr->addSprite (spriteLeft4Ptr);
-        animationLeftPtr->addSprite (spriteLeft5Ptr);
-        animationLeftPtr->setIndex(3);
-        Position    positionFixeUp(0, 200);
-        Position    positionFixeDown(100, 200);
-        Position    positionFixeRight(200, 200);
-        Position    positionFixeLeft(300, 200);
+        Sprite::Vector spriteLeftVector;
+        spriteLeftVector.push_back (spriteLeft1Ptr);
+        spriteLeftVector.push_back (spriteLeft2Ptr);
+        spriteLeftVector.push_back (spriteLeft3Ptr);
+        spriteLeftVector.push_back (spriteLeft1Ptr);
+        spriteLeftVector.push_back (spriteLeft4Ptr);
+        spriteLeftVector.push_back (spriteLeft5Ptr);
+        Animation::Ptr animationLeftPtr (new Animation(spriteLeftVector, 3));
+        Position    positionFixeUp(0, 100);
+        Position    positionFixeDown(50, 100);
+        Position    positionFixeRight(100, 100);
+        Position    positionFixeLeft(150, 100);
+        Sprite::Vector  orientationSprites;
+        orientationSprites.push_back(spriteRight0Ptr);
+        orientationSprites.push_back(spriteDown0Ptr);
+        orientationSprites.push_back(spriteLeft0Ptr);
+        orientationSprites.push_back(spriteUp0Ptr);
+        Animation::Vector   orientationAnimations;
+        orientationAnimations.push_back(animationRightPtr);
+        orientationAnimations.push_back(animationDownPtr);
+        orientationAnimations.push_back(animationLeftPtr);
+        orientationAnimations.push_back(animationUpPtr);
+        Position    positionInitiale(300, 200);
+        Entity::Ptr entityPtr (new Entity(orientationSprites, orientationAnimations, positionInitiale));
 
         Uint32 fpsTick  = SDL_GetTicks();
         Uint32 lastTick = SDL_GetTicks();
@@ -108,6 +125,45 @@ int main(int argc, char* argv[])
                         if (SDLK_ESCAPE == event.key.keysym.sym)
                         {
                             bRunning = false;
+                        }
+                        else if (SDLK_RIGHT == event.key.keysym.sym)
+                        {
+                            entityPtr->setOrientation(Entity::eOrientationRight);
+                            entityPtr->setSpeed(5);
+                        }
+                        else if (SDLK_DOWN == event.key.keysym.sym)
+                        {
+                            entityPtr->setOrientation(Entity::eOrientationDown);
+                            entityPtr->setSpeed(5);
+                        }
+                        else if (SDLK_LEFT == event.key.keysym.sym)
+                        {
+                            entityPtr->setOrientation(Entity::eOrientationLeft);
+                            entityPtr->setSpeed(5);
+                        }
+                        else if (SDLK_UP == event.key.keysym.sym)
+                        {
+                            entityPtr->setOrientation(Entity::eOrientationUp);
+                            entityPtr->setSpeed(5);
+                        }
+                        break;
+                    case SDL_KEYUP:
+                        // Si une touche est relâchée
+                        if (SDLK_RIGHT == event.key.keysym.sym)
+                        {
+                            entityPtr->setSpeed(0);
+                        }
+                        else if (SDLK_DOWN == event.key.keysym.sym)
+                        {
+                            entityPtr->setSpeed(0);
+                        }
+                        else if (SDLK_LEFT == event.key.keysym.sym)
+                        {
+                            entityPtr->setSpeed(0);
+                        }
+                        else if (SDLK_UP == event.key.keysym.sym)
+                        {
+                            entityPtr->setSpeed(0);
                         }
                         break;
                     case SDL_MOUSEMOTION:
@@ -138,24 +194,55 @@ int main(int argc, char* argv[])
             screen.blit(*spritePtr, position);
 
             screen.blit(*(animationUpPtr->getSprite()), positionFixeUp);
-            if (0 == (nbFrame%10))
-            {
-                animationUpPtr->next();
-            }
+//            if (0 == (nbFrame%10))
+//            {
+//                animationUpPtr->next();
+//            }
             screen.blit(*(animationDownPtr->getSprite()), positionFixeDown);
-            if (0 == (nbFrame%10))
-            {
-                animationDownPtr->next();
-            }
+//            if (0 == (nbFrame%10))
+//            {
+//                animationDownPtr->next();
+//            }
             screen.blit(*(animationRightPtr->getSprite()), positionFixeRight);
-            if (0 == (nbFrame%10))
-            {
-                animationRightPtr->next();
-            }
+//            if (0 == (nbFrame%10))
+//            {
+//                animationRightPtr->next();
+//            }
             screen.blit(*(animationLeftPtr->getSprite()), positionFixeLeft);
-            if (0 == (nbFrame%10))
+//            if (0 == (nbFrame%10))
+//            {
+//                animationLeftPtr->next();
+//            }
+
+            if (0 == entityPtr->getSpeed())
             {
-                animationLeftPtr->next();
+                screen.blit(*(entityPtr->getSprite()), entityPtr->getPosition());
+            }
+            else
+            {
+                // TODO SRO : déplacer cette logique dans Entity
+                switch (entityPtr->getOrientation())
+                {
+                    case Entity::eOrientationRight:
+                        entityPtr->getPosition().incr((Sint16)entityPtr->getSpeed(), 0);
+                        break;
+                    case Entity::eOrientationDown:
+                        entityPtr->getPosition().incr(0, (Sint16)entityPtr->getSpeed());
+                        break;
+                    case Entity::eOrientationLeft:
+                        entityPtr->getPosition().incr((Sint16)-entityPtr->getSpeed(), 0);
+                        break;
+                    case Entity::eOrientationUp:
+                        entityPtr->getPosition().incr(0, (Sint16)-entityPtr->getSpeed());
+                        break;
+                    default:
+                        ;
+                }
+                if (0 == (nbFrame%10))
+                {
+                    entityPtr->getAnimation()->next();
+                }
+                screen.blit(*(entityPtr->getAnimation()->getSprite()), entityPtr->getPosition());
             }
 
             // Mise à jour de l'écran (utilise le double buffering)
@@ -169,7 +256,7 @@ int main(int argc, char* argv[])
             if (1000 < deltaFpsTick)
             {
                 fps = (nbFrame*1000)/deltaFpsTick;
-                //std::cout << fps << std::endl;
+                std::cout << fps << " fps" << std::endl;
 
                 fpsTick = currentTick;
                 nbFrame = 0;

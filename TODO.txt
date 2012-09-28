@@ -1,3 +1,4 @@
+Distinguer un Objet animé mais ne se déplaçant pas d'une Entité mouvante 
 Ajouter une chaîne nommant chaque Image (son nom de fichier), chaque Sprite, chaque Animation
 Charger dynamiquement toutes les ressources graphiques.
-Fonction de miroring d'un sprite
+Fonction de mirroring d'un sprite

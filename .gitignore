@@ -3,3 +3,4 @@ sdl_tutorial
 *.o
 Debug
 Release
+core

@@ -5,9 +5,12 @@
 
 
 /// RAII : garantie qu'une animation est toujours valide (dispose au moins d'un Sprite)
-Entity::Entity(Sprite::Vector& aSpritesOrientation, Animation::Vector& aAnimationsOrientation) :
+Entity::Entity(const Sprite::Vector&    aSpritesOrientation,
+               const Animation::Vector& aAnimationsOrientation,
+               const Position&          aPosition) :
     mSpritesOrientation(aSpritesOrientation),
     mAnimationsOrientation(aAnimationsOrientation),
+    mPosition(aPosition),
     mOrientation(eOrientationRight),
     mSpeed(0)
 {

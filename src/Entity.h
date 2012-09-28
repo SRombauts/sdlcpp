@@ -17,21 +17,27 @@
 class Entity
 {
 public:
-             Entity(Sprite::Vector& aSpritesOrientation, Animation::Vector& aAnimationsOrientation);
+             Entity(const Sprite::Vector&       aSpritesOrientation,
+                    const Animation::Vector&    aAnimationsOrientation,
+                    const Position&             aPosition);
     virtual ~Entity(void);
 
     enum Orientation
     {
         eOrientationRight   = 0,
-        eOrientationBottom  = 1,
+        eOrientationDown    = 1,
         eOrientationLeft    = 2,
-        eOrientationTop     = 3
+        eOrientationUp      = 3
     };
 
     /// Accesseurs simples
     inline Sprite::Ptr getSprite(void)
     {
         return mSpritesOrientation[mOrientation];
+    }
+    inline Animation::Ptr getAnimation(void)
+    {
+        return mAnimationsOrientation[mOrientation];
     }
     inline void setPosition(const Position& aPosition)
     {
@@ -56,6 +62,18 @@ public:
     inline void setOrientation(const Orientation& aOrientation)
     {
         mOrientation = aOrientation;
+    }
+    inline int getSpeed(void)
+    {
+        return mSpeed;
+    }
+    inline int getSpeed(void) const
+    {
+        return mSpeed;
+    }
+    inline void setSpeed(const int aSpeed)
+    {
+        mSpeed = aSpeed;
     }
 
     typedef boost::shared_ptr<Entity>    Ptr;

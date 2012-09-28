@@ -15,12 +15,10 @@
 class Animation
 {
 public:
-             Animation(Sprite::Ptr& aSpritePtr);
+             Animation(Sprite::Vector& aSpriteVector, unsigned long aIndex = 0);
     virtual ~Animation(void);
 
-    unsigned long addSprite(Sprite::Ptr& aSpritePtr);
-
-    // Incrémente l'index du sprite courant
+    /// Incrémente l'index du sprite courant
     inline unsigned long next(void)
     {
         return setIndex(++mIndex);
