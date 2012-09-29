@@ -1,13 +1,13 @@
 #include "Rect.h"
 
-Rect::Rect(const Sint16 aX, const Sint16 aY, const Uint16 aW, const Uint16 aH)
+Rect::Rect(const int aX, const int aY, const unsigned int aW, const unsigned int aH)
 {
-    mRect.x = aX;
-    mRect.y = aY;
-    mRect.w = aW;
-    mRect.h = aH;
-    mX2 = (Sint16)(aX + aW);
-    mY2 = (Sint16)(aY + aH);
+    mRect.x = (Sint16)aX;
+    mRect.y = (Sint16)aY;
+    mRect.w = (Uint16)aW;
+    mRect.h = (Uint16)aH;
+    mX2 = (int)(aX + aW);
+    mY2 = (int)(aY + aH);
 }
 
 Rect::~Rect(void)

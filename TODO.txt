@@ -1,4 +1,18 @@
-Distinguer un Objet animé mais ne se déplaçant pas d'une Entité mouvante 
 Ajouter une chaîne nommant chaque Image (son nom de fichier), chaque Sprite, chaque Animation
+Créer une Zone à utiliser pour détection de clic :
+- Cette Zone ne serait qu'une interface, une propriété à ajouter à une Entity/Menu ?
+- Donc non nommée
+Créer un gestionnaire de Zones : voir sa relation éventuelle avec le gestionnaire de ressources
+Une infobulle ne serait pas une Zone (non cliquable)
+Une popup/un menu serait une Zone "modale" en surinpression : donc prioritaire, à traiter avant le reste, voir même en exclusivité ! 
+Une Zone peut être enfant d'une autre Zone (un objet sur un terrain) : alors non enregistrée dans le gestionnaire, seulement dans son parent
+Deux Zones peuvent se superposer (deux monstres se croisants) 
+
+Encapsulation du temps, des additions ou des deltas de temps
+
+Ajouter des algorithmes de mouvements dans Position 
+Distinguer un Objet animé mais ne se déplaçant pas, d'une Entité mouvante 
 Charger dynamiquement toutes les ressources graphiques.
 Fonction de mirroring d'un sprite
+
+Complèter le fichier de suppressions valgrind

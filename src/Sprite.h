@@ -15,7 +15,11 @@
 class Sprite
 {
 public:
-             Sprite(Surface::Ptr& aSurfacePtr, const Sint16 aX, const Sint16 aY, const Uint16 aW, const Uint16 aH);
+             Sprite(const Surface::Ptr& aSurfacePtr,
+                    const int           aX,
+                    const int           aY,
+                    const unsigned int  aW,
+                    const unsigned int  aH);
     virtual ~Sprite(void);
 
     /// Accesseurs simples

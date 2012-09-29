@@ -129,22 +129,22 @@ int main(int argc, char* argv[])
                         else if (SDLK_RIGHT == event.key.keysym.sym)
                         {
                             entityPtr->setOrientation(Entity::eOrientationRight);
-                            entityPtr->setSpeed(5);
+                            entityPtr->setSpeed(2);
                         }
                         else if (SDLK_DOWN == event.key.keysym.sym)
                         {
                             entityPtr->setOrientation(Entity::eOrientationDown);
-                            entityPtr->setSpeed(5);
+                            entityPtr->setSpeed(2);
                         }
                         else if (SDLK_LEFT == event.key.keysym.sym)
                         {
                             entityPtr->setOrientation(Entity::eOrientationLeft);
-                            entityPtr->setSpeed(5);
+                            entityPtr->setSpeed(2);
                         }
                         else if (SDLK_UP == event.key.keysym.sym)
                         {
                             entityPtr->setOrientation(Entity::eOrientationUp);
-                            entityPtr->setSpeed(5);
+                            entityPtr->setSpeed(2);
                         }
                         break;
                     case SDL_KEYUP:
@@ -169,13 +169,13 @@ int main(int argc, char* argv[])
                     case SDL_MOUSEMOTION:
                         if (event.motion.state & SDL_BUTTON(1)) // Bouton Gauche appuyé
                         {
-                            position.set ((Sint16)(event.motion.x - spritePtr->getSurface().getSurface().w/2),
-                                          (Sint16)(event.motion.y - spritePtr->getSurface().getSurface().h/2));
+                            position.set (event.motion.x - spritePtr->getSurface().getSurface().w/2,
+                                          event.motion.y - spritePtr->getSurface().getSurface().h/2);
                         }
                         break;
                     case SDL_MOUSEBUTTONDOWN:
-                        position.set ((Sint16)(event.motion.x - spritePtr->getSurface().getSurface().w/2),
-                                      (Sint16)(event.motion.y - spritePtr->getSurface().getSurface().h/2));
+                        position.set (event.motion.x - spritePtr->getSurface().getSurface().w/2,
+                                      event.motion.y - spritePtr->getSurface().getSurface().h/2);
                         break;
                     default:
                         // Autre évènement
@@ -199,20 +199,8 @@ int main(int argc, char* argv[])
 //                animationUpPtr->next();
 //            }
             screen.blit(*(animationDownPtr->getSprite()), positionFixeDown);
-//            if (0 == (nbFrame%10))
-//            {
-//                animationDownPtr->next();
-//            }
             screen.blit(*(animationRightPtr->getSprite()), positionFixeRight);
-//            if (0 == (nbFrame%10))
-//            {
-//                animationRightPtr->next();
-//            }
             screen.blit(*(animationLeftPtr->getSprite()), positionFixeLeft);
-//            if (0 == (nbFrame%10))
-//            {
-//                animationLeftPtr->next();
-//            }
 
             if (0 == entityPtr->getSpeed())
             {
@@ -224,16 +212,16 @@ int main(int argc, char* argv[])
                 switch (entityPtr->getOrientation())
                 {
                     case Entity::eOrientationRight:
-                        entityPtr->getPosition().incr((Sint16)entityPtr->getSpeed(), 0);
+                        entityPtr->getPosition().incr(entityPtr->getSpeed(), 0);
                         break;
                     case Entity::eOrientationDown:
-                        entityPtr->getPosition().incr(0, (Sint16)entityPtr->getSpeed());
+                        entityPtr->getPosition().incr(0, entityPtr->getSpeed());
                         break;
                     case Entity::eOrientationLeft:
-                        entityPtr->getPosition().incr((Sint16)-entityPtr->getSpeed(), 0);
+                        entityPtr->getPosition().incr(-entityPtr->getSpeed(), 0);
                         break;
                     case Entity::eOrientationUp:
-                        entityPtr->getPosition().incr(0, (Sint16)-entityPtr->getSpeed());
+                        entityPtr->getPosition().incr(0, -entityPtr->getSpeed());
                         break;
                     default:
                         ;

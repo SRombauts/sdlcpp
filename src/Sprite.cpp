@@ -2,7 +2,11 @@
 #include "Surface.h"
 
 
-Sprite::Sprite(Surface::Ptr& aSurfacePtr, const Sint16 aX, const Sint16 aY, const Uint16 aW, const Uint16 aH) :
+Sprite::Sprite(const Surface::Ptr&  aSurfacePtr,
+               const int            aX,
+               const int            aY,
+               const unsigned int   aW,
+               const unsigned int   aH) :
     mSurfacePtr(aSurfacePtr),
     mRect(aX, aY, aW, aH)
 {

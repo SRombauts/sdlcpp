@@ -10,12 +10,12 @@
 class Position
 {
 public:
-             Position(const Sint16 aX = 0, const Sint16 aY = 0);
+             Position(const int aX = 0, const int aY = 0);
     virtual ~Position(void);
 
     /// Met à jour la position
-    void set(const Sint16 aX = 0, const Sint16 aY = 0);
-    void incr(const Sint16 aIncrX = 0, const Sint16 aIncrY = 0);
+    void set(const int aX = 0, const int aY = 0);
+    void incr(const int aIncrX = 0, const int aIncrY = 0);
 
     /// Accesseurs simples
     inline       SDL_Rect&  getRect(void)

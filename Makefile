@@ -44,6 +44,7 @@ SDLCPP_OBJECTS =  \
 	$(BUILD)/SdlCpp_Screen.o \
 	$(BUILD)/SdlCpp_Sprite.o \
 	$(BUILD)/SdlCpp_Surface.o \
+	$(BUILD)/SdlCpp_Zone.o \
 	
 	
 ### Targets: ###
@@ -87,6 +88,9 @@ $(BUILD)/SdlCpp_Sprite.o: src/Sprite.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_Surface.o: src/Surface.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlCpp_Zone.o: src/Zone.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 .PHONY: all clean

@@ -11,7 +11,7 @@
 class Rect
 {
 public:
-             Rect(const Sint16 aX, const Sint16 aY, const Uint16 aW, const Uint16 aH);
+             Rect(const int aX, const int aY, const unsigned int aW, const unsigned int aH);
     virtual ~Rect(void);
 
     /// Accesseurs simples
@@ -23,33 +23,33 @@ public:
     {
         return mRect;
     }
-    inline Sint16 getX(void) const
+    inline int getX(void) const
     {
         return mRect.x;
     }
-    inline Sint16 getY(void) const
+    inline int getY(void) const
     {
         return mRect.y;
     }
-    inline Sint16 getH(void) const
+    inline unsigned int getH(void) const
     {
         return mRect.h;
     }
-    inline Sint16 getW(void) const
+    inline unsigned int getW(void) const
     {
         return mRect.w;
     }
-    inline Sint16 getX2(void) const
+    inline int getX2(void) const
     {
         return mX2;
     }
-    inline Sint16 getY2(void) const
+    inline int getY2(void) const
     {
         return mY2;
     }
 
 private:
     SDL_Rect    mRect;  //!< Rectangle (x,y,w,h) délimitant un morceau de surface
-    Sint16      mX2;    //!< X2=x+w calculée une fois pour toute à la construction
-    Sint16      mY2;    //!< Y2=y+h calculée une fois pour toute à la construction
+    int         mX2;    //!< X2=x+w calculée une fois pour toute à la construction
+    int         mY2;    //!< Y2=y+h calculée une fois pour toute à la construction
 };
