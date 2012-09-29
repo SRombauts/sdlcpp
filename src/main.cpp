@@ -12,6 +12,9 @@ const int SCREEN_WIDTH  = 640;
 const int SCREEN_HEIGHT = 480;
 
 
+/**
+ * @author 2012/09/26 SRombauts
+*/
 int main(int argc, char* argv[])
 {
     bool        bRunning = true;
@@ -247,7 +250,7 @@ int main(int argc, char* argv[])
             if (1000 < deltaFpsTick)
             {
                 fps = (nbFrame*1000)/deltaFpsTick;
-                //std::cout << fps << " fps" << std::endl;
+                std::cout << fps << " fps" << std::endl;
 
                 fpsTick = currentTick;
                 nbFrame = 0;

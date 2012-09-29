@@ -9,6 +9,8 @@
  *
  * TODO SRO : x2 et y2 ont ils un intérêt dans Rect ? Cf. la classe #Zone
  *  Y ajoute une gestion des coordonnées x2=x+w-1 et y2=y+h-1 calculées une fois pour toute.
+ *
+ * @author 2012/09/27 SRombauts
 */
 class Rect
 {

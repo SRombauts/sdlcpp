@@ -11,6 +11,8 @@
  * @brief Encapsulation d'un sprite sur une surface SDL
  *
  * Un Sprite est un morceau de Surface rectangulaire.
+ *
+ * @author 2012/09/27 SRombauts
 */
 class Sprite
 {

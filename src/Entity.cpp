@@ -1,6 +1,7 @@
 #include <stdexcept>
 
 #include "Entity.h"
+#include <iostream>
 #include "Sprite.h"
 
 
@@ -27,4 +28,10 @@ Entity::Entity(const Sprite::Vector&    aSpritesOrientation,
 
 Entity::~Entity(void)
 {
+}
+
+
+void Entity::onOver(const bool abIsOver)
+{
+    std::cout << "Entity::onOver: onHoover(abIsOver=" << abIsOver << ")" << std::endl;
 }

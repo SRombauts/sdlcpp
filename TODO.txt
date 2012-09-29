@@ -1,3 +1,7 @@
+Dépatouiller les notions de positions :
+- position relative d'un élément graphique par rapport à sa surface
+- position d'une entité  
+
 Ajouter une chaîne nommant chaque Image (son nom de fichier), chaque Sprite, chaque Animation
 Créer une Zone à utiliser pour détection de clic :
 - Cette Zone ne serait qu'une interface, une propriété à ajouter à une Entity/Menu ?
@@ -13,9 +17,15 @@ Encapsulation du temps, des additions ou des deltas de temps
 Encapsulation d'un élément d'UI/un Widget
 Encapsulation d'un élément de Menu
 
+Créer des Factory
+Créer un ResourcesManager
+Charger dynamiquement toutes les ressources graphiques
+- les entités du jeux
+- les éléments d'UI
+- les menus
+
 Ajouter des algorithmes de mouvements dans Position 
 Distinguer un Objet animé mais ne se déplaçant pas, d'une Entité mouvante 
-Charger dynamiquement toutes les ressources graphiques.
 Fonction de mirroring d'un sprite
 
 Compléter le fichier de suppressions valgrind

@@ -9,7 +9,7 @@ Zone::Zone(const unsigned int aX,
     mY(aY),
     mX2(aX + aW),
     mY2(aY + aH),
-    mbIsMouseInside(false)
+    mbIsMouseOver(false)
 {
 }
 
@@ -17,7 +17,7 @@ Zone::~Zone(void)
 {
 }
 
-bool Zone::isInside(const unsigned int aX, const unsigned int aY) const
+bool Zone::isOver(const unsigned int aX, const unsigned int aY) const
 {
     bool bRet;
 
@@ -33,23 +33,23 @@ bool Zone::updateMousePosition(const unsigned int aX, const unsigned int aY)
     bool bRet;
 
     // La souris est-elle au dessus de la zone ?
-    bRet = isInside(aX, aY);
+    bRet = isOver(aX, aY);
     if (   (true  == bRet)
-        && (false == mbIsMouseInside))
+        && (false == mbIsMouseOver))
     {
         // La souris vient d'entrer au dessus de la zone
-        // TODO SRombauts : onHoover(true)
-        std::cout << "Zone::UpdateMousePosition: onHoover(true)" << std::endl;
+        //std::cout << "Zone::UpdateMousePosition: onHoover(true)" << std::endl;
+        this->onOver(true);
     }
     else if (   (false == bRet)
-             && (true  == mbIsMouseInside))
+             && (true  == mbIsMouseOver))
     {
         // La souris vient de sortir de la zone
-        // TODO SRombauts : onHoover(false)
-        std::cout << "Zone::UpdateMousePosition: onHoover(false)" << std::endl;
+        //std::cout << "Zone::UpdateMousePosition: onHoover(false)" << std::endl;
+        this->onOver(false);
     }
     // Mémorise l'état de la souris
-    mbIsMouseInside = bRet;
+    mbIsMouseOver = bRet;
 
     return bRet;
 }

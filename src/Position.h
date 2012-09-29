@@ -6,6 +6,8 @@
  * @brief Encapsulation d'une position x,y dans un SDL_Rect
  *
  * Empêche d'utiliser à tord les membres w et h de SDL_Rect
+ *
+ * @author 2012/09/26 SRombauts
 */
 class Position
 {

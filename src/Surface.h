@@ -10,6 +10,8 @@ class Sprite;
  * @brief Encapsulation d'une surface SDL
  *
  * RAII ; gère la libération mémoire dans le destructeur
+ *
+ * @author 2012/09/24 SRombauts
 */
 class Surface
 {

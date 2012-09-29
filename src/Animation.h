@@ -11,6 +11,8 @@
  * @brief Encapsulation d'une liste de Sprites
  *
  * Une Animation est une séquence ordonnée (éventuellement répétable) de Sprite à afficher successivement.
+ *
+ * @author 2012/09/27 SRombauts
 */
 class Animation
 {

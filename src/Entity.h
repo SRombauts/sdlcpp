@@ -13,6 +13,8 @@
  * @brief Encapsulation d'une Entité
  *
  * Une Entity est la représentation générique d'un objet physique ou d'un être vivant animé
+ *
+ * @author 2012/09/27 SRombauts
 */
 class Entity : public Zone
 {
@@ -78,6 +80,9 @@ public:
 
     typedef boost::shared_ptr<Entity>    Ptr;
     typedef std::vector<Entity::Ptr>     Vector;
+
+protected:
+    virtual void onOver(const bool abIsOver);
 
 private:
     Sprite::Vector      mSpritesOrientation;    //!< Vecteur contenant les 4 sprites d'orientation
