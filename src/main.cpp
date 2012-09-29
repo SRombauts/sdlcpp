@@ -167,6 +167,9 @@ int main(int argc, char* argv[])
                         }
                         break;
                     case SDL_MOUSEMOTION:
+                        // Test de position de la souris
+                        entityPtr->updateMousePosition(event.motion.x, event.motion.y);
+
                         if (event.motion.state & SDL_BUTTON(1)) // Bouton Gauche appuyé
                         {
                             position.set (event.motion.x - spritePtr->getSurface().getSurface().w/2,
@@ -244,7 +247,7 @@ int main(int argc, char* argv[])
             if (1000 < deltaFpsTick)
             {
                 fps = (nbFrame*1000)/deltaFpsTick;
-                std::cout << fps << " fps" << std::endl;
+                //std::cout << fps << " fps" << std::endl;
 
                 fpsTick = currentTick;
                 nbFrame = 0;

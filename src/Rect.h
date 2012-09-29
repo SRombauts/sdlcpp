@@ -3,10 +3,12 @@
 #include <SDL/SDL.h>
 
 /**
- * @brief Encapsulation d'un rectangle x,y,w,h dans un SDL_Rect
+ * @brief Encapsulation d'un rectangle (x,y) (w,h) dans un SDL_Rect
  *
  * Ces 4 coordonnées sont considérées comme immuables.
- * Y ajoute une gestion des coordonnées x2=x+w et y2=y+h calculées une fois pour toute.
+ *
+ * TODO SRO : x2 et y2 ont ils un intérêt dans Rect ? Cf. la classe #Zone
+ *  Y ajoute une gestion des coordonnées x2=x+w-1 et y2=y+h-1 calculées une fois pour toute.
 */
 class Rect
 {

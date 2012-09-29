@@ -7,14 +7,14 @@
 #include "Animation.h"
 #include "Sprite.h"
 #include "Position.h"
-
+#include "Zone.h"
 
 /**
  * @brief Encapsulation d'une Entité
  *
  * Une Entity est la représentation générique d'un objet physique ou d'un être vivant animé
 */
-class Entity
+class Entity : public Zone
 {
 public:
              Entity(const Sprite::Vector&       aSpritesOrientation,

@@ -26,6 +26,14 @@ public:
     {
         return mRect;
     }
+    inline int getX(void) const
+    {
+        return mRect.x;
+    }
+    inline int getY(void) const
+    {
+        return mRect.y;
+    }
 
 private:
     SDL_Rect    mRect;  //!< Rect contenant la position (x,y)

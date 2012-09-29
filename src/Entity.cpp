@@ -8,6 +8,7 @@
 Entity::Entity(const Sprite::Vector&    aSpritesOrientation,
                const Animation::Vector& aAnimationsOrientation,
                const Position&          aPosition) :
+    Zone(aPosition.getX(), aPosition.getY(), aSpritesOrientation[0]->getRect().getW(), aSpritesOrientation[0]->getRect().getH()),
     mSpritesOrientation(aSpritesOrientation),
     mAnimationsOrientation(aAnimationsOrientation),
     mPosition(aPosition),

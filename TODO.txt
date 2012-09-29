@@ -4,15 +4,18 @@ Créer une Zone à utiliser pour détection de clic :
 - Donc non nommée
 Créer un gestionnaire de Zones : voir sa relation éventuelle avec le gestionnaire de ressources
 Une infobulle ne serait pas une Zone (non cliquable)
-Une popup/un menu serait une Zone "modale" en surinpression : donc prioritaire, à traiter avant le reste, voir même en exclusivité ! 
+Une popup/un menu serait une Zone "modale" en surimpression : donc prioritaire, à traiter avant le reste, voir même en exclusivité ! 
 Une Zone peut être enfant d'une autre Zone (un objet sur un terrain) : alors non enregistrée dans le gestionnaire, seulement dans son parent
-Deux Zones peuvent se superposer (deux monstres se croisants) 
+Deux Zones peuvent se superposer (deux monstres se croisant) 
 
 Encapsulation du temps, des additions ou des deltas de temps
+
+Encapsulation d'un élément d'UI/un Widget
+Encapsulation d'un élément de Menu
 
 Ajouter des algorithmes de mouvements dans Position 
 Distinguer un Objet animé mais ne se déplaçant pas, d'une Entité mouvante 
 Charger dynamiquement toutes les ressources graphiques.
 Fonction de mirroring d'un sprite
 
-Complèter le fichier de suppressions valgrind
+Compléter le fichier de suppressions valgrind
