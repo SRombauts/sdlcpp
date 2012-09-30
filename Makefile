@@ -37,9 +37,9 @@ SDLCPP_CXXFLAGS = $(BUILD_FLAGS) $(CXXFLAGS)
 SDLCPP_OBJECTS =  \
 	$(BUILD)/SdlCpp_main.o \
 	$(BUILD)/SdlCpp_Animation.o \
+	$(BUILD)/SdlCpp_Coord.o \
 	$(BUILD)/SdlCpp_Entity.o \
 	$(BUILD)/SdlCpp_Image.o \
-	$(BUILD)/SdlCpp_Position.o \
 	$(BUILD)/SdlCpp_Rect.o \
 	$(BUILD)/SdlCpp_Screen.o \
 	$(BUILD)/SdlCpp_Sprite.o \
@@ -69,13 +69,13 @@ $(BUILD)/SdlCpp_main.o: src/main.cpp
 $(BUILD)/SdlCpp_Animation.o: src/Animation.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
+$(BUILD)/SdlCpp_Coord.o: src/Coord.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
 $(BUILD)/SdlCpp_Entity.o: src/Entity.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_Image.o: src/Image.cpp
-	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
-
-$(BUILD)/SdlCpp_Position.o: src/Position.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_Rect.o: src/Rect.cpp

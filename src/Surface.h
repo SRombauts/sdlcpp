@@ -3,7 +3,7 @@
 #include <SDL/SDL.h>
 #include <boost/shared_ptr.hpp>
 
-class Position;
+class Coord;
 class Sprite;
 
 /**
@@ -21,8 +21,8 @@ public:
 
     /// Blit une surface sur la surface courante
     bool blit(Surface& aSurface);
-    bool blit(Surface& aSurface, Position& aOffset);
-    bool blit(Sprite&  aSprite,  Position& aOffset);
+    bool blit(Surface& aSurface, Coord& aOffset);
+    bool blit(Sprite&  aSprite,  Coord& aOffset);
 
     /// Accesseurs simples
     inline const SDL_Surface&   getSurface(void) const

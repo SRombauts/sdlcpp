@@ -3,19 +3,21 @@
 #include <SDL/SDL.h>
 
 /**
- * @brief Encapsulation d'une position x,y dans un SDL_Rect
+ * @brief Encapsulation de coordonnées (x,y) dans un SDL_Rect
  *
- * Empêche d'utiliser à tord les membres w et h de SDL_Rect
+ * Sert à décrire un offset (x,y) pour la destination du blit d'une #Surface.
+ * Les membres w et h sont considérés comme immuables et initialisés à zéro.
+ * Les deux coordonnées (x,y) peuvent être mise à jour.
  *
  * @author 2012/09/26 SRombauts
 */
-class Position
+class Coord
 {
 public:
-             Position(const int aX = 0, const int aY = 0);
-    virtual ~Position(void);
+             Coord(const int aX = 0, const int aY = 0);
+    virtual ~Coord(void);
 
-    /// Met à jour la position
+    /// Met à jour les coordonnées (x,y)
     void set(const int aX = 0, const int aY = 0);
     void incr(const int aIncrX = 0, const int aIncrY = 0);
 
@@ -38,5 +40,5 @@ public:
     }
 
 private:
-    SDL_Rect    mRect;  //!< Rect contenant la position (x,y)
+    SDL_Rect    mRect;  //!< Rect contenant les coordonnées (x,y)
 };

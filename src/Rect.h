@@ -5,10 +5,8 @@
 /**
  * @brief Encapsulation d'un rectangle (x,y) (w,h) dans un SDL_Rect
  *
+ * Sert à encapsuler un SDL_Rect pour la source du blit d'un #Sprite.
  * Ces 4 coordonnées sont considérées comme immuables.
- *
- * TODO SRO : x2 et y2 ont ils un intérêt dans Rect ? Cf. la classe #Zone
- *  Y ajoute une gestion des coordonnées x2=x+w-1 et y2=y+h-1 calculées une fois pour toute.
  *
  * @author 2012/09/27 SRombauts
 */
@@ -43,17 +41,7 @@ public:
     {
         return mRect.w;
     }
-    inline int getX2(void) const
-    {
-        return mX2;
-    }
-    inline int getY2(void) const
-    {
-        return mY2;
-    }
 
 private:
     SDL_Rect    mRect;  //!< Rectangle (x,y,w,h) délimitant un morceau de surface
-    int         mX2;    //!< X2=x+w calculée une fois pour toute à la construction
-    int         mY2;    //!< Y2=y+h calculée une fois pour toute à la construction
 };

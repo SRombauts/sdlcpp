@@ -1,6 +1,7 @@
 Dépatouiller les notions de positions :
-- position relative d'un élément graphique par rapport à sa surface
-- position d'une entité  
+- position absolue d'une Entity dans le jeu
+- position relative d'un élément graphique par rapport à sa surface, SDL_Rect pour le blit
+- position dans la fenêtre pour les évènements souris (Zone)
 
 Ajouter une chaîne nommant chaque Image (son nom de fichier), chaque Sprite, chaque Animation
 Créer une Zone à utiliser pour détection de clic :

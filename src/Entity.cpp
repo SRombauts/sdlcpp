@@ -8,11 +8,11 @@
 /// RAII : garantie qu'une animation est toujours valide (dispose au moins d'un Sprite)
 Entity::Entity(const Sprite::Vector&    aSpritesOrientation,
                const Animation::Vector& aAnimationsOrientation,
-               const Position&          aPosition) :
-    Zone(aPosition.getX(), aPosition.getY(), aSpritesOrientation[0]->getRect().getW(), aSpritesOrientation[0]->getRect().getH()),
+               const Coord&             aCoord) :
+    Zone(aCoord.getX(), aCoord.getY(), aSpritesOrientation[0]->getRect().getW(), aSpritesOrientation[0]->getRect().getH()),
     mSpritesOrientation(aSpritesOrientation),
     mAnimationsOrientation(aAnimationsOrientation),
-    mPosition(aPosition),
+    mCoord(aCoord),
     mOrientation(eOrientationRight),
     mSpeed(0)
 {
@@ -30,6 +30,26 @@ Entity::~Entity(void)
 {
 }
 
+void Entity::move(void)
+{
+    switch (mOrientation)
+    {
+        case Entity::eOrientationRight:
+            mCoord.incr(mSpeed, 0);
+            break;
+        case Entity::eOrientationDown:
+            mCoord.incr(0, mSpeed);
+            break;
+        case Entity::eOrientationLeft:
+            mCoord.incr(-mSpeed, 0);
+            break;
+        case Entity::eOrientationUp:
+            mCoord.incr(0, -mSpeed);
+            break;
+        default:
+            ;
+    }
+}
 
 void Entity::onOver(const bool abIsOver)
 {

@@ -6,7 +6,7 @@
 
 #include "Animation.h"
 #include "Sprite.h"
-#include "Position.h"
+#include "Coord.h"
 #include "Zone.h"
 
 /**
@@ -21,7 +21,7 @@ class Entity : public Zone
 public:
              Entity(const Sprite::Vector&       aSpritesOrientation,
                     const Animation::Vector&    aAnimationsOrientation,
-                    const Position&             aPosition);
+                    const Coord&                aCoord);
     virtual ~Entity(void);
 
     enum Orientation
@@ -32,6 +32,8 @@ public:
         eOrientationUp      = 3
     };
 
+    void move(void);
+
     /// Accesseurs simples
     inline Sprite::Ptr getSprite(void)
     {
@@ -41,17 +43,17 @@ public:
     {
         return mAnimationsOrientation[mOrientation];
     }
-    inline void setPosition(const Position& aPosition)
+    inline void setCoord(const Coord& aCoord)
     {
-        mPosition = aPosition;
+        mCoord = aCoord;
     }
-    inline       Position& getPosition(void)
+    inline       Coord& getCoord(void)
     {
-        return mPosition;
+        return mCoord;
     }
-    inline const Position& getPosition(void) const
+    inline const Coord& getCoord(void) const
     {
-        return mPosition;
+        return mCoord;
     }
     inline       Orientation& getOrientation(void)
     {
@@ -87,7 +89,7 @@ protected:
 private:
     Sprite::Vector      mSpritesOrientation;    //!< Vecteur contenant les 4 sprites d'orientation
     Animation::Vector   mAnimationsOrientation; //!< Vecteur contenant les 4 animations d'orientation
-    Position            mPosition;              //!< Position de l'Entity
+    Coord               mCoord;                 //!< Coordonnées de l'Entity dans sa surface parent
     Orientation         mOrientation;           //!< Orientation courante
     int                 mSpeed;                 //!< Vitesse courante
 };
