@@ -23,9 +23,6 @@ public:
                   const unsigned int aH);
     virtual ~Zone(void);
 
-    // TODO SRO : setPosition()
-    // TODO SRO : incrPosition()
-
     /// Indique si les coordonnées sont sur la zone (bordures incluses)
     bool isOver             (const unsigned int aX, const unsigned int aY) const;
 
@@ -53,6 +50,10 @@ public:
     {
         return mbIsMouseOver;
     }
+
+protected:
+    /// Met à jour les coordonnées (x,y) et recalcule (x2,y2)
+    void set(const unsigned int aX, const unsigned int aY);
 
 protected:
     virtual void onOver(const bool abIsOver) = 0;

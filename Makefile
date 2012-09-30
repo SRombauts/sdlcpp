@@ -40,6 +40,8 @@ SDLCPP_OBJECTS =  \
 	$(BUILD)/SdlCpp_Coord.o \
 	$(BUILD)/SdlCpp_Entity.o \
 	$(BUILD)/SdlCpp_Image.o \
+	$(BUILD)/SdlCpp_Offset.o \
+	$(BUILD)/SdlCpp_Position.o \
 	$(BUILD)/SdlCpp_Rect.o \
 	$(BUILD)/SdlCpp_Screen.o \
 	$(BUILD)/SdlCpp_Sprite.o \
@@ -76,6 +78,12 @@ $(BUILD)/SdlCpp_Entity.o: src/Entity.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_Image.o: src/Image.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlCpp_Offset.o: src/Offset.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlCpp_Position.o: src/Position.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_Rect.o: src/Rect.cpp

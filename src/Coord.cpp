@@ -13,13 +13,13 @@ Coord::~Coord(void)
 {
 }
 
-void Coord::set(const int aX /* = 0 */, const int aY /* = 0 */)
+void Coord::set(const int aX, const int aY)
 {
     mRect.x = (Sint16)aX;
     mRect.y = (Sint16)aY;
 }
 
-void Coord::incr(const int aIncrX /* = 0 */, const int aIncrY /* = 0 */)
+void Coord::incr(const int aIncrX, const int aIncrY)
 {
     mRect.x = (Sint16)(mRect.x + aIncrX);
     mRect.y = (Sint16)(mRect.y + aIncrY);

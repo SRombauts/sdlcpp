@@ -7,6 +7,8 @@ Zone::Zone(const unsigned int aX,
            const unsigned int aH) :
     mX(aX),
     mY(aY),
+    mW(aW),
+    mH(aH),
     mX2(aX + aW),
     mY2(aY + aH),
     mbIsMouseOver(false)
@@ -15,6 +17,14 @@ Zone::Zone(const unsigned int aX,
 
 Zone::~Zone(void)
 {
+}
+
+void Zone::set(const unsigned int aX, const unsigned int aY)
+{
+    mX = aX;
+    mY = aY;
+    mX2 = aX + mW;
+    mY2 = aY + mH;
 }
 
 bool Zone::isOver(const unsigned int aX, const unsigned int aY) const

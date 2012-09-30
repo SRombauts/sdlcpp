@@ -1,8 +1,3 @@
-Dépatouiller les notions de positions :
-- position absolue d'une Entity dans le jeu
-- position relative d'un élément graphique par rapport à sa surface, SDL_Rect pour le blit
-- position dans la fenêtre pour les évènements souris (Zone)
-
 Ajouter une chaîne nommant chaque Image (son nom de fichier), chaque Sprite, chaque Animation
 Créer une Zone à utiliser pour détection de clic :
 - Cette Zone ne serait qu'une interface, une propriété à ajouter à une Entity/Menu ?

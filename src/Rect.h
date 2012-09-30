@@ -13,8 +13,8 @@
 class Rect
 {
 public:
-             Rect(const int aX, const int aY, const unsigned int aW, const unsigned int aH);
-    virtual ~Rect(void);
+     Rect(const int aX, const int aY, const unsigned int aW, const unsigned int aH);
+    ~Rect(void); // non virtuel car non destiné à être dérivée
 
     /// Accesseurs simples
     inline       SDL_Rect&  getRect(void)

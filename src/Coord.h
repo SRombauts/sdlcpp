@@ -18,8 +18,8 @@ public:
     virtual ~Coord(void);
 
     /// Met à jour les coordonnées (x,y)
-    void set(const int aX = 0, const int aY = 0);
-    void incr(const int aIncrX = 0, const int aIncrY = 0);
+    void set (const int aX,     const int aY);
+    void incr(const int aIncrX, const int aIncrY);
 
     /// Accesseurs simples
     inline       SDL_Rect&  getRect(void)

@@ -102,8 +102,9 @@ int main(int argc, char* argv[])
         orientationAnimations.push_back(animationDownPtr);
         orientationAnimations.push_back(animationLeftPtr);
         orientationAnimations.push_back(animationUpPtr);
-        Coord   coordInitiale(300, 200);
-        Entity::Ptr entityPtr (new Entity(orientationSprites, orientationAnimations, coordInitiale));
+        Position positionInitiale(300, 200);
+        Offset   offsetInitial(0, 0);
+        Entity::Ptr entityPtr (new Entity(orientationSprites, orientationAnimations, positionInitiale, offsetInitial));
 
         Uint32 firstTick = SDL_GetTicks();
         Uint32 lastTick = firstTick;
@@ -229,7 +230,7 @@ int main(int argc, char* argv[])
             if (1000 < deltaFpsTick)
             {
                 fps = (nbFrame*1000)/deltaFpsTick;
-                //std::cout << fps << " fps" << std::endl;
+                std::cout << fps << " fps" << std::endl;
 
                 fpsTick = currentTick;
                 nbFrame = 0;

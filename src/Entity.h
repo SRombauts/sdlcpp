@@ -5,8 +5,10 @@
 #include <boost/shared_ptr.hpp>
 
 #include "Animation.h"
-#include "Sprite.h"
 #include "Coord.h"
+#include "Offset.h"
+#include "Position.h"
+#include "Sprite.h"
 #include "Zone.h"
 
 /**
@@ -21,7 +23,8 @@ class Entity : public Zone
 public:
              Entity(const Sprite::Vector&       aSpritesOrientation,
                     const Animation::Vector&    aAnimationsOrientation,
-                    const Coord&                aCoord);
+                    const Position&             aPosition,
+                    const Offset&               aOffset);
     virtual ~Entity(void);
 
     enum Orientation
@@ -42,6 +45,18 @@ public:
     inline Animation::Ptr getAnimation(void)
     {
         return mAnimationsOrientation[mOrientation];
+    }
+    inline void setCoord(const Position& aPosition)
+    {
+        mPosition = aPosition;
+    }
+    inline       Position& getPosition(void)
+    {
+        return mPosition;
+    }
+    inline const Position& getPosition(void) const
+    {
+        return mPosition;
     }
     inline void setCoord(const Coord& aCoord)
     {
@@ -89,6 +104,8 @@ protected:
 private:
     Sprite::Vector      mSpritesOrientation;    //!< Vecteur contenant les 4 sprites d'orientation
     Animation::Vector   mAnimationsOrientation; //!< Vecteur contenant les 4 animations d'orientation
+    Position            mPosition;              //!< Position absolue de l'Entity
+    Offset              mOffset;                //!< Offset pour l'affichage de l'Entity #Coord)
     Coord               mCoord;                 //!< Coordonnées de l'Entity dans sa surface parent
     Orientation         mOrientation;           //!< Orientation courante
     int                 mSpeed;                 //!< Vitesse courante
