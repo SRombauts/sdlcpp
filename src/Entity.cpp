@@ -10,13 +10,14 @@ Entity::Entity(const Sprite::Vector&    aSpritesOrientation,
                const Animation::Vector& aAnimationsOrientation,
                const Position&          aPosition,
                const Offset&            aOffset) :
-    Zone(aPosition.getX()+aOffset.getX(), aPosition.getY()+aOffset.getY(),
-         aSpritesOrientation[0]->getRect().getW(), aSpritesOrientation[0]->getRect().getH()),
     mSpritesOrientation(aSpritesOrientation),
     mAnimationsOrientation(aAnimationsOrientation),
     mPosition(aPosition),
     mOffset(aOffset),
     mCoord(aPosition.getX()+aOffset.getX(), aPosition.getY()+aOffset.getY()),
+    mZone(*this,
+          aPosition.getX()+aOffset.getX(), aPosition.getY()+aOffset.getY(),
+          aSpritesOrientation[0]->getRect().getW(), aSpritesOrientation[0]->getRect().getH()),
     mOrientation(eOrientationRight),
     mSpeed(0)
 {
@@ -54,10 +55,18 @@ void Entity::move(void)
             ;
     }
     mCoord.set(mPosition.getX()+mOffset.getX(), mPosition.getY()+mOffset.getY());
-    Zone::set (mPosition.getX()+mOffset.getX(), mPosition.getY()+mOffset.getY());
+    mZone.set (mPosition.getX()+mOffset.getX(), mPosition.getY()+mOffset.getY());
 }
 
-void Entity::onOver(const bool abIsOver)
+void Entity::onOver(const bool abIsOver, bool& abAlreadyConsumed)
 {
-    std::cout << "Entity::onOver: onHoover(abIsOver=" << abIsOver << ")" << std::endl;
+    if (false == abAlreadyConsumed)
+    {
+        std::cout << "Entity::onOver: onHoover(abIsOver=" << abIsOver << ", abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        abAlreadyConsumed = true;
+    }
+    else
+    {
+        std::cout << "abAlreadyConsumed" << std::endl;
+    }
 }

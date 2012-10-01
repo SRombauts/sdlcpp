@@ -10,6 +10,7 @@
 #include "Position.h"
 #include "Sprite.h"
 #include "Zone.h"
+#include "ZoneCallbacks.h"
 
 /**
  * @brief Encapsulation d'une Entité
@@ -18,7 +19,7 @@
  *
  * @author 2012/09/27 SRombauts
 */
-class Entity : public Zone
+class Entity : public IZoneCallbacks
 {
 public:
              Entity(const Sprite::Vector&       aSpritesOrientation,
@@ -70,6 +71,14 @@ public:
     {
         return mCoord;
     }
+    inline       Zone& getZone(void)
+    {
+        return mZone;
+    }
+    inline const Zone& getZone(void) const
+    {
+        return mZone;
+    }
     inline       Orientation& getOrientation(void)
     {
         return mOrientation;
@@ -98,8 +107,9 @@ public:
     typedef boost::shared_ptr<Entity>    Ptr;
     typedef std::vector<Entity::Ptr>     Vector;
 
-protected:
-    virtual void onOver(const bool abIsOver);
+private:
+    // Méthodes dérivées de IZoneCallbacks
+    virtual void onOver(const bool abIsOver, bool& abAlreadyConsumed);
 
 private:
     Sprite::Vector      mSpritesOrientation;    //!< Vecteur contenant les 4 sprites d'orientation
@@ -107,6 +117,7 @@ private:
     Position            mPosition;              //!< Position absolue de l'Entity
     Offset              mOffset;                //!< Offset pour l'affichage de l'Entity #Coord)
     Coord               mCoord;                 //!< Coordonnées de l'Entity dans sa surface parent
+    Zone                mZone;                  //!< Zone cliquable à l'écran
     Orientation         mOrientation;           //!< Orientation courante
     int                 mSpeed;                 //!< Vitesse courante
 };

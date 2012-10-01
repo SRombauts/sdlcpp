@@ -105,6 +105,9 @@ int main(int argc, char* argv[])
         Position positionInitiale(300, 200);
         Offset   offsetInitial(0, 0);
         Entity::Ptr entityPtr (new Entity(orientationSprites, orientationAnimations, positionInitiale, offsetInitial));
+        Zone::List  zoneList;
+        Zone::List::iterator iZone;
+        zoneList.push_back(entityPtr->getZone());
 
         Uint32 firstTick = SDL_GetTicks();
         Uint32 lastTick = firstTick;
@@ -171,8 +174,14 @@ int main(int argc, char* argv[])
                         }
                         break;
                     case SDL_MOUSEMOTION:
-                        // Test de position de la souris
-                        entityPtr->updateMousePosition(event.motion.x, event.motion.y);
+                        // Test de position de la souris vis à vis de l'arborescence des listes
+                        for (iZone  = zoneList.begin();
+                             iZone != zoneList.end();
+                             iZone++)
+                        {
+                            bool bAlreadyConsumed = false;
+                            iZone->updateMousePosition(event.motion.x, event.motion.y, bAlreadyConsumed);
+                        }
 
                         if (event.motion.state & SDL_BUTTON(1)) // Bouton Gauche appuyé
                         {
