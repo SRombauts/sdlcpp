@@ -18,6 +18,8 @@ class IZoneCallbacks;
 */
 class Zone : public boost::intrusive::list_base_hook<> // Base hook with default tag, raw pointers and safe_link mode
 {
+    friend class ZoneManager;
+
 public:
     /// Liste intrusive doublement chaînée de #Zone (et non pas de pointeurs de #Zone)
     typedef boost::intrusive::list<Zone> List;
@@ -35,14 +37,6 @@ public:
 
     /// Indique si les coordonnées sont sur la zone (bordures incluses)
     bool isOver             (const unsigned int aX, const unsigned int aY) const;
-
-    /**
-     * @brief Indique si la souris est au dessus de la zone (bordures incluses)
-     *
-     * @return true si l'évènement a conduit à un traitement
-     */
-    // TODO SRO : à rendre privée et mettre en friend le ZoneManager
-    void updateMousePosition(const unsigned int aX, const unsigned int aY, bool& abAlreadyConsumed);
 
     /// Accesseurs simples
     inline unsigned int getX(void) const
@@ -73,6 +67,11 @@ public:
     {
         return mZoneList;
     }
+
+private:
+    // Notifie la #Zone
+    void onMouseMotion(const unsigned int aX, const unsigned int aY, const bool abIsDown, bool& abAlreadyConsumed);
+    void onMouseEvent (const unsigned int aX, const unsigned int aY, const bool abIsDown, bool& abAlreadyConsumed);
 
 private:
     IZoneCallbacks& mZoneCallbacks; //!< Instance à notifier des changements d'état

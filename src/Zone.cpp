@@ -41,7 +41,7 @@ bool Zone::isOver(const unsigned int aX, const unsigned int aY) const
     return bRet;
 }
 
-void Zone::updateMousePosition(const unsigned int aX, const unsigned int aY, bool& abAlreadyConsumed)
+void Zone::onMouseMotion(const unsigned int aX, const unsigned int aY, const bool abIsDown, bool& abAlreadyConsumed)
 {
     bool bIsOver;
     Zone::List::iterator iZone;
@@ -51,7 +51,7 @@ void Zone::updateMousePosition(const unsigned int aX, const unsigned int aY, boo
          iZone != mZoneList.end();
          iZone++)
     {
-        iZone->updateMousePosition(aX, aY, abAlreadyConsumed);
+        iZone->onMouseMotion(aX, aY, abIsDown, abAlreadyConsumed);
     }
 
     // Puis teste si la souris est-elle au dessus de la zone
@@ -60,16 +60,21 @@ void Zone::updateMousePosition(const unsigned int aX, const unsigned int aY, boo
         && (false == mbIsMouseOver))
     {
         // La souris vient d'entrer au dessus de la zone
-        //std::cout << "Zone::UpdateMousePosition: onHoover(true)" << std::endl;
+        //std::cout << "Zone::onMouseMotion: onHoover(true)" << std::endl;
         mZoneCallbacks.onOver(true, abAlreadyConsumed);
     }
     else if (   (false == bIsOver)
              && (true  == mbIsMouseOver))
     {
         // La souris vient de sortir de la zone
-        //std::cout << "Zone::UpdateMousePosition: onHoover(false)" << std::endl;
+        //std::cout << "Zone::onMouseMotion: onHoover(false)" << std::endl;
         mZoneCallbacks.onOver(false, abAlreadyConsumed);
     }
     // Mémorise l'état de la souris
     mbIsMouseOver = bIsOver;
+}
+
+void Zone::onMouseEvent (const unsigned int aX, const unsigned int aY, const bool abIsDown, bool& abAlreadyConsumed)
+{
+    std::cout << "Zone::onMouseEvent: " << aX << ", " << aY << ", " << abIsDown << std::endl;
 }

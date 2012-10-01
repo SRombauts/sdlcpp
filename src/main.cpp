@@ -5,6 +5,7 @@
 #include "Screen.h"
 #include "Sprite.h"
 #include "Coord.h"
+#include "ZoneManager.h"
 
 
 // Les paramètres de notre écran
@@ -32,9 +33,6 @@ int main(int argc, char* argv[])
         Screen screen(SCREEN_WIDTH, SCREEN_HEIGHT, "Hello World");
 
         Image       background  ("res/background.bmp");
-        Image::Ptr  imagePtr    (new Image("res/sprite.bmp", true));
-        Sprite::Ptr spritePtr   (new Sprite(imagePtr, 7, 10, 50, 100));
-        Coord       coord       (64, 48);
         Image::Ptr  planchePtr  (new Image("res/animation.bmp", true));
         Sprite::Ptr spriteUp0Ptr  (new Sprite(planchePtr, 0*32, 32, 32, 64));
         Sprite::Ptr spriteUp3Ptr  (new Sprite(planchePtr, 1*32, 32, 32, 64));
@@ -105,9 +103,8 @@ int main(int argc, char* argv[])
         Position positionInitiale(300, 200);
         Offset   offsetInitial(0, 0);
         Entity::Ptr entityPtr (new Entity(orientationSprites, orientationAnimations, positionInitiale, offsetInitial));
-        Zone::List  zoneList;
-        Zone::List::iterator iZone;
-        zoneList.push_back(entityPtr->getZone());
+        ZoneManager zoneManager;
+        zoneManager.getList().push_back(entityPtr->getZone());
 
         Uint32 firstTick = SDL_GetTicks();
         Uint32 lastTick = firstTick;
@@ -175,40 +172,30 @@ int main(int argc, char* argv[])
                         break;
                     case SDL_MOUSEMOTION:
                         // Test de position de la souris vis à vis de l'arborescence des listes
-                        for (iZone  = zoneList.begin();
-                             iZone != zoneList.end();
-                             iZone++)
-                        {
-                            bool bAlreadyConsumed = false;
-                            iZone->updateMousePosition(event.motion.x, event.motion.y, bAlreadyConsumed);
-                        }
-
-                        if (event.motion.state & SDL_BUTTON(1)) // Bouton Gauche appuyé
-                        {
-                            coord.set (event.motion.x - spritePtr->getSurface().getSurface().w/2,
-                                       event.motion.y - spritePtr->getSurface().getSurface().h/2);
-                        }
+                        zoneManager.onMouseMotion(event.motion.x, event.motion.y, (event.motion.state & SDL_BUTTON(1)));
                         break;
                     case SDL_MOUSEBUTTONDOWN:
-                        coord.set (event.motion.x - spritePtr->getSurface().getSurface().w/2,
-                                   event.motion.y - spritePtr->getSurface().getSurface().h/2);
+                        if (SDL_BUTTON_LEFT == event.button.button)
+                        {
+                            // Test de position de la souris vis à vis de l'arborescence des listes
+                            zoneManager.onMouseEvent(event.button.x, event.button.y, true);
+                        }
+                        break;
+                    case SDL_MOUSEBUTTONUP:
+                        if (SDL_BUTTON_LEFT == event.button.button)
+                        {
+                            // Test de position de la souris vis à vis de l'arborescence des listes
+                            zoneManager.onMouseEvent(event.button.x, event.button.y, false);
+                        }
                         break;
                     default:
                         // Autre évènement
                         ;
                 }
             }
-            // Incrémente le déplacement du sprite, et le limite à l'affichage sur l'écran
-            coord.incr(5, 0);
-            if (coord.getRect().x >= (screen.getSurface().w))
-            {
-                coord.getRect().x = 0;
-            }
 
             // Blit d'abord le background sur l'écran
             screen.blit(background);
-            // puis le sprite
-            screen.blit(*spritePtr, coord);
 
             // déplace l'entité
             entityPtr->move();

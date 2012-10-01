@@ -36,6 +36,7 @@ public:
         eOrientationUp      = 3
     };
 
+    /// Met à jour la position selon l'orientation et la vitesse
     void move(void);
 
     /// Accesseurs simples
@@ -90,10 +91,6 @@ public:
     inline void setOrientation(const Orientation& aOrientation)
     {
         mOrientation = aOrientation;
-    }
-    inline int getSpeed(void)
-    {
-        return mSpeed;
     }
     inline int getSpeed(void) const
     {

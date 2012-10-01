@@ -3,10 +3,6 @@ Compléter les ZoneCallbacks
 Encapsulation d'un élément d'UI/un Widget
 Encapsulation d'un élément de Menu
 
-Arborescence de Zones
-- ZoneManager
-- rendre privée Zone::updateMousePosition et mettre en friend le ZoneManager
-
 Utiliser boost/intrusive à la place des std::list dans certains cas ? Plus efficace :
 + en terme d'utilisation mémoire,
 + dès lors qu'il s'agit de délier un membre de la liste, plus efficace en mémoire
