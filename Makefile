@@ -6,9 +6,8 @@ CXX = g++
 
 # flags for C++ 
 # TODO SRombauts :
-# -Weffc++ pose problème
+# -Weffc++ pose problème avec l'init des structures SDL dans les constructeurs (SDL_Rect)
 # -Werror
-# -Wzero-as-null-pointer-constant ?
 CXXFLAGS ?= -Wall -Wextra -pedantic -Wformat-security -Winit-self -Wswitch-default -Wswitch-enum -Wfloat-equal -Wundef -Wshadow -Wcast-qual -Wconversion -Wlogical-op -Wmissing-declarations -Winline -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wsuggest-attribute=noreturn
 
 # [Debug,Release]
@@ -17,7 +16,7 @@ BUILD ?= Debug
 ### Conditionally set variables: ###
 
 ifeq ($(BUILD),Debug)
-BUILD_FLAGS = -g -rdynamic -fno-inline -O0 -DDEBUG -D_DEBUG
+BUILD_FLAGS = -g -rdynamic -fstack-protector-all -fno-inline -O0 -DDEBUG -D_DEBUG
 endif
 ifeq ($(BUILD),Release)
 BUILD_FLAGS = -O2
@@ -46,6 +45,7 @@ SDLCPP_OBJECTS =  \
 	$(BUILD)/SdlCpp_Screen.o \
 	$(BUILD)/SdlCpp_Sprite.o \
 	$(BUILD)/SdlCpp_Surface.o \
+	$(BUILD)/SdlCpp_UI.o \
 	$(BUILD)/SdlCpp_Zone.o \
 	$(BUILD)/SdlCpp_ZoneManager.o \
 	
@@ -97,6 +97,9 @@ $(BUILD)/SdlCpp_Sprite.o: src/Sprite.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_Surface.o: src/Surface.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlCpp_UI.o: src/UI.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_Zone.o: src/Zone.cpp

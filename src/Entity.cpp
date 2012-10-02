@@ -1,8 +1,7 @@
 #include <stdexcept>
+#include <iostream>
 
 #include "Entity.h"
-#include <iostream>
-#include "Sprite.h"
 
 
 /// RAII : garantie qu'une animation est toujours valide (dispose au moins d'un Sprite)
@@ -58,11 +57,11 @@ void Entity::move(void)
     mZone.set (mPosition.getX()+mOffset.getX(), mPosition.getY()+mOffset.getY());
 }
 
-void Entity::onOver(const bool abIsOver, bool& abAlreadyConsumed)
+void Entity::onOver(bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "Entity::onOver: onHoover(abIsOver=" << abIsOver << ", abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "Entity::onOver: onOver(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -70,3 +69,56 @@ void Entity::onOver(const bool abIsOver, bool& abAlreadyConsumed)
         std::cout << "abAlreadyConsumed" << std::endl;
     }
 }
+
+void Entity::onOut (bool& abAlreadyConsumed)
+{
+    if (false == abAlreadyConsumed)
+    {
+        std::cout << "Entity::onOver: onOut(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        abAlreadyConsumed = true;
+    }
+    else
+    {
+        std::cout << "abAlreadyConsumed" << std::endl;
+    }
+}
+
+void Entity::onDrag(bool& abAlreadyConsumed)
+{
+    if (false == abAlreadyConsumed)
+    {
+        std::cout << "Entity::onOver: onDrag(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        abAlreadyConsumed = true;
+    }
+    else
+    {
+        std::cout << "abAlreadyConsumed" << std::endl;
+    }
+}
+
+void Entity::onDrop(bool& abAlreadyConsumed)
+{
+    if (false == abAlreadyConsumed)
+    {
+        std::cout << "Entity::onOver: onDrop(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        abAlreadyConsumed = true;
+    }
+    else
+    {
+        std::cout << "abAlreadyConsumed" << std::endl;
+    }
+}
+
+void Entity::onClic(bool& abAlreadyConsumed)
+{
+    if (false == abAlreadyConsumed)
+    {
+        std::cout << "Entity::onOver: onClic(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        abAlreadyConsumed = true;
+    }
+    else
+    {
+        std::cout << "abAlreadyConsumed" << std::endl;
+    }
+}
+

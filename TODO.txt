@@ -1,6 +1,9 @@
 Compléter les ZoneCallbacks
 
-Encapsulation d'un élément d'UI/un Widget
+Encapsulation d'un élément d'UI/un Widget :
+- Button (+Text)
+- Label/Text
+- List ?
 Encapsulation d'un élément de Menu
 
 Utiliser boost/intrusive à la place des std::list dans certains cas ? Plus efficace :
@@ -9,6 +12,8 @@ Utiliser boost/intrusive à la place des std::list dans certains cas ? Plus effi
 - Mais non copiables (à ne pas utiliser pour lister les Sprites d'une Animation par exemple)
 => pour le ResourcesManager ? pour la hierarchie de Zones ?
 http://www.boost.org/doc/libs/1_51_0/doc/html/intrusive/intrusive_vs_nontrusive.html
+
+Décider où gérer le chaînage des Zone : dans les Factory ? Dans les constructeurs d'Entity et d'UI ?
 
 Ajouter une chaîne nommant chaque Image (son nom de fichier), chaque Sprite, chaque Animation
 Créer une Zone à utiliser pour détection de clic :

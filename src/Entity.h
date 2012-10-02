@@ -40,11 +40,19 @@ public:
     void move(void);
 
     /// Accesseurs simples
-    inline Sprite::Ptr getSprite(void)
+    inline       Sprite::Ptr& getSprite(void)
     {
-        return mSpritesOrientation[mOrientation];
+         return mSpritesOrientation[mOrientation];
     }
-    inline Animation::Ptr getAnimation(void)
+    inline const Sprite::Ptr& getSprite(void) const
+    {
+         return mSpritesOrientation[mOrientation];
+    }
+    inline       Animation::Ptr& getAnimation(void)
+    {
+        return mAnimationsOrientation[mOrientation];
+    }
+    inline const Animation::Ptr& getAnimation(void) const
     {
         return mAnimationsOrientation[mOrientation];
     }
@@ -106,7 +114,11 @@ public:
 
 private:
     // Méthodes dérivées de IZoneCallbacks
-    virtual void onOver(const bool abIsOver, bool& abAlreadyConsumed);
+    virtual void onOver(bool& abAlreadyConsumed);
+    virtual void onOut (bool& abAlreadyConsumed);
+    virtual void onDrag(bool& abAlreadyConsumed);
+    virtual void onDrop(bool& abAlreadyConsumed);
+    virtual void onClic(bool& abAlreadyConsumed);
 
 private:
     Sprite::Vector      mSpritesOrientation;    //!< Vecteur contenant les 4 sprites d'orientation

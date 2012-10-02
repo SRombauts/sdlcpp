@@ -12,5 +12,9 @@ class IZoneCallbacks
     friend class Zone;
 
 private:
-    virtual void onOver(const bool abIsOver, bool& abAlreadyConsumed) = 0;
+    virtual void onOver(bool& abAlreadyConsumed) = 0;
+    virtual void onOut (bool& abAlreadyConsumed) = 0;
+    virtual void onDrag(bool& abAlreadyConsumed) = 0;
+    virtual void onDrop(bool& abAlreadyConsumed) = 0;
+    virtual void onClic(bool& abAlreadyConsumed) = 0;
 };

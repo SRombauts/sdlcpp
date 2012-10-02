@@ -1,15 +1,16 @@
 #include <iostream>
 #include "Animation.h"
+#include "Coord.h"
 #include "Entity.h"
 #include "Image.h"
 #include "Screen.h"
 #include "Sprite.h"
-#include "Coord.h"
+#include "UI.h"
 #include "ZoneManager.h"
 
 
 // Les paramètres de notre écran
-const int SCREEN_WIDTH  = 640;
+const int SCREEN_WIDTH  = 800;
 const int SCREEN_HEIGHT = 480;
 
 
@@ -34,6 +35,8 @@ int main(int argc, char* argv[])
 
         Image       background  ("res/background.bmp");
         Image::Ptr  planchePtr  (new Image("res/animation.bmp", true));
+        Image::Ptr  imageUIPtr   (new Image("res/sprite.bmp", true));
+        Sprite::Ptr spriteUIPtr  (new Sprite(imageUIPtr, 0, 0, 64, 120));
         Sprite::Ptr spriteUp0Ptr  (new Sprite(planchePtr, 0*32, 32, 32, 64));
         Sprite::Ptr spriteUp3Ptr  (new Sprite(planchePtr, 1*32, 32, 32, 64));
         Sprite::Ptr spriteUp2Ptr  (new Sprite(planchePtr, 2*32, 32, 32, 64));
@@ -100,11 +103,16 @@ int main(int argc, char* argv[])
         orientationAnimations.push_back(animationDownPtr);
         orientationAnimations.push_back(animationLeftPtr);
         orientationAnimations.push_back(animationUpPtr);
-        Position positionInitiale(300, 200);
-        Offset   offsetInitial(0, 0);
+        Position    positionInitiale(300, 200);
+        Offset      offsetInitial(0, 0);
         Entity::Ptr entityPtr (new Entity(orientationSprites, orientationAnimations, positionInitiale, offsetInitial));
+
+        Coord       coordUI(0,0);
+        UI::Ptr     uiPtr     (new UI(spriteUIPtr, coordUI));
+
         ZoneManager zoneManager;
         zoneManager.getList().push_back(entityPtr->getZone());
+        zoneManager.getList().push_back(uiPtr->getZone());
 
         Uint32 firstTick = SDL_GetTicks();
         Uint32 lastTick = firstTick;
@@ -194,12 +202,16 @@ int main(int argc, char* argv[])
                 }
             }
 
+            // déplace l'entité
+            entityPtr->move();
+
             // Blit d'abord le background sur l'écran
             screen.blit(background);
 
-            // déplace l'entité
-            entityPtr->move();
-            // blit l'entité (en statique, une image de l'animation)
+            // Blit l'UI
+            screen.blit(*(uiPtr->getSprite()), uiPtr->getCoord());
+
+            // Blit ensuite l'entité (en statique, une image de l'animation)
             // TODO SRO : déplacer cette logique dans Entity
             if (0 == entityPtr->getSpeed())
             {
