@@ -61,7 +61,7 @@ void Entity::onOver(bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "Entity::onOver: onOver(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "Entity::onOver(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -74,7 +74,7 @@ void Entity::onOut (bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "Entity::onOver: onOut(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "Entity::onOut(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -83,11 +83,11 @@ void Entity::onOut (bool& abAlreadyConsumed)
     }
 }
 
-void Entity::onDrag(bool& abAlreadyConsumed)
+void Entity::onDrag(const unsigned int aX, const unsigned int aY, bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "Entity::onOver: onDrag(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "Entity::onDrag(aX=" << aX << ", aY="  << aY << ", abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -100,7 +100,7 @@ void Entity::onDrop(bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "Entity::onOver: onDrop(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "Entity::onDrop(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -113,7 +113,7 @@ void Entity::onClic(bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "Entity::onOver: onClic(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "Entity::onClic(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else

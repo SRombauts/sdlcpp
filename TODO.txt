@@ -1,10 +1,15 @@
-Compléter les ZoneCallbacks
+Utiliser les ZoneCallbacks
+
+Créer classe Size comme Offset, à ajouter au constructeur de Entity et UI
 
 Encapsulation d'un élément d'UI/un Widget :
 - Button (+Text)
 - Label/Text
 - List ?
 Encapsulation d'un élément de Menu
+
+Gérer le focus
+Evènements clavier UP, DOWN, ESC
 
 Utiliser boost/intrusive à la place des std::list dans certains cas ? Plus efficace :
 + en terme d'utilisation mémoire,

@@ -116,7 +116,7 @@ private:
     // Méthodes dérivées de IZoneCallbacks
     virtual void onOver(bool& abAlreadyConsumed);
     virtual void onOut (bool& abAlreadyConsumed);
-    virtual void onDrag(bool& abAlreadyConsumed);
+    virtual void onDrag(const unsigned int aX, const unsigned int aY, bool& abAlreadyConsumed);
     virtual void onDrop(bool& abAlreadyConsumed);
     virtual void onClic(bool& abAlreadyConsumed);
 

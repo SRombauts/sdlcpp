@@ -96,7 +96,7 @@ void UI::onOver(bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "UI::onOver: onOver(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "UI::onOver(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -109,7 +109,7 @@ void UI::onOut (bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "UI::onOver: onOut(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "UI::onOut(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -118,11 +118,11 @@ void UI::onOut (bool& abAlreadyConsumed)
     }
 }
 
-void UI::onDrag(bool& abAlreadyConsumed)
+void UI::onDrag(const unsigned int aX, const unsigned int aY, bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "UI::onOver: onDrag(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "UI::onDrag(aX=" << aX << ", aY="  << aY << ", abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -135,7 +135,7 @@ void UI::onDrop(bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "UI::onOver: onDrop(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "UI::onDrop(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -148,7 +148,7 @@ void UI::onClic(bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "UI::onOver: onClic(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "UI::onClic(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else

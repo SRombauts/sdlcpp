@@ -14,7 +14,7 @@ class IZoneCallbacks
 private:
     virtual void onOver(bool& abAlreadyConsumed) = 0;
     virtual void onOut (bool& abAlreadyConsumed) = 0;
-    virtual void onDrag(bool& abAlreadyConsumed) = 0;
+    virtual void onDrag(const unsigned int aX, const unsigned int aY, bool& abAlreadyConsumed) = 0;
     virtual void onDrop(bool& abAlreadyConsumed) = 0;
     virtual void onClic(bool& abAlreadyConsumed) = 0;
 };

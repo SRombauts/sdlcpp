@@ -82,5 +82,8 @@ private:
     unsigned int    mX2;    //!< X2=x+w-1 coordonnée du côté droit
     unsigned int    mY2;    //!< Y2=y+h-1 coordonnée du bas
     bool            mbIsMouseOver;  //!< Mémorise l'état "dans/hors de la zone" de la souris (pour détection de transition)
+    bool            mbIsClicked;    //!< Mémorise le fait que la zone a été cliquée
+    bool            mbIsDraged;     //!< Mémorise le fait que la zone a été draguée
+    bool            mbOnOverCalled; //!< Mémorise le fait que la callback onOver a été appelée
     List            mZoneList;      //!< Liste des éventuelles zones enfants
 };
