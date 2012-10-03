@@ -12,6 +12,8 @@
 #include "Zone.h"
 #include "ZoneCallbacks.h"
 
+class Screen;
+
 /**
  * @brief Encapsulation d'une Entité
  *
@@ -38,6 +40,9 @@ public:
 
     /// Met à jour la position selon l'orientation et la vitesse
     void move(void);
+
+    /// Affichage sur l'écran
+    void show(Screen& aScreen);
 
     /// Accesseurs simples
     inline       Sprite::Ptr& getSprite(void)

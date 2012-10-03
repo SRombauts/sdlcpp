@@ -1,5 +1,10 @@
 Utiliser les ZoneCallbacks
 
+Reconcevoir la hiérarchie de classe Entity/Unit...
+Créer une tourelle à instancier N fois :
+-> un TypeTourelle instanciant une Tourelle ?
+=> à utiliser sur Drop !
+
 Trouver/dessiner une grille de jeu : http://puzzles.about.com/library/grids/blankind.htm
 Icône et sprites de tourelle  : http://www.vickiwenderlich.com/2012/02/free-iphone-ipad-game-art-tower-of-defense-robot-world/
 
@@ -20,6 +25,8 @@ Encapsulation d'un élément de Menu
 
 Gérer le focus
 Evènements clavier UP, DOWN, ESC
+
+Encapsuler l'animation en fonction du temps
 
 Utiliser boost/intrusive à la place des std::list dans certains cas ? Plus efficace :
 + en terme d'utilisation mémoire,

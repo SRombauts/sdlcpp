@@ -5,9 +5,12 @@
 #include <boost/shared_ptr.hpp>
 
 #include "Coord.h"
+#include "Drag.h"
 #include "Sprite.h"
 #include "Zone.h"
 #include "ZoneCallbacks.h"
+
+class Screen;
 
 /**
  * @brief Encapsulation d'un élément d'UI (User Interface)
@@ -27,25 +30,32 @@ public:
     };
 
 public:
-             UI(const Sprite::Ptr&  aSpriteDefaultPtr,
-                const Coord&        aCoord,
-                const State         aState = eStateDefault);
-             UI(const Sprite::Ptr&  aSpriteDefaultPtr,
-                const Sprite::Ptr&  aSpriteDownPtr,
-                const Coord&        aCoord,
-                const State         aState = eStateDefault);
-             UI(const Sprite::Ptr&  aSpriteDefaultPtr,
-                const Sprite::Ptr&  aSpriteDownPtr,
-                const Sprite::Ptr&  aSpriteDisabledPtr,
-                const Coord&        aCoord,
-                const State         aState = eStateDefault);
-             UI(const Sprite::Ptr&  aSpriteDefaultPtr,
-                const Sprite::Ptr&  aSpriteDownPtr,
-                const Sprite::Ptr&  aSpriteFocusPtr,
-                const Sprite::Ptr&  aSpriteDisabledPtr,
-                const Coord&        aCoord,
-                const State         aState = eStateDefault);
+     UI(const Sprite::Ptr&  aSpriteDefaultPtr,
+        const Sprite::Ptr&  aSpriteDragPtr,
+        const Coord&        aCoord,
+        const State         aState = eStateDefault);
+     UI(const Sprite::Ptr&  aSpriteDefaultPtr,
+        const Sprite::Ptr&  aSpriteDownPtr,
+        const Sprite::Ptr&  aSpriteDragPtr,
+        const Coord&        aCoord,
+        const State         aState = eStateDefault);
+     UI(const Sprite::Ptr&  aSpriteDefaultPtr,
+        const Sprite::Ptr&  aSpriteDownPtr,
+        const Sprite::Ptr&  aSpriteDisabledPtr,
+        const Sprite::Ptr&  aSpriteDragPtr,
+        const Coord&        aCoord,
+        const State         aState = eStateDefault);
+     UI(const Sprite::Ptr&  aSpriteDefaultPtr,
+        const Sprite::Ptr&  aSpriteDownPtr,
+        const Sprite::Ptr&  aSpriteFocusPtr,
+        const Sprite::Ptr&  aSpriteDisabledPtr,
+        const Sprite::Ptr&  aSpriteDragPtr,
+        const Coord&        aCoord,
+        const State         aState = eStateDefault);
     virtual ~UI(void);
+
+    /// Affichage sur l'écran
+    void show(Screen& aScreen);
 
     /// Accesseurs simples
     inline       Sprite::Ptr& getSprite(void)
@@ -93,8 +103,9 @@ private:
     virtual void onClic(bool& abAlreadyConsumed);
 
 private:
-    Sprite::Vector  mSprites;   //!< Liste des Sprite de l'élément d'UI (selon son état courant ci-dessous)
-    Coord           mCoord;     //!< Coordonnées de l'UI dans sa surface parent
-    Zone            mZone;      //!< Zone cliquable à l'écran
-    State           mState;     //!< Etat courant de l'élément d'UI
+    Sprite::Vector  mSprites;       //!< Liste des Sprite de l'élément d'UI (selon son état courant ci-dessous)
+    Drag            mDrag;          //!< Sprite de Drag and Drop de l'élément d'UI
+    Coord           mCoord;         //!< Coordonnées de l'UI dans sa surface parent
+    Zone            mZone;          //!< Zone cliquable à l'écran
+    State           mState;         //!< Etat courant de l'élément d'UI
 };

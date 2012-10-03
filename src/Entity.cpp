@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "Entity.h"
-
+#include "Screen.h"
 
 /// RAII : garantie qu'une animation est toujours valide (dispose au moins d'un Sprite)
 Entity::Entity(const Sprite::Vector&    aSpritesOrientation,
@@ -55,6 +55,18 @@ void Entity::move(void)
     }
     mCoord.set(mPosition.getX()+mOffset.getX(), mPosition.getY()+mOffset.getY());
     mZone.set (mPosition.getX()+mOffset.getX(), mPosition.getY()+mOffset.getY());
+}
+
+void Entity::show(Screen& aScreen)
+{
+    if (0 == mSpeed)
+    {
+        aScreen.blit(*(getSprite()), mCoord);
+    }
+    else
+    {
+        aScreen.blit(*(getAnimation())->getSprite(), mCoord);
+    }
 }
 
 void Entity::onOver(bool& abAlreadyConsumed)

@@ -108,30 +108,30 @@ void Zone::onMouseEvent (const unsigned int aX, const unsigned int aY, const boo
         iZone->onMouseEvent(aX, aY, abIsDown, abAlreadyConsumed);
     }
 
-    // Puis teste si la souris est au dessus de la zone
-    bIsOver = isOver(aX, aY);
-//    if (bIsOver)
-//        std::cout << "Zone::onMouseEvent: " << aX << ", " << aY << ", " << abIsDown << ", " << abAlreadyConsumed << std::endl;
-
-    if (bIsOver)
+    if (mbIsDraged)
     {
-        if (mbOnOverCalled)
+        mZoneCallbacks.onDrop(abAlreadyConsumed);
+        mbIsDraged = false;
+        mbIsClicked = false;
+    }
+    else
+    {
+        // Puis teste si la souris est au dessus de la zone
+        bIsOver = isOver(aX, aY);
+//      if (bIsOver)
+//          std::cout << "Zone::onMouseEvent: " << aX << ", " << aY << ", " << abIsDown << ", " << abAlreadyConsumed << std::endl;
+
+        if (bIsOver)
         {
-            // Le clic souris provoque une "sortie" de la zone
-            mZoneCallbacks.onOut(abAlreadyConsumed);
-            mbOnOverCalled = false;
-        }
-        if (abIsDown)
-        {
-            mbIsClicked = true;
-        }
-        else
-        {
-            if (mbIsDraged)
+            if (mbOnOverCalled)
             {
-                mZoneCallbacks.onDrop(abAlreadyConsumed);
-                mbIsDraged = false;
-                mbIsClicked = false;
+                // Le clic souris provoque une "sortie" de la zone
+                mZoneCallbacks.onOut(abAlreadyConsumed);
+                mbOnOverCalled = false;
+            }
+            if (abIsDown)
+            {
+                mbIsClicked = true;
             }
             else
             {

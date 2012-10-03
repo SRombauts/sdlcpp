@@ -2,12 +2,14 @@
 #include <iostream>
 
 #include "UI.h"
-
+#include "Screen.h"
 
 /// RAII : garantie qu'un élément d'UI est toujours valide (dispose au moins d'un Sprite)
 UI::UI(const Sprite::Ptr&   aSpriteDefaultPtr,
+       const Sprite::Ptr&   aSpriteDragPtr,
        const Coord&         aCoord,
        const State          aState /* = eStateDefault */) :
+    mDrag(aSpriteDragPtr),
     mCoord(aCoord),
     mZone(*this,
           aCoord.getX(), aCoord.getY(),
@@ -26,8 +28,10 @@ UI::UI(const Sprite::Ptr&   aSpriteDefaultPtr,
 
 UI::UI(const Sprite::Ptr&   aSpriteDefaultPtr,
        const Sprite::Ptr&   aSpriteDownPtr,
+       const Sprite::Ptr&   aSpriteDragPtr,
        const Coord&         aCoord,
        const State          aState /* = eStateDefault */) :
+    mDrag(aSpriteDragPtr),
     mCoord(aCoord),
     mZone(*this,
           aCoord.getX(), aCoord.getY(),
@@ -47,8 +51,10 @@ UI::UI(const Sprite::Ptr&   aSpriteDefaultPtr,
 UI::UI(const Sprite::Ptr&   aSpriteDefaultPtr,
        const Sprite::Ptr&   aSpriteDownPtr,
        const Sprite::Ptr&   aSpriteFocusPtr,
+       const Sprite::Ptr&   aSpriteDragPtr,
        const Coord&         aCoord,
        const State          aState /* = eStateDefault */) :
+    mDrag(aSpriteDragPtr),
     mCoord(aCoord),
     mZone(*this,
           aCoord.getX(), aCoord.getY(),
@@ -69,8 +75,10 @@ UI::UI(const Sprite::Ptr&   aSpriteDefaultPtr,
        const Sprite::Ptr&   aSpriteDownPtr,
        const Sprite::Ptr&   aSpriteFocusPtr,
        const Sprite::Ptr&   aSpriteDisabledPtr,
+       const Sprite::Ptr&   aSpriteDragPtr,
        const Coord&         aCoord,
        const State          aState /* = eStateDefault */) :
+    mDrag(aSpriteDragPtr),
     mCoord(aCoord),
     mZone(*this,
           aCoord.getX(), aCoord.getY(),
@@ -91,6 +99,11 @@ UI::~UI(void)
 {
 }
 
+void UI::show(Screen& aScreen)
+{
+    aScreen.blit(*mSprites[mState], mCoord);
+    mDrag.show(aScreen);
+}
 
 void UI::onOver(bool& abAlreadyConsumed)
 {
@@ -123,6 +136,8 @@ void UI::onDrag(const unsigned int aX, const unsigned int aY, bool& abAlreadyCon
     if (false == abAlreadyConsumed)
     {
         std::cout << "UI::onDrag(aX=" << aX << ", aY="  << aY << ", abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        mDrag.getCoord().set(aX,aY);
+        mDrag.setVisible(true);
         abAlreadyConsumed = true;
     }
     else
@@ -136,6 +151,7 @@ void UI::onDrop(bool& abAlreadyConsumed)
     if (false == abAlreadyConsumed)
     {
         std::cout << "UI::onDrop(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        mDrag.setVisible(false);
         abAlreadyConsumed = true;
     }
     else
@@ -156,4 +172,3 @@ void UI::onClic(bool& abAlreadyConsumed)
         std::cout << "abAlreadyConsumed" << std::endl;
     }
 }
-

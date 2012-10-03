@@ -37,6 +37,7 @@ SDLCPP_OBJECTS =  \
 	$(BUILD)/SdlCpp_main.o \
 	$(BUILD)/SdlCpp_Animation.o \
 	$(BUILD)/SdlCpp_Coord.o \
+	$(BUILD)/SdlCpp_Drag.o \
 	$(BUILD)/SdlCpp_Entity.o \
 	$(BUILD)/SdlCpp_Image.o \
 	$(BUILD)/SdlCpp_Offset.o \
@@ -73,6 +74,9 @@ $(BUILD)/SdlCpp_Animation.o: src/Animation.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_Coord.o: src/Coord.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlCpp_Drag.o: src/Drag.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_Entity.o: src/Entity.cpp

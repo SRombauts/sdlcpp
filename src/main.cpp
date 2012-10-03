@@ -37,6 +37,8 @@ int main(int argc, char* argv[])
         Image::Ptr  planchePtr  (new Image("res/animation.bmp", true));
         Image::Ptr  imageUIPtr   (new Image("res/tower.bmp", true));
         Sprite::Ptr spriteUIPtr  (new Sprite(imageUIPtr, 0, 0, 96, 96));
+        Image::Ptr  towersPtr    (new Image("res/tower-sprites.bmp", true));
+        Sprite::Ptr towerPtr     (new Sprite(towersPtr, 12, 12, 32, 32));
         Sprite::Ptr spriteUp0Ptr  (new Sprite(planchePtr, 0*32, 32, 32, 64));
         Sprite::Ptr spriteUp3Ptr  (new Sprite(planchePtr, 1*32, 32, 32, 64));
         Sprite::Ptr spriteUp2Ptr  (new Sprite(planchePtr, 2*32, 32, 32, 64));
@@ -107,8 +109,8 @@ int main(int argc, char* argv[])
         Offset      offsetInitial(0, 0);
         Entity::Ptr entityPtr (new Entity(orientationSprites, orientationAnimations, positionInitiale, offsetInitial));
 
-        Coord       coordUI(0,0);
-        UI::Ptr     uiPtr     (new UI(spriteUIPtr, coordUI));
+        Coord       coordUI(800-104, 8);
+        UI::Ptr     uiPtr     (new UI(spriteUIPtr, towerPtr, coordUI));
 
         ZoneManager zoneManager;
         zoneManager.getList().push_back(entityPtr->getZone());
@@ -209,24 +211,21 @@ int main(int argc, char* argv[])
             screen.blit(background);
 
             // Blit l'UI
-            screen.blit(*(uiPtr->getSprite()), uiPtr->getCoord());
+            uiPtr->show(screen);
 
-            // Blit ensuite l'entité (en statique, une image de l'animation)
-            // TODO SRO : déplacer cette logique dans Entity
-            if (0 == entityPtr->getSpeed())
-            {
-                screen.blit(*(entityPtr->getSprite()), entityPtr->getCoord());
-            }
-            else
+            if (0 != entityPtr->getSpeed())
             {
                 // Se base sur le temps qui passe pour animer l'entité
+                // TODO SRO : déplacer cette logique dans Entity
                 if (100 < (currentTick-animTick))
                 {
                     animTick = currentTick;
                     entityPtr->getAnimation()->next();
                 }
-                screen.blit(*(entityPtr->getAnimation()->getSprite()), entityPtr->getCoord());
             }
+
+            // Blit ensuite l'entité (en statique, une image de l'animation)
+            entityPtr->show(screen);
 
             // Mise à jour de l'écran (utilise le double buffering)
             screen.flip();
