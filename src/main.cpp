@@ -35,8 +35,8 @@ int main(int argc, char* argv[])
 
         Image       background  ("res/background.bmp");
         Image::Ptr  planchePtr  (new Image("res/animation.bmp", true));
-        Image::Ptr  imageUIPtr   (new Image("res/sprite.bmp", true));
-        Sprite::Ptr spriteUIPtr  (new Sprite(imageUIPtr, 0, 0, 64, 120));
+        Image::Ptr  imageUIPtr   (new Image("res/tower.bmp", true));
+        Sprite::Ptr spriteUIPtr  (new Sprite(imageUIPtr, 0, 0, 96, 96));
         Sprite::Ptr spriteUp0Ptr  (new Sprite(planchePtr, 0*32, 32, 32, 64));
         Sprite::Ptr spriteUp3Ptr  (new Sprite(planchePtr, 1*32, 32, 32, 64));
         Sprite::Ptr spriteUp2Ptr  (new Sprite(planchePtr, 2*32, 32, 32, 64));

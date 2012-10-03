@@ -1,7 +1,7 @@
 Utiliser les ZoneCallbacks
 
 Trouver/dessiner une grille de jeu : http://puzzles.about.com/library/grids/blankind.htm
-Trouver dessiner une icone de tourelle ou d'arme : http://www.vickiwenderlich.com/2012/02/free-iphone-ipad-game-art-tower-of-defense-robot-world/
+Icône et sprites de tourelle  : http://www.vickiwenderlich.com/2012/02/free-iphone-ipad-game-art-tower-of-defense-robot-world/
 
 Mettre au point :
 - un DragAndDrop type inventaire (avec cas d'erreur et d'annulations)
