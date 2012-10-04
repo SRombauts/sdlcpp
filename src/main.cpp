@@ -28,16 +28,17 @@ int main(int argc, char* argv[])
         printf("%s", argv[arg]);
     }
 
+    std::cout << "*** SDL_Init... ***" << std::endl;
     res = SDL_Init(SDL_INIT_VIDEO);
     if (-1 != res)
     {
         Screen screen(SCREEN_WIDTH, SCREEN_HEIGHT, "Hello World");
 
         Image       background  ("res/background.bmp");
-        Image::Ptr  planchePtr  (new Image("res/animation.bmp", true));
-        Image::Ptr  imageUIPtr   (new Image("res/tower.bmp", true));
+        Image::Ptr  planchePtr  (new Image("res/animation.bmp", 0, 0xFF, 0xFF));
+        Image::Ptr  imageUIPtr   (new Image("res/tower.bmp", 0, 0xFF, 0xFF));
         Sprite::Ptr spriteUIPtr  (new Sprite(imageUIPtr, 0, 0, 96, 96));
-        Image::Ptr  towersPtr    (new Image("res/tower-sprites.bmp", true));
+        Image::Ptr  towersPtr    (new Image("res/tower-sprites.bmp", 0, 0xFF, 0xFF, SDL_ALPHA_128));
         Sprite::Ptr towerPtr     (new Sprite(towersPtr, 12, 12, 32, 32));
         Sprite::Ptr spriteUp0Ptr  (new Sprite(planchePtr, 0*32, 32, 32, 64));
         Sprite::Ptr spriteUp3Ptr  (new Sprite(planchePtr, 1*32, 32, 32, 64));
@@ -259,6 +260,7 @@ int main(int argc, char* argv[])
     }
 
     SDL_Quit();
+    std::cout << "*** SDL_Quit done ***" << std::endl;
 
     return EXIT_SUCCESS;
 }

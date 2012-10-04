@@ -1,5 +1,7 @@
 Utiliser les ZoneCallbacks
 
+Alpha channel (transparence partielle) à mettre au propre 
+
 Reconcevoir la hiérarchie de classe Entity/Unit...
 Créer une tourelle à instancier N fois :
 -> un TypeTourelle instanciant une Tourelle ?

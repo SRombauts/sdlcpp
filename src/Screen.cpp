@@ -11,6 +11,9 @@ const int SCREEN_BPP    = 32;
 Screen::Screen(const int aWidth, const int aHeight, const char* apTitle) :
     Surface()
 {
+    // Chargement de l'icône AVANT SDL_SetVideoMode
+    SDL_WM_SetIcon(SDL_LoadBMP("sdl_icone.bmp"), NULL);
+
     // Initialisation de la fenêtre principale
     mpSurface = SDL_SetVideoMode(aWidth, aHeight, SCREEN_BPP, SDL_HWSURFACE);
     if (NULL != mpSurface)
