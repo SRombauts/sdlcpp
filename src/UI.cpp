@@ -3,89 +3,25 @@
 
 #include "UI.h"
 #include "Screen.h"
+#include "Size.h"
 
 /// RAII : garantie qu'un élément d'UI est toujours valide (dispose au moins d'un Sprite)
-UI::UI(const Sprite::Ptr&   aSpriteDefaultPtr,
-       const Sprite::Ptr&   aSpriteDragPtr,
-       const Coord&         aCoord,
-       const State          aState /* = eStateDefault */) :
-    mDrag(aSpriteDragPtr),
-    mCoord(aCoord),
-    mZone(*this,
-          aCoord.getX(), aCoord.getY(),
-          aSpriteDefaultPtr->getRect().getW(), aSpriteDefaultPtr->getRect().getH()),
-    mState(aState)
-{
-    if (!aSpriteDefaultPtr)
-    {
-        throw std::runtime_error("UI::UI: aSpriteDefaultPtr NULL");
-    }
-    mSprites.push_back(aSpriteDefaultPtr);  // eStateDefault   = 0,
-    mSprites.push_back(aSpriteDefaultPtr);  // eStateDown      = 1,
-    mSprites.push_back(aSpriteDefaultPtr);  // eStateFocus     = 2,
-    mSprites.push_back(aSpriteDefaultPtr);  // eStateDisabled  = 3
-}
-
-UI::UI(const Sprite::Ptr&   aSpriteDefaultPtr,
-       const Sprite::Ptr&   aSpriteDownPtr,
-       const Sprite::Ptr&   aSpriteDragPtr,
-       const Coord&         aCoord,
-       const State          aState /* = eStateDefault */) :
-    mDrag(aSpriteDragPtr),
-    mCoord(aCoord),
-    mZone(*this,
-          aCoord.getX(), aCoord.getY(),
-          aSpriteDefaultPtr->getRect().getW(), aSpriteDefaultPtr->getRect().getH()),
-    mState(aState)
-{
-    if (!aSpriteDefaultPtr || !aSpriteDownPtr)
-    {
-        throw std::runtime_error("UI::UI: aSpriteDefaultPtr NULL");
-    }
-    mSprites.push_back(aSpriteDefaultPtr);  // eStateDefault   = 0,
-    mSprites.push_back(aSpriteDownPtr);     // eStateDown      = 1,
-    mSprites.push_back(aSpriteDefaultPtr);  // eStateFocus     = 2,
-    mSprites.push_back(aSpriteDefaultPtr);  // eStateDisabled  = 3
-}
-
-UI::UI(const Sprite::Ptr&   aSpriteDefaultPtr,
-       const Sprite::Ptr&   aSpriteDownPtr,
-       const Sprite::Ptr&   aSpriteFocusPtr,
-       const Sprite::Ptr&   aSpriteDragPtr,
-       const Coord&         aCoord,
-       const State          aState /* = eStateDefault */) :
-    mDrag(aSpriteDragPtr),
-    mCoord(aCoord),
-    mZone(*this,
-          aCoord.getX(), aCoord.getY(),
-          aSpriteDefaultPtr->getRect().getW(), aSpriteDefaultPtr->getRect().getH()),
-    mState(aState)
-{
-    if (!aSpriteDefaultPtr || !aSpriteDownPtr || !aSpriteFocusPtr)
-    {
-        throw std::runtime_error("UI::UI: aSpriteDefaultPtr NULL");
-    }
-    mSprites.push_back(aSpriteDefaultPtr);  // eStateDefault   = 0,
-    mSprites.push_back(aSpriteDownPtr);     // eStateDown      = 1,
-    mSprites.push_back(aSpriteFocusPtr);    // eStateFocus     = 2,
-    mSprites.push_back(aSpriteDefaultPtr);  // eStateDisabled  = 3
-}
-
-UI::UI(const Sprite::Ptr&   aSpriteDefaultPtr,
+UI::UI(const Coord&         aCoord,
+       const Size&          aSize,
+       const Sprite::Ptr&   aSpriteDefaultPtr,
        const Sprite::Ptr&   aSpriteDownPtr,
        const Sprite::Ptr&   aSpriteFocusPtr,
        const Sprite::Ptr&   aSpriteDisabledPtr,
-       const Sprite::Ptr&   aSpriteDragPtr,
-       const Coord&         aCoord,
-       const State          aState /* = eStateDefault */) :
+       const Sprite::Ptr&   aSpriteDragPtr) :
+    mSprites(),
     mDrag(aSpriteDragPtr),
     mCoord(aCoord),
     mZone(*this,
           aCoord.getX(), aCoord.getY(),
-          aSpriteDefaultPtr->getRect().getW(), aSpriteDefaultPtr->getRect().getH()),
-    mState(aState)
+          aSize.getW(), aSize.getH()),
+    mState(eStateDefault)
 {
-    if (!aSpriteDefaultPtr || !aSpriteDownPtr || !aSpriteFocusPtr || !aSpriteDisabledPtr)
+    if (!aSpriteDefaultPtr || !aSpriteDownPtr || !aSpriteFocusPtr || !aSpriteDisabledPtr || !aSpriteDragPtr)
     {
         throw std::runtime_error("UI::UI: aSpriteDefaultPtr NULL");
     }

@@ -13,6 +13,7 @@
 #include "ZoneCallbacks.h"
 
 class Screen;
+class Size;
 
 /**
  * @brief Encapsulation d'une Entité
@@ -24,10 +25,12 @@ class Screen;
 class Entity : public IZoneCallbacks
 {
 public:
+             // TODO SRombauts : problème, les Animations doivent être copiée !
              Entity(const Sprite::Vector&       aSpritesOrientation,
                     const Animation::Vector&    aAnimationsOrientation,
                     const Position&             aPosition,
-                    const Offset&               aOffset);
+                    const Offset&               aOffset,
+                    const Size&                 aSize);
     virtual ~Entity(void);
 
     enum Orientation
@@ -126,8 +129,8 @@ private:
     virtual void onClic(bool& abAlreadyConsumed);
 
 private:
-    Sprite::Vector      mSpritesOrientation;    //!< Vecteur contenant les 4 sprites d'orientation
-    Animation::Vector   mAnimationsOrientation; //!< Vecteur contenant les 4 animations d'orientation
+    Sprite::Vector      mSpritesOrientation;    //!< Vecteur pointant sur les 4 sprites d'orientation
+    Animation::Vector   mAnimationsOrientation; //!< Vecteur pointant sur les 4 animations d'orientation
     Position            mPosition;              //!< Position absolue de l'Entity
     Offset              mOffset;                //!< Offset pour l'affichage de l'Entity #Coord)
     Coord               mCoord;                 //!< Coordonnées de l'Entity dans sa surface parent

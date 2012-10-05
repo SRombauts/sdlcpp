@@ -1,11 +1,22 @@
 Utiliser les ZoneCallbacks
 
-Alpha channel (transparence partielle) à mettre au propre 
+Concevoir la hiérarchie[NON, la composition d'objets !] de classe Entity/Unit/Building/Tower...
 
-Reconcevoir la hiérarchie de classe Entity/Unit...
+Corriger l'utilisation de Animation : la séquence de Sprite peut être partagée, mais pas l'index ni le timestamp...
+- soit on les met dans l'entité (mauvaise encapsulation)
+- soit on duplique l'objet Animation,
+- soit on découpe en utilisant un pointeur vers le vecteur de Sprite, ou une nouvelle classe Sequence
+Encapsuler dans Animation l'évolution de l'index en fonction du temps
+
 Créer une tourelle à instancier N fois :
 -> un TypeTourelle instanciant une Tourelle ?
 => à utiliser sur Drop !
+
+Boost.PropertyTree XML
+Boost.Serialization XML
+- Resources Loader (menus, ui, modèles)
+- Savegames (instances)
+- Éditeur de modèles, de niveaux, de menus et d'ui ! 
 
 Trouver/dessiner une grille de jeu : http://puzzles.about.com/library/grids/blankind.htm
 Icône et sprites de tourelle  : http://www.vickiwenderlich.com/2012/02/free-iphone-ipad-game-art-tower-of-defense-robot-world/
@@ -17,18 +28,18 @@ Mettre au point :
 Rendre paramétrable la couleur de transparence
 Permettre de charger des PNG
 
-Créer classe Size comme Offset, à ajouter au constructeur de Entity et UI
-
 Encapsulation d'un élément d'UI/un Widget :
+- Créer des classes UI Button, Label, EditText, List...
 - Button (+Text)
 - Label/Text
 - List ?
 Encapsulation d'un élément de Menu
 
+Compléter les callbacks
++ onFocus
+Evt clavier (up, down, esc)
 Gérer le focus
 Evènements clavier UP, DOWN, ESC
-
-Encapsuler l'animation en fonction du temps
 
 Utiliser boost/intrusive à la place des std::list dans certains cas ? Plus efficace :
 + en terme d'utilisation mémoire,

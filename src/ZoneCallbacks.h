@@ -11,6 +11,9 @@ class IZoneCallbacks
 {
     friend class Zone;
 
+protected:
+    virtual ~IZoneCallbacks(void) {};
+
 private:
     virtual void onOver(bool& abAlreadyConsumed) = 0;
     virtual void onOut (bool& abAlreadyConsumed) = 0;

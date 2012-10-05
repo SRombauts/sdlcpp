@@ -9,3 +9,14 @@ Principes de conception, règle de codage...
 * Utiliser les containeurs de la STL avec les pointeurs intelligents de Boost
 *- définir un type "boost::shared_ptr<Cls> Ptr" public dans chaque classe concernée
 *- définir un type "std::vector<Cls::Ptr> Vector" (resp List, Map...)
+
+
+Boost - utilisation de :
+<boost/shared_ptr.hpp> : encapsule l'allocation/libération mémoire d'un objet par comptage de références (évite tous les "delete")
+<boost/make_shared.hpp> : factory produisant un shared_ptr (évite tous les "new", et améliore l'allocation mémoire en faisant d'un bloc l'allocation de l'objet et du compteur de références)
+<boost/enable_shared_from_this.hpp> : permet d'obtenir un shared_ptr de "this" à l'aide de shared_from_this() dès lors que "this" à été créé avec un shared_ptr
+<boost/weak_ptr.hpp> : permet d'obtenir une référence faible utile pour ne pas retenir un objet qui n'est plus utilisé ailleurs (NECESSAIRE dans le cas d'une référence croisée)  
+
+Boost - pas d'utilisation de :
+A shared_ptr to a std::vector is an alternative to a "shared_array" that is a bit heavier duty but far more flexible.
+If it isn't obvious whether "intrusive_ptr" better fits your needs than "shared_ptr", try a shared_ptr-based design first.

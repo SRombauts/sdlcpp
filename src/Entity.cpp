@@ -3,12 +3,14 @@
 
 #include "Entity.h"
 #include "Screen.h"
+#include "Size.h"
 
 /// RAII : garantie qu'une animation est toujours valide (dispose au moins d'un Sprite)
 Entity::Entity(const Sprite::Vector&    aSpritesOrientation,
                const Animation::Vector& aAnimationsOrientation,
                const Position&          aPosition,
-               const Offset&            aOffset) :
+               const Offset&            aOffset,
+               const Size&              aSize) :
     mSpritesOrientation(aSpritesOrientation),
     mAnimationsOrientation(aAnimationsOrientation),
     mPosition(aPosition),
@@ -16,7 +18,7 @@ Entity::Entity(const Sprite::Vector&    aSpritesOrientation,
     mCoord(aPosition.getX()+aOffset.getX(), aPosition.getY()+aOffset.getY()),
     mZone(*this,
           aPosition.getX()+aOffset.getX(), aPosition.getY()+aOffset.getY(),
-          aSpritesOrientation[0]->getRect().getW(), aSpritesOrientation[0]->getRect().getH()),
+          aSize.getW(), aSize.getH()),
     mOrientation(eOrientationRight),
     mSpeed(0)
 {

@@ -5,10 +5,7 @@
 CXX = g++
 
 # flags for C++ 
-# TODO SRombauts :
-# -Weffc++ pose problème avec l'init des structures SDL dans les constructeurs (SDL_Rect)
-# -Werror
-CXXFLAGS ?= -Wall -Wextra -pedantic -Wformat-security -Winit-self -Wswitch-default -Wswitch-enum -Wfloat-equal -Wundef -Wshadow -Wcast-qual -Wconversion -Wlogical-op -Wmissing-declarations -Winline -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wsuggest-attribute=noreturn
+CXXFLAGS ?= -Wall -Wextra -Weffc++ -pedantic -Wformat-security -Winit-self -Wswitch-default -Wswitch-enum -Wfloat-equal -Wundef -Wshadow -Wcast-qual -Wconversion -Wlogical-op -Wmissing-declarations -Winline -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wsuggest-attribute=noreturn
 
 # [Debug,Release]
 BUILD ?= Debug
@@ -44,6 +41,7 @@ SDLCPP_OBJECTS =  \
 	$(BUILD)/SdlCpp_Position.o \
 	$(BUILD)/SdlCpp_Rect.o \
 	$(BUILD)/SdlCpp_Screen.o \
+	$(BUILD)/SdlCpp_Size.o \
 	$(BUILD)/SdlCpp_Sprite.o \
 	$(BUILD)/SdlCpp_Surface.o \
 	$(BUILD)/SdlCpp_UI.o \
@@ -95,6 +93,9 @@ $(BUILD)/SdlCpp_Rect.o: src/Rect.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_Screen.o: src/Screen.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlCpp_Size.o: src/Size.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_Sprite.o: src/Sprite.cpp

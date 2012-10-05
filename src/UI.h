@@ -11,6 +11,7 @@
 #include "ZoneCallbacks.h"
 
 class Screen;
+class Size;
 
 /**
  * @brief Encapsulation d'un élément d'UI (User Interface)
@@ -30,28 +31,13 @@ public:
     };
 
 public:
-     UI(const Sprite::Ptr&  aSpriteDefaultPtr,
-        const Sprite::Ptr&  aSpriteDragPtr,
-        const Coord&        aCoord,
-        const State         aState = eStateDefault);
-     UI(const Sprite::Ptr&  aSpriteDefaultPtr,
-        const Sprite::Ptr&  aSpriteDownPtr,
-        const Sprite::Ptr&  aSpriteDragPtr,
-        const Coord&        aCoord,
-        const State         aState = eStateDefault);
-     UI(const Sprite::Ptr&  aSpriteDefaultPtr,
-        const Sprite::Ptr&  aSpriteDownPtr,
-        const Sprite::Ptr&  aSpriteDisabledPtr,
-        const Sprite::Ptr&  aSpriteDragPtr,
-        const Coord&        aCoord,
-        const State         aState = eStateDefault);
-     UI(const Sprite::Ptr&  aSpriteDefaultPtr,
+     UI(const Coord&        aCoord,
+        const Size&         aSize,
+        const Sprite::Ptr&  aSpriteDefaultPtr,
         const Sprite::Ptr&  aSpriteDownPtr,
         const Sprite::Ptr&  aSpriteFocusPtr,
         const Sprite::Ptr&  aSpriteDisabledPtr,
-        const Sprite::Ptr&  aSpriteDragPtr,
-        const Coord&        aCoord,
-        const State         aState = eStateDefault);
+        const Sprite::Ptr&  aSpriteDragPtr);
     virtual ~UI(void);
 
     /// Affichage sur l'écran

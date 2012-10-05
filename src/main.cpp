@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Image.h"
 #include "Screen.h"
+#include "Size.h"
 #include "Sprite.h"
 #include "UI.h"
 #include "ZoneManager.h"
@@ -108,10 +109,12 @@ int main(int argc, char* argv[])
         orientationAnimations.push_back(animationUpPtr);
         Position    positionInitiale(300, 200);
         Offset      offsetInitial(0, 0);
-        Entity::Ptr entityPtr (new Entity(orientationSprites, orientationAnimations, positionInitiale, offsetInitial));
+        Size        sizeEntity(32, 64);
+        Entity::Ptr entityPtr (new Entity(orientationSprites, orientationAnimations, positionInitiale, offsetInitial, sizeEntity));
 
         Coord       coordUI(800-104, 8);
-        UI::Ptr     uiPtr     (new UI(spriteUIPtr, towerPtr, coordUI));
+        Size        sizeUI(96, 96);
+        UI::Ptr     uiPtr     (new UI(coordUI, sizeUI, spriteUIPtr, spriteUIPtr, spriteUIPtr, spriteUIPtr, towerPtr));
 
         ZoneManager zoneManager;
         zoneManager.getList().push_back(entityPtr->getZone());
