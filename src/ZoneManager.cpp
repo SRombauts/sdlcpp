@@ -1,6 +1,7 @@
 #include "ZoneManager.h"
 
-ZoneManager::ZoneManager(void)
+ZoneManager::ZoneManager(void) :
+    mZoneList()
 {
 }
 

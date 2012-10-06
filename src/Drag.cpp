@@ -7,6 +7,7 @@
 /// RAII : garantie qu'un élément d'Drag est toujours valide (dispose au moins d'un Sprite)
 Drag::Drag(const Sprite::Ptr&   aSpritePtr) :
     mSpritePtr(aSpritePtr),
+    mCoord(),
     mbIsVisible(false)
 {
     if (!aSpritePtr)

@@ -17,7 +17,8 @@ Zone::Zone(IZoneCallbacks&    aZoneCallbacks,
     mbIsMouseOver(false),
     mbIsClicked(false),
     mbIsDraged(false),
-    mbOnOverCalled(false)
+    mbOnOverCalled(false),
+    mZoneList()
 {
 }
 

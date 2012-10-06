@@ -1,7 +1,8 @@
 #include "Coord.h"
 
 
-Coord::Coord(const int aX /* = 0 */, const int aY /* = 0 */)
+Coord::Coord(const int aX /* = 0 */, const int aY /* = 0 */) :
+    mRect() // warning: ‘Rect::mRect’ should be initialized in the member initialization list [-Weffc++]
 {
     mRect.x = (Sint16)aX;
     mRect.y = (Sint16)aY;
