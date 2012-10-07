@@ -33,6 +33,7 @@ SDLCPP_CXXFLAGS = $(BUILD_FLAGS) $(CXXFLAGS)
 SDLCPP_OBJECTS =  \
 	$(BUILD)/SdlCpp_main.o \
 	$(BUILD)/SdlCpp_backtrace.o \
+	$(BUILD)/SdlCpp_signal_handler.o \
 	$(BUILD)/SdlCpp_engine_Animation.o \
 	$(BUILD)/SdlCpp_engine_Coord.o \
 	$(BUILD)/SdlCpp_engine_Drag.o \
@@ -70,6 +71,9 @@ $(BUILD)/SdlCpp_main.o: src/main.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_backtrace.o: src/backtrace.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlCpp_signal_handler.o: src/signal_handler.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 

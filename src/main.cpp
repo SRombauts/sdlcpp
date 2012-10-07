@@ -12,6 +12,7 @@
 #include <boost/make_shared.hpp>
 
 #include "backtrace.h"
+#include "signal_handler.h"
 
 // Les paramètres de notre écran
 const int SCREEN_WIDTH  = 800;
@@ -40,6 +41,8 @@ int main(int argc, char* argv[])
     SDL_Event   event;
 
     _default_terminate_handler = std::set_terminate(my_terminate_handler);
+
+    install_signal_handler();
 
     for (int arg = 0; arg < argc; arg++)
     {
