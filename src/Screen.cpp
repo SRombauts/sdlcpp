@@ -12,7 +12,15 @@ Screen::Screen(const int aWidth, const int aHeight, const char* apTitle) :
     Surface()
 {
     // Chargement de l'icône AVANT SDL_SetVideoMode
-    SDL_WM_SetIcon(SDL_LoadBMP("sdl_icone.bmp"), NULL);
+    SDL_Surface* pSurfaceIcon = SDL_LoadBMP("res/sdl_icone.bmp");
+    if (NULL != pSurfaceIcon)
+    {
+        SDL_WM_SetIcon(pSurfaceIcon, NULL);
+    }
+    else
+    {
+        std::cout << "Screen: Can't load Icon: " << SDL_GetError() << std::endl;
+    }
 
     // Initialisation de la fenêtre principale
     mpSurface = SDL_SetVideoMode(aWidth, aHeight, SCREEN_BPP, SDL_HWSURFACE);
@@ -24,7 +32,7 @@ Screen::Screen(const int aWidth, const int aHeight, const char* apTitle) :
     else
     {
         std::ostringstream streamErr;
-        streamErr << "Screen: Can't set video mode: " << SDL_GetError();
+        streamErr << "Screen: Can't set video mode: " << SDL_GetError() << std::endl;
         throw std::runtime_error(streamErr.str());
     }
 }
