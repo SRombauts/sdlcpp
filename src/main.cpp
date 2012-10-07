@@ -1,21 +1,34 @@
 #include <iostream>
-#include "Animation.h"
-#include "Coord.h"
-#include "Entity.h"
-#include "Image.h"
-#include "Screen.h"
-#include "Size.h"
-#include "Sprite.h"
-#include "UI.h"
-#include "ZoneManager.h"
+#include "engine/Animation.h"
+#include "engine/Coord.h"
+#include "engine/Entity.h"
+#include "engine/Image.h"
+#include "engine/Screen.h"
+#include "engine/Size.h"
+#include "engine/Sprite.h"
+#include "engine/UI.h"
+#include "engine/ZoneManager.h"
 
-#include "boost/make_shared.hpp"
+#include <boost/make_shared.hpp>
 
+#include "backtrace.h"
 
 // Les paramètres de notre écran
 const int SCREEN_WIDTH  = 800;
 const int SCREEN_HEIGHT = 480;
 
+
+void my_terminate_handler (void);
+
+std::terminate_handler _default_terminate_handler = NULL;
+void my_terminate_handler (void)
+{
+    print_backtrace();
+    if (NULL != _default_terminate_handler)
+    {
+        _default_terminate_handler();
+    }
+}
 
 /**
  * @author 2012/09/26 SRombauts
@@ -25,6 +38,8 @@ int main(int argc, char* argv[])
     bool        bRunning = true;
     int         res;
     SDL_Event   event;
+
+    _default_terminate_handler = std::set_terminate(my_terminate_handler);
 
     for (int arg = 0; arg < argc; arg++)
     {

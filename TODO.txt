@@ -1,7 +1,8 @@
 Utiliser les ZoneCallbacks
 
-Logger (glog ? Boost.Log ?)
+Signal Handler (Boost.asio n'est pas pertinent tant qu'on n'utilise pas déjà Boost.asio)
 Backtrace (facile sous Linux, mais sous Windows ?)
+Logger (glog ? Boost.Log ?)
 Tests Unitaires ?
 
 Définir une règle sur quand utiliser les Exceptions vs les Assertions ?!

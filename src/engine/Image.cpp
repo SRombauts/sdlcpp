@@ -72,6 +72,14 @@ Image::Image(const char* apFileName,
            streamErr << "Image: Optimize error: " << SDL_GetError() << std::endl;
            throw std::runtime_error(streamErr.str());
         }
+/* TODO SRombauts : tests en cours
+abort();
+int i = 0;
+int j = 1/i;
+std::ostringstream streamErr;
+streamErr << "Image: Optimize error: " << SDL_GetError() << std::endl;
+BOOST_THROW_EXCEPTION(std::runtime_error(streamErr.str()));
+*/
     }
     else
     {

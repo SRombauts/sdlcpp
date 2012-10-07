@@ -13,13 +13,13 @@ BUILD ?= Debug
 ### Conditionally set variables: ###
 
 ifeq ($(BUILD),Debug)
-BUILD_FLAGS = -g -rdynamic -fstack-protector-all -fno-inline -O0 -DDEBUG -D_DEBUG
+BUILD_FLAGS = -g3 -rdynamic -fstack-protector-all -fno-inline -O0 -DDEBUG -D_DEBUG
 endif
 ifeq ($(BUILD),Release)
 BUILD_FLAGS = -O2
 endif
 ifeq ($(BUILD),Debug)
-LINK_FLAGS = -g -rdynamic
+LINK_FLAGS = -g3 -rdynamic
 endif
 ifeq ($(BUILD),Release)
 LINK_FLAGS =
@@ -32,21 +32,22 @@ CPPDEPS = -MT $@ -MF`echo $@ | sed -e 's,\.o$$,.d,'` -MD -MP
 SDLCPP_CXXFLAGS = $(BUILD_FLAGS) $(CXXFLAGS)
 SDLCPP_OBJECTS =  \
 	$(BUILD)/SdlCpp_main.o \
-	$(BUILD)/SdlCpp_Animation.o \
-	$(BUILD)/SdlCpp_Coord.o \
-	$(BUILD)/SdlCpp_Drag.o \
-	$(BUILD)/SdlCpp_Entity.o \
-	$(BUILD)/SdlCpp_Image.o \
-	$(BUILD)/SdlCpp_Offset.o \
-	$(BUILD)/SdlCpp_Position.o \
-	$(BUILD)/SdlCpp_Rect.o \
-	$(BUILD)/SdlCpp_Screen.o \
-	$(BUILD)/SdlCpp_Size.o \
-	$(BUILD)/SdlCpp_Sprite.o \
-	$(BUILD)/SdlCpp_Surface.o \
-	$(BUILD)/SdlCpp_UI.o \
-	$(BUILD)/SdlCpp_Zone.o \
-	$(BUILD)/SdlCpp_ZoneManager.o \
+	$(BUILD)/SdlCpp_backtrace.o \
+	$(BUILD)/SdlCpp_engine_Animation.o \
+	$(BUILD)/SdlCpp_engine_Coord.o \
+	$(BUILD)/SdlCpp_engine_Drag.o \
+	$(BUILD)/SdlCpp_engine_Entity.o \
+	$(BUILD)/SdlCpp_engine_Image.o \
+	$(BUILD)/SdlCpp_engine_Offset.o \
+	$(BUILD)/SdlCpp_engine_Position.o \
+	$(BUILD)/SdlCpp_engine_Rect.o \
+	$(BUILD)/SdlCpp_engine_Screen.o \
+	$(BUILD)/SdlCpp_engine_Size.o \
+	$(BUILD)/SdlCpp_engine_Sprite.o \
+	$(BUILD)/SdlCpp_engine_Surface.o \
+	$(BUILD)/SdlCpp_engine_UI.o \
+	$(BUILD)/SdlCpp_engine_Zone.o \
+	$(BUILD)/SdlCpp_engine_ZoneManager.o \
 	
 	
 ### Targets: ###
@@ -62,55 +63,59 @@ $(BUILD): $(BUILD)/
 	mkdir -p $(BUILD)
 
 $(BUILD)/sdlcpp: $(SDLCPP_OBJECTS)
-	$(CXX) -o $@ $(SDLCPP_OBJECTS) $(LINK_FLAGS) -lSDL
+	$(CXX) -o $@ $(SDLCPP_OBJECTS) $(LINK_FLAGS) -lSDL -lboost
 
 
 $(BUILD)/SdlCpp_main.o: src/main.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Animation.o: src/Animation.cpp
+$(BUILD)/SdlCpp_backtrace.o: src/backtrace.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Coord.o: src/Coord.cpp
+
+$(BUILD)/SdlCpp_engine_Animation.o: src/engine/Animation.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Drag.o: src/Drag.cpp
+$(BUILD)/SdlCpp_engine_Coord.o: src/engine/Coord.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Entity.o: src/Entity.cpp
+$(BUILD)/SdlCpp_engine_Drag.o: src/engine/Drag.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Image.o: src/Image.cpp
+$(BUILD)/SdlCpp_engine_Entity.o: src/engine/Entity.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Offset.o: src/Offset.cpp
+$(BUILD)/SdlCpp_engine_Image.o: src/engine/Image.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Position.o: src/Position.cpp
+$(BUILD)/SdlCpp_engine_Offset.o: src/engine/Offset.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Rect.o: src/Rect.cpp
+$(BUILD)/SdlCpp_engine_Position.o: src/engine/Position.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Screen.o: src/Screen.cpp
+$(BUILD)/SdlCpp_engine_Rect.o: src/engine/Rect.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Size.o: src/Size.cpp
+$(BUILD)/SdlCpp_engine_Screen.o: src/engine/Screen.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Sprite.o: src/Sprite.cpp
+$(BUILD)/SdlCpp_engine_Size.o: src/engine/Size.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Surface.o: src/Surface.cpp
+$(BUILD)/SdlCpp_engine_Sprite.o: src/engine/Sprite.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_UI.o: src/UI.cpp
+$(BUILD)/SdlCpp_engine_Surface.o: src/engine/Surface.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_Zone.o: src/Zone.cpp
+$(BUILD)/SdlCpp_engine_UI.o: src/engine/UI.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_ZoneManager.o: src/ZoneManager.cpp
+$(BUILD)/SdlCpp_engine_Zone.o: src/engine/Zone.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlCpp_engine_ZoneManager.o: src/engine/ZoneManager.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 .PHONY: all clean
