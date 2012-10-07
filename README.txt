@@ -9,7 +9,12 @@ Principes de conception, règle de codage...
 * Utiliser les containeurs de la STL avec les pointeurs intelligents de Boost
 *- définir un type "boost::shared_ptr<Cls> Ptr" public dans chaque classe concernée
 *- définir un type "std::vector<Cls::Ptr> Vector" (resp List, Map...)
+* Jamais de new/delete (boost::make_shared)
 
+Boost guidelines :
+Often the best way to deal with exceptions is to not handle them at all. If you can let them pass through your code and allow destructors to handle cleanup, your code will be cleaner.
+BOOST_ASSERT et BOOST_ASSERT_MSG
+BOOST_THROW_EXCEPTION
 
 Boost - utilisation de :
 <boost/shared_ptr.hpp> : encapsule l'allocation/libération mémoire d'un objet par comptage de références (évite tous les "delete")

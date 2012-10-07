@@ -17,7 +17,7 @@
 class Animation
 {
 public:
-             Animation(Sprite::Vector& aSpriteVector, unsigned long aIndex = 0);
+             Animation(const Sprite::Vector& aSpriteVector, const unsigned long aIndex = 0);
     virtual ~Animation(void);
 
     /// Incrémente l'index du sprite courant

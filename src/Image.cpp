@@ -10,9 +10,10 @@ Image::Image(const char* apFileName,
              const unsigned char aB /* = 255 */,
              const unsigned char aAlpha /* = SDL_ALPHA_OPAQUE */)
 {
+    BOOST_ASSERT_MSG(NULL != apFileName, "Image ctor need a filename");
     SDL_Surface* pSurfaceUnoptimized = NULL; // Surface tampon pour charger l'image non optimisé
 
-    std::cout << "image: SDL_LoadBMP..." << std::endl;
+    std::cout << "image: SDL_LoadBMP(" << apFileName << ")" << std::endl;
 
     // Chargement de l'image
     pSurfaceUnoptimized = SDL_LoadBMP(apFileName);
@@ -68,14 +69,14 @@ Image::Image(const char* apFileName,
         else
         {
            std::ostringstream streamErr;
-           streamErr << "Image: Optimize error: " << SDL_GetError();
+           streamErr << "Image: Optimize error: " << SDL_GetError() << std::endl;
            throw std::runtime_error(streamErr.str());
         }
     }
     else
     {
         std::ostringstream streamErr;
-        streamErr << "Image: Load error: " << SDL_GetError();
+        streamErr << "Image: Load error: " << SDL_GetError() << std::endl;
         throw std::runtime_error(streamErr.str());
     }
 }

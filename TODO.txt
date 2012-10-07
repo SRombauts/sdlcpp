@@ -1,6 +1,18 @@
 Utiliser les ZoneCallbacks
 
-Concevoir la hiérarchie[NON, la composition d'objets !] de classe Entity/Unit/Building/Tower...
+Logger (glog ? Boost.Log ?)
+Backtrace (facile sous Linux, mais sous Windows ?)
+Tests Unitaires ?
+
+Définir une règle sur quand utiliser les Exceptions vs les Assertions ?!
+
+Concevoir la hiérarchie ET la composition d'objets de classe Entity/Unit/Building/Tower...
+
+Mettre en place des fabriques d'objets
+- rendre les constructeurs privés ?
+- remplacer les Foo::Ptr fooPtr(new Foo()) par des make_shared(Foo)
+
+Décider où gérer le chaînage des Zone : dans les Factory ? Dans les constructeurs d'Entity et d'UI ?
 
 Corriger l'utilisation de Animation : la séquence de Sprite peut être partagée, mais pas l'index ni le timestamp...
 - soit on les met dans l'entité (mauvaise encapsulation)
@@ -47,8 +59,6 @@ Utiliser boost/intrusive à la place des std::list dans certains cas ? Plus effi
 - Mais non copiables (à ne pas utiliser pour lister les Sprites d'une Animation par exemple)
 => pour le ResourcesManager ? pour la hierarchie de Zones ?
 http://www.boost.org/doc/libs/1_51_0/doc/html/intrusive/intrusive_vs_nontrusive.html
-
-Décider où gérer le chaînage des Zone : dans les Factory ? Dans les constructeurs d'Entity et d'UI ?
 
 Ajouter une chaîne nommant chaque Image (son nom de fichier), chaque Sprite, chaque Animation
 Créer une Zone à utiliser pour détection de clic :

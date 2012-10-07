@@ -9,6 +9,8 @@
 #include "UI.h"
 #include "ZoneManager.h"
 
+#include "boost/make_shared.hpp"
+
 
 // Les paramètres de notre écran
 const int SCREEN_WIDTH  = 800;
@@ -26,27 +28,27 @@ int main(int argc, char* argv[])
 
     for (int arg = 0; arg < argc; arg++)
     {
-        printf("%s", argv[arg]);
+        std::cout << argv[arg] << std::endl;
     }
 
-    std::cout << "*** SDL_Init... ***" << std::endl;
+    std::cout << std::endl << "*** SDL_Init... ***" << std::endl;
     res = SDL_Init(SDL_INIT_VIDEO);
     if (-1 != res)
     {
         Screen screen(SCREEN_WIDTH, SCREEN_HEIGHT, "Hello World");
 
         Image       background  ("res/background.bmp");
-        Image::Ptr  planchePtr  (new Image("res/animation.bmp", 0, 0xFF, 0xFF));
-        Image::Ptr  imageUIPtr   (new Image("res/tower.bmp", 0, 0xFF, 0xFF));
-        Sprite::Ptr spriteUIPtr  (new Sprite(imageUIPtr, 0, 0, 96, 96));
-        Image::Ptr  towersPtr    (new Image("res/tower-sprites.bmp", 0, 0xFF, 0xFF, SDL_ALPHA_128));
-        Sprite::Ptr towerPtr     (new Sprite(towersPtr, 12, 12, 32, 32));
-        Sprite::Ptr spriteUp0Ptr  (new Sprite(planchePtr, 0*32, 32, 32, 64));
-        Sprite::Ptr spriteUp3Ptr  (new Sprite(planchePtr, 1*32, 32, 32, 64));
-        Sprite::Ptr spriteUp2Ptr  (new Sprite(planchePtr, 2*32, 32, 32, 64));
-        Sprite::Ptr spriteUp1Ptr  (new Sprite(planchePtr, 3*32, 32, 32, 64));
-        Sprite::Ptr spriteUp4Ptr  (new Sprite(planchePtr, 4*32, 32, 32, 64));
-        Sprite::Ptr spriteUp5Ptr  (new Sprite(planchePtr, 5*32, 32, 32, 64));
+        Image::Ptr  planchePtr  = boost::make_shared<Image>("res/animation.bmp", 0, 0xFF, 0xFF);
+        Image::Ptr  imageUIPtr  = boost::make_shared<Image>("res/tower.bmp", 0, 0xFF, 0xFF);
+        Sprite::Ptr spriteUIPtr = boost::make_shared<Sprite>(imageUIPtr, 0, 0, 96, 96);
+        Image::Ptr  towersPtr   = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF, SDL_ALPHA_128);
+        Sprite::Ptr towerPtr      = boost::make_shared<Sprite>(towersPtr, 12, 12, 32, 32);
+        Sprite::Ptr spriteUp0Ptr  = boost::make_shared<Sprite>(planchePtr, 0*32, 32, 32, 64);
+        Sprite::Ptr spriteUp3Ptr  = boost::make_shared<Sprite>(planchePtr, 1*32, 32, 32, 64);
+        Sprite::Ptr spriteUp2Ptr  = boost::make_shared<Sprite>(planchePtr, 2*32, 32, 32, 64);
+        Sprite::Ptr spriteUp1Ptr  = boost::make_shared<Sprite>(planchePtr, 3*32, 32, 32, 64);
+        Sprite::Ptr spriteUp4Ptr  = boost::make_shared<Sprite>(planchePtr, 4*32, 32, 32, 64);
+        Sprite::Ptr spriteUp5Ptr  = boost::make_shared<Sprite>(planchePtr, 5*32, 32, 32, 64);
         Sprite::Vector spriteUpVector;
         spriteUpVector.push_back (spriteUp1Ptr);
         spriteUpVector.push_back (spriteUp2Ptr);
@@ -54,13 +56,13 @@ int main(int argc, char* argv[])
         spriteUpVector.push_back (spriteUp1Ptr);
         spriteUpVector.push_back (spriteUp4Ptr);
         spriteUpVector.push_back (spriteUp5Ptr);
-        Animation::Ptr animationUpPtr (new Animation(spriteUpVector, 0));
-        Sprite::Ptr spriteDown0Ptr  (new Sprite(planchePtr, 0*32, 32+64, 32, 64));
-        Sprite::Ptr spriteDown3Ptr  (new Sprite(planchePtr, 1*32, 32+64, 32, 64));
-        Sprite::Ptr spriteDown2Ptr  (new Sprite(planchePtr, 2*32, 32+64, 32, 64));
-        Sprite::Ptr spriteDown1Ptr  (new Sprite(planchePtr, 3*32, 32+64, 32, 64));
-        Sprite::Ptr spriteDown4Ptr  (new Sprite(planchePtr, 4*32, 32+64, 32, 64));
-        Sprite::Ptr spriteDown5Ptr  (new Sprite(planchePtr, 5*32, 32+64, 32, 64));
+        Animation::Ptr animationUpPtr= boost::make_shared<Animation>(spriteUpVector, 0);
+        Sprite::Ptr spriteDown0Ptr  = boost::make_shared<Sprite>(planchePtr, 0*32, 32+64, 32, 64);
+        Sprite::Ptr spriteDown3Ptr  = boost::make_shared<Sprite>(planchePtr, 1*32, 32+64, 32, 64);
+        Sprite::Ptr spriteDown2Ptr  = boost::make_shared<Sprite>(planchePtr, 2*32, 32+64, 32, 64);
+        Sprite::Ptr spriteDown1Ptr  = boost::make_shared<Sprite>(planchePtr, 3*32, 32+64, 32, 64);
+        Sprite::Ptr spriteDown4Ptr  = boost::make_shared<Sprite>(planchePtr, 4*32, 32+64, 32, 64);
+        Sprite::Ptr spriteDown5Ptr  = boost::make_shared<Sprite>(planchePtr, 5*32, 32+64, 32, 64);
         Sprite::Vector spriteDownVector;
         spriteDownVector.push_back (spriteDown1Ptr);
         spriteDownVector.push_back (spriteDown2Ptr);
@@ -68,13 +70,13 @@ int main(int argc, char* argv[])
         spriteDownVector.push_back (spriteDown1Ptr);
         spriteDownVector.push_back (spriteDown4Ptr);
         spriteDownVector.push_back (spriteDown5Ptr);
-        Animation::Ptr animationDownPtr (new Animation(spriteDownVector, 1));
-        Sprite::Ptr spriteRight0Ptr  (new Sprite(planchePtr, 0*32, 32+2*64, 32, 64));
-        Sprite::Ptr spriteRight3Ptr  (new Sprite(planchePtr, 1*32, 32+2*64, 32, 64));
-        Sprite::Ptr spriteRight2Ptr  (new Sprite(planchePtr, 2*32, 32+2*64, 32, 64));
-        Sprite::Ptr spriteRight1Ptr  (new Sprite(planchePtr, 3*32, 32+2*64, 32, 64));
-        Sprite::Ptr spriteRight4Ptr  (new Sprite(planchePtr, 4*32, 32+2*64, 32, 64));
-        Sprite::Ptr spriteRight5Ptr  (new Sprite(planchePtr, 5*32, 32+2*64, 32, 64));
+        Animation::Ptr animationDownPtr= boost::make_shared<Animation>(spriteDownVector, 1);
+        Sprite::Ptr spriteRight0Ptr  = boost::make_shared<Sprite>(planchePtr, 0*32, 32+2*64, 32, 64);
+        Sprite::Ptr spriteRight3Ptr  = boost::make_shared<Sprite>(planchePtr, 1*32, 32+2*64, 32, 64);
+        Sprite::Ptr spriteRight2Ptr  = boost::make_shared<Sprite>(planchePtr, 2*32, 32+2*64, 32, 64);
+        Sprite::Ptr spriteRight1Ptr  = boost::make_shared<Sprite>(planchePtr, 3*32, 32+2*64, 32, 64);
+        Sprite::Ptr spriteRight4Ptr  = boost::make_shared<Sprite>(planchePtr, 4*32, 32+2*64, 32, 64);
+        Sprite::Ptr spriteRight5Ptr  = boost::make_shared<Sprite>(planchePtr, 5*32, 32+2*64, 32, 64);
         Sprite::Vector spriteRightVector;
         spriteRightVector.push_back (spriteRight1Ptr);
         spriteRightVector.push_back (spriteRight2Ptr);
@@ -82,13 +84,13 @@ int main(int argc, char* argv[])
         spriteRightVector.push_back (spriteRight1Ptr);
         spriteRightVector.push_back (spriteRight4Ptr);
         spriteRightVector.push_back (spriteRight5Ptr);
-        Animation::Ptr animationRightPtr (new Animation(spriteRightVector, 2));
-        Sprite::Ptr spriteLeft0Ptr  (new Sprite(planchePtr, 0*32, 32+3*64, 32, 64));
-        Sprite::Ptr spriteLeft3Ptr  (new Sprite(planchePtr, 1*32, 32+3*64, 32, 64));
-        Sprite::Ptr spriteLeft2Ptr  (new Sprite(planchePtr, 2*32, 32+3*64, 32, 64));
-        Sprite::Ptr spriteLeft1Ptr  (new Sprite(planchePtr, 3*32, 32+3*64, 32, 64));
-        Sprite::Ptr spriteLeft4Ptr  (new Sprite(planchePtr, 4*32, 32+3*64, 32, 64));
-        Sprite::Ptr spriteLeft5Ptr  (new Sprite(planchePtr, 5*32, 32+3*64, 32, 64));
+        Animation::Ptr animationRightPtr = boost::make_shared<Animation>(spriteRightVector, 2);
+        Sprite::Ptr spriteLeft0Ptr  = boost::make_shared<Sprite>(planchePtr, 0*32, 32+3*64, 32, 64);
+        Sprite::Ptr spriteLeft3Ptr  = boost::make_shared<Sprite>(planchePtr, 1*32, 32+3*64, 32, 64);
+        Sprite::Ptr spriteLeft2Ptr  = boost::make_shared<Sprite>(planchePtr, 2*32, 32+3*64, 32, 64);
+        Sprite::Ptr spriteLeft1Ptr  = boost::make_shared<Sprite>(planchePtr, 3*32, 32+3*64, 32, 64);
+        Sprite::Ptr spriteLeft4Ptr  = boost::make_shared<Sprite>(planchePtr, 4*32, 32+3*64, 32, 64);
+        Sprite::Ptr spriteLeft5Ptr  = boost::make_shared<Sprite>(planchePtr, 5*32, 32+3*64, 32, 64);
         Sprite::Vector spriteLeftVector;
         spriteLeftVector.push_back (spriteLeft1Ptr);
         spriteLeftVector.push_back (spriteLeft2Ptr);
@@ -96,7 +98,7 @@ int main(int argc, char* argv[])
         spriteLeftVector.push_back (spriteLeft1Ptr);
         spriteLeftVector.push_back (spriteLeft4Ptr);
         spriteLeftVector.push_back (spriteLeft5Ptr);
-        Animation::Ptr animationLeftPtr (new Animation(spriteLeftVector, 3));
+        Animation::Ptr animationLeftPtr= boost::make_shared<Animation>(spriteLeftVector, 3);
         Sprite::Vector  orientationSprites;
         orientationSprites.push_back(spriteRight0Ptr);
         orientationSprites.push_back(spriteDown0Ptr);
@@ -110,11 +112,11 @@ int main(int argc, char* argv[])
         Position    positionInitiale(300, 200);
         Offset      offsetInitial(0, 0);
         Size        sizeEntity(32, 64);
-        Entity::Ptr entityPtr (new Entity(orientationSprites, orientationAnimations, positionInitiale, offsetInitial, sizeEntity));
+        Entity::Ptr entityPtr= boost::make_shared<Entity>(orientationSprites, orientationAnimations, positionInitiale, offsetInitial, sizeEntity);
 
         Coord       coordUI(800-104, 8);
         Size        sizeUI(96, 96);
-        UI::Ptr     uiPtr     (new UI(coordUI, sizeUI, spriteUIPtr, spriteUIPtr, spriteUIPtr, spriteUIPtr, towerPtr));
+        UI::Ptr     uiPtr    = boost::make_shared<UI>(coordUI, sizeUI, spriteUIPtr, spriteUIPtr, spriteUIPtr, spriteUIPtr, towerPtr);
 
         ZoneManager zoneManager;
         zoneManager.getList().push_back(entityPtr->getZone());

@@ -5,7 +5,7 @@
 
 
 /// RAII : garantie qu'une animation est toujours valide (dispose au moins d'un Sprite)
-Animation::Animation(Sprite::Vector& aSpriteVector, unsigned long aIndex /* = 0 */) :
+Animation::Animation(const Sprite::Vector& aSpriteVector, const unsigned long aIndex /* = 0 */) :
     mSpriteVector(aSpriteVector),
     mIndex(aIndex)
 {
