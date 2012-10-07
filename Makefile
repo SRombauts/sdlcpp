@@ -63,7 +63,7 @@ $(BUILD): $(BUILD)/
 	mkdir -p $(BUILD)
 
 $(BUILD)/sdlcpp: $(SDLCPP_OBJECTS)
-	$(CXX) -o $@ $(SDLCPP_OBJECTS) $(LINK_FLAGS) -lSDL -lboost
+	$(CXX) -o $@ $(SDLCPP_OBJECTS) $(LINK_FLAGS) -lSDL
 
 
 $(BUILD)/SdlCpp_main.o: src/main.cpp
