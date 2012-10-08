@@ -12,6 +12,7 @@ Principes de conception, règle de codage...
 * Jamais de new/delete (boost::make_shared)
 
 Boost guidelines :
+http://www.boost.org/community/error_handling.html
 Often the best way to deal with exceptions is to not handle them at all. If you can let them pass through your code and allow destructors to handle cleanup, your code will be cleaner.
 
 Boost - utilisation de :

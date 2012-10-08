@@ -1,9 +1,10 @@
 Utiliser les ZoneCallbacks
 
-Signal Handler (Boost.asio n'est pas pertinent tant qu'on n'utilise pas déjà Boost.asio)
-Backtrace (facile sous Linux, mais sous Windows ?)
+Utiliser le Signal Handler de Boost.asio lorsqu'on utiliser Boost.asio pour le réseau
+Backtrace sous Windows ?
 Logger (glog ? Boost.Log ?)
 Tests Unitaires ?
+Serveur Web Boost
 
 Définir une règle sur quand utiliser les Exceptions vs les Assertions ?!
 
