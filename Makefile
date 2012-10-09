@@ -37,7 +37,6 @@ SDLCPP_OBJECTS =  \
 	$(BUILD)/SdlCpp_engine_Animation.o \
 	$(BUILD)/SdlCpp_engine_Coord.o \
 	$(BUILD)/SdlCpp_engine_Drag.o \
-	$(BUILD)/SdlCpp_engine_Entity.o \
 	$(BUILD)/SdlCpp_engine_Image.o \
 	$(BUILD)/SdlCpp_engine_Offset.o \
 	$(BUILD)/SdlCpp_engine_Position.o \
@@ -47,6 +46,9 @@ SDLCPP_OBJECTS =  \
 	$(BUILD)/SdlCpp_engine_Sprite.o \
 	$(BUILD)/SdlCpp_engine_Surface.o \
 	$(BUILD)/SdlCpp_engine_UI.o \
+	$(BUILD)/SdlCpp_engine_UnitEnemy.o \
+	$(BUILD)/SdlCpp_engine_UnitPlayer.o \
+	$(BUILD)/SdlCpp_engine_UnitTower.o \
 	$(BUILD)/SdlCpp_engine_Zone.o \
 	$(BUILD)/SdlCpp_engine_ZoneManager.o \
 	
@@ -86,9 +88,6 @@ $(BUILD)/SdlCpp_engine_Coord.o: src/engine/Coord.cpp
 $(BUILD)/SdlCpp_engine_Drag.o: src/engine/Drag.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
-$(BUILD)/SdlCpp_engine_Entity.o: src/engine/Entity.cpp
-	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
-
 $(BUILD)/SdlCpp_engine_Image.o: src/engine/Image.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
@@ -114,6 +113,15 @@ $(BUILD)/SdlCpp_engine_Surface.o: src/engine/Surface.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_engine_UI.o: src/engine/UI.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlCpp_engine_UnitEnemy.o: src/engine/UnitEnemy.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlCpp_engine_UnitPlayer.o: src/engine/UnitPlayer.cpp
+	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
+
+$(BUILD)/SdlCpp_engine_UnitTower.o: src/engine/UnitTower.cpp
 	$(CXX) -c -o $@ $(SDLCPP_CXXFLAGS) $(CPPDEPS) $<
 
 $(BUILD)/SdlCpp_engine_Zone.o: src/engine/Zone.cpp

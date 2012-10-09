@@ -22,6 +22,9 @@ class Zone : public boost::intrusive::list_base_hook<> // Base hook with default
 
 public:
     /// Liste intrusive doublement chaînée de #Zone (et non pas de pointeurs de #Zone)
+    /// => utilisée parce que les Zones sont des objets membres (composition)
+    ///    et qu'on veut donc simplement en faire une liste "light"
+    /// TODO SRO : sujet à mettre au propre à tête reposée
     typedef boost::intrusive::list<Zone> List;
 
 public:

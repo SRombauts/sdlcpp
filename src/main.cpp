@@ -1,7 +1,7 @@
 #include <iostream>
 #include "engine/Animation.h"
 #include "engine/Coord.h"
-#include "engine/Entity.h"
+#include "engine/UnitPlayer.h"
 #include "engine/Image.h"
 #include "engine/Screen.h"
 #include "engine/Size.h"
@@ -129,13 +129,14 @@ int main(int argc, char* argv[])
         orientationAnimations.push_back(animationUpPtr);
         Position    positionInitiale(300, 200);
         Offset      offsetInitial(0, 0);
-        Size        sizeEntity(32, 64);
-        Entity::Ptr entityPtr= boost::make_shared<Entity>(orientationSprites, orientationAnimations, positionInitiale, offsetInitial, sizeEntity);
+        Size        sizeUnitPlayer(32, 64);
+        UnitPlayer::Ptr entityPtr= boost::make_shared<UnitPlayer>(orientationSprites, orientationAnimations, positionInitiale, offsetInitial, sizeUnitPlayer);
 
         Coord       coordUI(800-104, 8);
         Size        sizeUI(96, 96);
         UI::Ptr     uiPtr    = boost::make_shared<UI>(coordUI, sizeUI, spriteUIPtr, spriteUIPtr, spriteUIPtr, spriteUIPtr, towerPtr);
 
+        /// TODO SRO : sujet à mettre au propre à tête reposée ; le remove() !
         ZoneManager zoneManager;
         zoneManager.getList().push_back(entityPtr->getZone());
         zoneManager.getList().push_back(uiPtr->getZone());
@@ -166,22 +167,22 @@ int main(int argc, char* argv[])
                         }
                         else if (SDLK_RIGHT == event.key.keysym.sym)
                         {
-                            entityPtr->setOrientation(Entity::eOrientationRight);
+                            entityPtr->setOrientation(UnitPlayer::eOrientationRight);
                             entityPtr->setSpeed(2);
                         }
                         else if (SDLK_DOWN == event.key.keysym.sym)
                         {
-                            entityPtr->setOrientation(Entity::eOrientationDown);
+                            entityPtr->setOrientation(UnitPlayer::eOrientationDown);
                             entityPtr->setSpeed(2);
                         }
                         else if (SDLK_LEFT == event.key.keysym.sym)
                         {
-                            entityPtr->setOrientation(Entity::eOrientationLeft);
+                            entityPtr->setOrientation(UnitPlayer::eOrientationLeft);
                             entityPtr->setSpeed(2);
                         }
                         else if (SDLK_UP == event.key.keysym.sym)
                         {
-                            entityPtr->setOrientation(Entity::eOrientationUp);
+                            entityPtr->setOrientation(UnitPlayer::eOrientationUp);
                             entityPtr->setSpeed(2);
                         }
                         break;
@@ -240,7 +241,7 @@ int main(int argc, char* argv[])
             if (0 != entityPtr->getSpeed())
             {
                 // Se base sur le temps qui passe pour animer l'entité
-                // TODO SRO : déplacer cette logique dans Entity
+                // TODO SRO : déplacer cette logique dans UnitPlayer
                 if (100 < (currentTick-animTick))
                 {
                     animTick = currentTick;

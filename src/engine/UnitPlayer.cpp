@@ -1,12 +1,12 @@
 #include <stdexcept>
 #include <iostream>
 
-#include "Entity.h"
+#include "UnitPlayer.h"
 #include "Screen.h"
 #include "Size.h"
 
 /// RAII : garantie qu'une animation est toujours valide (dispose au moins d'un Sprite)
-Entity::Entity(const Sprite::Vector&    aSpritesOrientation,
+UnitPlayer::UnitPlayer(const Sprite::Vector&    aSpritesOrientation,
                const Animation::Vector& aAnimationsOrientation,
                const Position&          aPosition,
                const Offset&            aOffset,
@@ -24,32 +24,32 @@ Entity::Entity(const Sprite::Vector&    aSpritesOrientation,
 {
     if (4 != aSpritesOrientation.size())
     {
-        throw std::runtime_error("Entity::Entity: 4 != aSpritesOrientation.size()");
+        throw std::runtime_error("UnitPlayer::UnitPlayer: 4 != aSpritesOrientation.size()");
     }
     if (4 != aAnimationsOrientation.size())
     {
-        throw std::runtime_error("Entity::Entity: 4 != aAnimationsOrientation.size()");
+        throw std::runtime_error("UnitPlayer::UnitPlayer: 4 != aAnimationsOrientation.size()");
     }
 }
 
-Entity::~Entity(void)
+UnitPlayer::~UnitPlayer(void)
 {
 }
 
-void Entity::move(void)
+void UnitPlayer::move(void)
 {
     switch (mOrientation)
     {
-        case Entity::eOrientationRight:
+        case UnitPlayer::eOrientationRight:
             mPosition.incr(mSpeed, 0);
             break;
-        case Entity::eOrientationDown:
+        case UnitPlayer::eOrientationDown:
             mPosition.incr(0, mSpeed);
             break;
-        case Entity::eOrientationLeft:
+        case UnitPlayer::eOrientationLeft:
             mPosition.incr(-mSpeed, 0);
             break;
-        case Entity::eOrientationUp:
+        case UnitPlayer::eOrientationUp:
             mPosition.incr(0, -mSpeed);
             break;
         default:
@@ -59,7 +59,7 @@ void Entity::move(void)
     mZone.set (mPosition.getX()+mOffset.getX(), mPosition.getY()+mOffset.getY());
 }
 
-void Entity::show(Screen& aScreen)
+void UnitPlayer::show(Screen& aScreen)
 {
     if (0 == mSpeed)
     {
@@ -71,11 +71,11 @@ void Entity::show(Screen& aScreen)
     }
 }
 
-void Entity::onOver(bool& abAlreadyConsumed)
+void UnitPlayer::onOver(bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "Entity::onOver(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "UnitPlayer::onOver(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -84,11 +84,11 @@ void Entity::onOver(bool& abAlreadyConsumed)
     }
 }
 
-void Entity::onOut (bool& abAlreadyConsumed)
+void UnitPlayer::onOut (bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "Entity::onOut(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "UnitPlayer::onOut(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -97,11 +97,11 @@ void Entity::onOut (bool& abAlreadyConsumed)
     }
 }
 
-void Entity::onDrag(const unsigned int aX, const unsigned int aY, bool& abAlreadyConsumed)
+void UnitPlayer::onDrag(const unsigned int aX, const unsigned int aY, bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "Entity::onDrag(aX=" << aX << ", aY="  << aY << ", abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "UnitPlayer::onDrag(aX=" << aX << ", aY="  << aY << ", abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -110,11 +110,11 @@ void Entity::onDrag(const unsigned int aX, const unsigned int aY, bool& abAlread
     }
 }
 
-void Entity::onDrop(bool& abAlreadyConsumed)
+void UnitPlayer::onDrop(bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "Entity::onDrop(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "UnitPlayer::onDrop(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else
@@ -123,11 +123,11 @@ void Entity::onDrop(bool& abAlreadyConsumed)
     }
 }
 
-void Entity::onClic(bool& abAlreadyConsumed)
+void UnitPlayer::onClic(bool& abAlreadyConsumed)
 {
     if (false == abAlreadyConsumed)
     {
-        std::cout << "Entity::onClic(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
+        std::cout << "UnitPlayer::onClic(abAlreadyConsumed=" << abAlreadyConsumed << ")" << std::endl;
         abAlreadyConsumed = true;
     }
     else

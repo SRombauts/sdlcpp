@@ -16,22 +16,20 @@ class Screen;
 class Size;
 
 /**
- * @brief Encapsulation d'une Entité
+ * @brief Encapsulation d'une unité ennemie
  *
- * Une Entity est la représentation générique d'un objet physique ou d'un être vivant animé
- *
- * @author 2012/09/27 SRombauts
+ * @author 2012/10/09 SRombauts
 */
-class Entity : public IZoneCallbacks
+class UnitEnemy : public IZoneCallbacks
 {
 public:
              // TODO SRombauts : problème, les Animations doivent être copiée !
-             Entity(const Sprite::Vector&       aSpritesOrientation,
-                    const Animation::Vector&    aAnimationsOrientation,
-                    const Position&             aPosition,
-                    const Offset&               aOffset,
-                    const Size&                 aSize);
-    virtual ~Entity(void);
+             UnitEnemy(const Animation::Vector& aAnimationsOrientation,
+                       const Position&          aPosition,
+                       const Offset&            aOffset,
+                       const Size&              aSize,
+                       const int                aSpeed);
+    virtual ~UnitEnemy(void);
 
     enum Orientation
     {
@@ -42,20 +40,12 @@ public:
     };
 
     /// Met à jour la position selon l'orientation et la vitesse
-    void move(void);
+    void move(unsigned int aDeltaTime);
 
     /// Affichage sur l'écran
     void show(Screen& aScreen);
 
     /// Accesseurs simples
-    inline       Sprite::Ptr& getSprite(void)
-    {
-         return mSpritesOrientation[mOrientation];
-    }
-    inline const Sprite::Ptr& getSprite(void) const
-    {
-         return mSpritesOrientation[mOrientation];
-    }
     inline       Animation::Ptr& getAnimation(void)
     {
         return mAnimationsOrientation[mOrientation];
@@ -117,8 +107,8 @@ public:
         mSpeed = aSpeed;
     }
 
-    typedef boost::shared_ptr<Entity>    Ptr;
-    typedef std::vector<Entity::Ptr>     Vector;
+    typedef boost::shared_ptr<UnitEnemy>    Ptr;
+    typedef std::vector<UnitEnemy::Ptr>     Vector;
 
 private:
     // Méthodes dérivées de IZoneCallbacks
@@ -129,11 +119,10 @@ private:
     virtual void onClic(bool& abAlreadyConsumed);
 
 private:
-    Sprite::Vector      mSpritesOrientation;    //!< Vecteur pointant sur les 4 sprites d'orientation
     Animation::Vector   mAnimationsOrientation; //!< Vecteur pointant sur les 4 animations d'orientation
-    Position            mPosition;              //!< Position absolue de l'Entity
-    Offset              mOffset;                //!< Offset pour l'affichage de l'Entity #Coord)
-    Coord               mCoord;                 //!< Coordonnées de l'Entity dans sa surface parent
+    Position            mPosition;              //!< Position absolue de l'UnitEnemy
+    Offset              mOffset;                //!< Offset pour l'affichage de l'UnitEnemy #Coord)
+    Coord               mCoord;                 //!< Coordonnées de l'UnitEnemy dans sa surface parent
     Zone                mZone;                  //!< Zone cliquable à l'écran
     Orientation         mOrientation;           //!< Orientation courante
     int                 mSpeed;                 //!< Vitesse courante
