@@ -65,6 +65,8 @@ Evt clavier (up, down, esc)
 Gérer le focus
 Evènements clavier UP, DOWN, ESC
 
+Tester DevIL (anciennement OpenIL) : Image Library (manipulations)
+
 Utiliser boost/intrusive à la place des std::list dans certains cas ? Plus efficace :
 + en terme d'utilisation mémoire,
 + dès lors qu'il s'agit de délier un membre de la liste, plus efficace en mémoire
