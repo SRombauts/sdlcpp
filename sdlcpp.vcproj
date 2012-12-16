@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Projets\sdlcpp\src\SDL\include"
+				AdditionalIncludeDirectories="src\SDL-1.2.15\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="src\SDL\lib\SDL.lib src\SDL\lib\SDLmain.lib"
+				AdditionalDependencies="src\SDL-1.2.15\lib\SDL.lib src\SDL-1.2.15\lib\SDLmain.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="2"
