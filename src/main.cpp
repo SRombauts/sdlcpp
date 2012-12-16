@@ -36,9 +36,12 @@ void my_terminate_handler (void)
 }
 
 
-// Workaround for Win32 compilation in CONSOLE mode without SDLmain.lib :
-// this undo the redirection from WinMain defined by <SDL/SDL_main.h">
-//#undef main
+// En Release le link Système se fait en /SUBSYSTEM:WINDOWS avec SDL.lib et SDLmain.lib qui implémente la redirection de WinMain() vers main()
+// En Debug ce undef défait cette redirection pour permettre la compilation en mode /SUBSYSTEM:CONSOLE activant la sortie de traces
+#if defined(_WIN32) && defined(_DEBUG)
+#undef main
+#endif
+
 
 /**
  * @author 2012/09/26 SRombauts
