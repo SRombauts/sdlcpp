@@ -11,8 +11,10 @@
 
 #include <boost/make_shared.hpp>
 
-#include "backtrace.h"
-#include "signal_handler.h"
+#ifdef __GNUC__
+    #include "backtrace.h"
+    #include "signal_handler.h"
+#endif
 
 // Les paramètres de notre écran
 const int SCREEN_WIDTH  = 800;
@@ -24,12 +26,19 @@ void my_terminate_handler (void);
 std::terminate_handler _default_terminate_handler = NULL;
 void my_terminate_handler (void)
 {
+#ifdef __GNUC__
     print_backtrace();
+#endif
     if (NULL != _default_terminate_handler)
     {
         _default_terminate_handler();
     }
 }
+
+
+// Workaround for Win32 compilation in CONSOLE mode without SDLmain.lib :
+// this undo the redirection from WinMain defined by <SDL/SDL_main.h">
+//#undef main
 
 /**
  * @author 2012/09/26 SRombauts
@@ -42,7 +51,9 @@ int main(int argc, char* argv[])
 
     _default_terminate_handler = std::set_terminate(my_terminate_handler);
 
+#ifdef __GNUC__
     install_signal_handler();
+#endif
 
     for (int arg = 0; arg < argc; arg++)
     {
