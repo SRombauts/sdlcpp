@@ -62,14 +62,6 @@ public:
     {
         return mbIsMouseOver;
     }
-    inline       List&  getList(void)
-    {
-        return mZoneList;
-    }
-    inline const List&  getList(void) const
-    {
-        return mZoneList;
-    }
 
 private:
     // Notifie la #Zone
@@ -88,5 +80,4 @@ private:
     bool            mbIsClicked;    //!< Mémorise le fait que la zone a été cliquée
     bool            mbIsDraged;     //!< Mémorise le fait que la zone a été draguée
     bool            mbOnOverCalled; //!< Mémorise le fait que la callback onOver a été appelée
-    List            mZoneList;      //!< Liste des éventuelles zones enfants
 };

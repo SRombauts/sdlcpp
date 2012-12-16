@@ -17,8 +17,7 @@ Zone::Zone(IZoneCallbacks&    aZoneCallbacks,
     mbIsMouseOver(false),
     mbIsClicked(false),
     mbIsDraged(false),
-    mbOnOverCalled(false),
-    mZoneList()
+    mbOnOverCalled(false)
 {
 }
 
@@ -49,14 +48,6 @@ void Zone::onMouseMotion(const unsigned int aX, const unsigned int aY, const boo
 {
     bool                    bIsOver;
     Zone::List::iterator    iZone;
-
-    // Commence par mettre à jour récursivement l'arborescence des éventuelles zones filles
-    for (iZone  = mZoneList.begin();
-         iZone != mZoneList.end();
-         iZone++)
-    {
-        iZone->onMouseMotion(aX, aY, abIsDown, abAlreadyConsumed);
-    }
 
     // Puis teste si la souris est au dessus de la zone
     bIsOver = isOver(aX, aY);
@@ -100,14 +91,6 @@ void Zone::onMouseEvent (const unsigned int aX, const unsigned int aY, const boo
 {
     bool                    bIsOver;
     Zone::List::iterator    iZone;
-
-    // Commence par mettre à jour récursivement l'arborescence des éventuelles zones filles
-    for (iZone  = mZoneList.begin();
-         iZone != mZoneList.end();
-         iZone++)
-    {
-        iZone->onMouseEvent(aX, aY, abIsDown, abAlreadyConsumed);
-    }
 
     if (mbIsDraged)
     {

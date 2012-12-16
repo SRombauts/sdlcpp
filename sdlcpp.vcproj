@@ -279,14 +279,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\engine\UnitPlayer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\engine\UnitPlayer.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\engine\Zone.cpp"
 				>
 			</File>

@@ -37,9 +37,6 @@
     <ClCompile Include="src\engine\UI.cpp">
       <Filter>engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\UnitPlayer.cpp">
-      <Filter>engine</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\Zone.cpp">
       <Filter>engine</Filter>
     </ClCompile>
@@ -88,9 +85,6 @@
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\UI.h">
-      <Filter>engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\UnitPlayer.h">
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\Zone.h">

@@ -74,77 +74,7 @@ int main(int argc, char* argv[])
         Image::Ptr  imageUIPtr  = boost::make_shared<Image>("res/tower.bmp", 0, 0xFF, 0xFF);
         Sprite::Ptr spriteUIPtr = boost::make_shared<Sprite>(imageUIPtr, 0, 0, 96, 96);
         Image::Ptr  towersPtr   = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF, SDL_ALPHA_128);
-        Sprite::Ptr towerPtr      = boost::make_shared<Sprite>(towersPtr, 12, 12, 32, 32);
-        Sprite::Ptr spriteUp0Ptr  = boost::make_shared<Sprite>(planchePtr, 0*32, 32, 32, 64);
-        Sprite::Ptr spriteUp3Ptr  = boost::make_shared<Sprite>(planchePtr, 1*32, 32, 32, 64);
-        Sprite::Ptr spriteUp2Ptr  = boost::make_shared<Sprite>(planchePtr, 2*32, 32, 32, 64);
-        Sprite::Ptr spriteUp1Ptr  = boost::make_shared<Sprite>(planchePtr, 3*32, 32, 32, 64);
-        Sprite::Ptr spriteUp4Ptr  = boost::make_shared<Sprite>(planchePtr, 4*32, 32, 32, 64);
-        Sprite::Ptr spriteUp5Ptr  = boost::make_shared<Sprite>(planchePtr, 5*32, 32, 32, 64);
-        Sprite::Vector spriteUpVector;
-        spriteUpVector.push_back (spriteUp1Ptr);
-        spriteUpVector.push_back (spriteUp2Ptr);
-        spriteUpVector.push_back (spriteUp3Ptr);
-        spriteUpVector.push_back (spriteUp1Ptr);
-        spriteUpVector.push_back (spriteUp4Ptr);
-        spriteUpVector.push_back (spriteUp5Ptr);
-        Animation::Ptr animationUpPtr= boost::make_shared<Animation>(spriteUpVector, 0);
-        Sprite::Ptr spriteDown0Ptr  = boost::make_shared<Sprite>(planchePtr, 0*32, 32+64, 32, 64);
-        Sprite::Ptr spriteDown3Ptr  = boost::make_shared<Sprite>(planchePtr, 1*32, 32+64, 32, 64);
-        Sprite::Ptr spriteDown2Ptr  = boost::make_shared<Sprite>(planchePtr, 2*32, 32+64, 32, 64);
-        Sprite::Ptr spriteDown1Ptr  = boost::make_shared<Sprite>(planchePtr, 3*32, 32+64, 32, 64);
-        Sprite::Ptr spriteDown4Ptr  = boost::make_shared<Sprite>(planchePtr, 4*32, 32+64, 32, 64);
-        Sprite::Ptr spriteDown5Ptr  = boost::make_shared<Sprite>(planchePtr, 5*32, 32+64, 32, 64);
-        Sprite::Vector spriteDownVector;
-        spriteDownVector.push_back (spriteDown1Ptr);
-        spriteDownVector.push_back (spriteDown2Ptr);
-        spriteDownVector.push_back (spriteDown3Ptr);
-        spriteDownVector.push_back (spriteDown1Ptr);
-        spriteDownVector.push_back (spriteDown4Ptr);
-        spriteDownVector.push_back (spriteDown5Ptr);
-        Animation::Ptr animationDownPtr= boost::make_shared<Animation>(spriteDownVector, 1);
-        Sprite::Ptr spriteRight0Ptr  = boost::make_shared<Sprite>(planchePtr, 0*32, 32+2*64, 32, 64);
-        Sprite::Ptr spriteRight3Ptr  = boost::make_shared<Sprite>(planchePtr, 1*32, 32+2*64, 32, 64);
-        Sprite::Ptr spriteRight2Ptr  = boost::make_shared<Sprite>(planchePtr, 2*32, 32+2*64, 32, 64);
-        Sprite::Ptr spriteRight1Ptr  = boost::make_shared<Sprite>(planchePtr, 3*32, 32+2*64, 32, 64);
-        Sprite::Ptr spriteRight4Ptr  = boost::make_shared<Sprite>(planchePtr, 4*32, 32+2*64, 32, 64);
-        Sprite::Ptr spriteRight5Ptr  = boost::make_shared<Sprite>(planchePtr, 5*32, 32+2*64, 32, 64);
-        Sprite::Vector spriteRightVector;
-        spriteRightVector.push_back (spriteRight1Ptr);
-        spriteRightVector.push_back (spriteRight2Ptr);
-        spriteRightVector.push_back (spriteRight3Ptr);
-        spriteRightVector.push_back (spriteRight1Ptr);
-        spriteRightVector.push_back (spriteRight4Ptr);
-        spriteRightVector.push_back (spriteRight5Ptr);
-        Animation::Ptr animationRightPtr = boost::make_shared<Animation>(spriteRightVector, 2);
-        Sprite::Ptr spriteLeft0Ptr  = boost::make_shared<Sprite>(planchePtr, 0*32, 32+3*64, 32, 64);
-        Sprite::Ptr spriteLeft3Ptr  = boost::make_shared<Sprite>(planchePtr, 1*32, 32+3*64, 32, 64);
-        Sprite::Ptr spriteLeft2Ptr  = boost::make_shared<Sprite>(planchePtr, 2*32, 32+3*64, 32, 64);
-        Sprite::Ptr spriteLeft1Ptr  = boost::make_shared<Sprite>(planchePtr, 3*32, 32+3*64, 32, 64);
-        Sprite::Ptr spriteLeft4Ptr  = boost::make_shared<Sprite>(planchePtr, 4*32, 32+3*64, 32, 64);
-        Sprite::Ptr spriteLeft5Ptr  = boost::make_shared<Sprite>(planchePtr, 5*32, 32+3*64, 32, 64);
-        Sprite::Vector spriteLeftVector;
-        spriteLeftVector.push_back (spriteLeft1Ptr);
-        spriteLeftVector.push_back (spriteLeft2Ptr);
-        spriteLeftVector.push_back (spriteLeft3Ptr);
-        spriteLeftVector.push_back (spriteLeft1Ptr);
-        spriteLeftVector.push_back (spriteLeft4Ptr);
-        spriteLeftVector.push_back (spriteLeft5Ptr);
-        Animation::Ptr animationLeftPtr= boost::make_shared<Animation>(spriteLeftVector, 3);
-        Sprite::Vector  orientationSprites;
-        orientationSprites.push_back(spriteRight0Ptr);
-        orientationSprites.push_back(spriteDown0Ptr);
-        orientationSprites.push_back(spriteLeft0Ptr);
-        orientationSprites.push_back(spriteUp0Ptr);
-        Animation::Vector   orientationAnimations;
-        orientationAnimations.push_back(animationRightPtr);
-        orientationAnimations.push_back(animationDownPtr);
-        orientationAnimations.push_back(animationLeftPtr);
-        orientationAnimations.push_back(animationUpPtr);
-        Position    positionInitiale(300, 200);
-        Offset      offsetInitial(0, 0);
-        Size        sizeUnitPlayer(32, 64);
-        UnitPlayer::Ptr entityPtr= boost::make_shared<UnitPlayer>(orientationSprites, orientationAnimations, positionInitiale, offsetInitial, sizeUnitPlayer);
+        Sprite::Ptr towerPtr    = boost::make_shared<Sprite>(towersPtr, 12, 12, 32, 32);
 
         Coord       coordUI(800-104, 8);
         Size        sizeUI(96, 96);
@@ -152,7 +82,7 @@ int main(int argc, char* argv[])
 
         /// TODO SRO : sujet à mettre au propre à tête reposée ; le remove() !
         ZoneManager zoneManager;
-        zoneManager.getList().push_back(entityPtr->getZone());
+//      zoneManager.getList().push_back(entityPtr->getZone());
         zoneManager.getList().push_back(uiPtr->getZone());
 
         Uint32 firstTick = SDL_GetTicks();
@@ -179,45 +109,7 @@ int main(int argc, char* argv[])
                         {
                             bRunning = false;
                         }
-                        else if (SDLK_RIGHT == event.key.keysym.sym)
-                        {
-                            entityPtr->setOrientation(UnitPlayer::eOrientationRight);
-                            entityPtr->setSpeed(2);
-                        }
-                        else if (SDLK_DOWN == event.key.keysym.sym)
-                        {
-                            entityPtr->setOrientation(UnitPlayer::eOrientationDown);
-                            entityPtr->setSpeed(2);
-                        }
-                        else if (SDLK_LEFT == event.key.keysym.sym)
-                        {
-                            entityPtr->setOrientation(UnitPlayer::eOrientationLeft);
-                            entityPtr->setSpeed(2);
-                        }
-                        else if (SDLK_UP == event.key.keysym.sym)
-                        {
-                            entityPtr->setOrientation(UnitPlayer::eOrientationUp);
-                            entityPtr->setSpeed(2);
-                        }
-                        break;
-                    case SDL_KEYUP:
-                        // Si une touche est relâchée
-                        if (SDLK_RIGHT == event.key.keysym.sym)
-                        {
-                            entityPtr->setSpeed(0);
-                        }
-                        else if (SDLK_DOWN == event.key.keysym.sym)
-                        {
-                            entityPtr->setSpeed(0);
-                        }
-                        else if (SDLK_LEFT == event.key.keysym.sym)
-                        {
-                            entityPtr->setSpeed(0);
-                        }
-                        else if (SDLK_UP == event.key.keysym.sym)
-                        {
-                            entityPtr->setSpeed(0);
-                        }
+
                         break;
                     case SDL_MOUSEMOTION:
                         // Test de position de la souris vis à vis de l'arborescence des listes
@@ -243,8 +135,8 @@ int main(int argc, char* argv[])
                 }
             }
 
-            // déplace l'entité
-            entityPtr->move();
+            // TODO SRO déplacement de toutes les unités mobiles
+            //UnitList.move();
 
             // Blit d'abord le background sur l'écran
             screen.blit(background);
@@ -252,6 +144,8 @@ int main(int argc, char* argv[])
             // Blit l'UI
             uiPtr->show(screen);
 
+			// TODO SRO animation de toutes les unités
+			/*
             if (0 != entityPtr->getSpeed())
             {
                 // Se base sur le temps qui passe pour animer l'entité
@@ -262,9 +156,9 @@ int main(int argc, char* argv[])
                     entityPtr->getAnimation()->next();
                 }
             }
-
             // Blit ensuite l'entité (en statique, une image de l'animation)
             entityPtr->show(screen);
+			*/
 
             // Mise à jour de l'écran (utilise le double buffering)
             screen.flip();
