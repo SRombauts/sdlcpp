@@ -1,6 +1,8 @@
-sdl_tutorial
 *~
 *.o
+*.user
+*.ncb
+*.suo
 Debug
 Release
 core

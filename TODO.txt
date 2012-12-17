@@ -3,6 +3,9 @@ Zone :
    pourquoi pas simplement utiliser l'arborescence des objets UnitXxx qui les contiennent ?
 2) Qui doit les enregister, et surtout les désenregistrer :
    les objets UnitXxx qui les contiennent pour pouvoir faire un remove dans le destructeur
+3) Supprimer la mZoneList de l'objet Zone :
+   pas d'intérêt (pas besoin d'arborescence d'objets)
+   et supprimerai ainsi énormément de complexité
 
 Listes d'objets à afficher :
 - Background(s)
