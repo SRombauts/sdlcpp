@@ -49,6 +49,7 @@ void my_terminate_handler (void)
 int main(int argc, char* argv[])
 {
     bool        bRunning = true;
+    bool        bInMenu  = true;
     int         res;
     SDL_Event   event;
 
@@ -70,7 +71,6 @@ int main(int argc, char* argv[])
         Screen screen(SCREEN_WIDTH, SCREEN_HEIGHT, "Hello World");
 
         Image       background  ("res/background.bmp");
-        Image::Ptr  planchePtr  = boost::make_shared<Image>("res/animation.bmp", 0, 0xFF, 0xFF);
         Image::Ptr  imageUIPtr  = boost::make_shared<Image>("res/tower.bmp", 0, 0xFF, 0xFF);
         Sprite::Ptr spriteUIPtr = boost::make_shared<Sprite>(imageUIPtr, 0, 0, 96, 96);
         Image::Ptr  towersPtr   = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF, SDL_ALPHA_128);
@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
         /// TODO SRO : sujet à mettre au propre à tête reposée ; le remove() !
         ZoneManager zoneManager;
 //      zoneManager.getList().push_back(entityPtr->getZone());
-        zoneManager.getList().push_back(uiPtr->getZone());
+        zoneManager.getUiList().push_back(uiPtr->getZone());
 
         Uint32 firstTick = SDL_GetTicks();
         Uint32 lastTick = firstTick;
@@ -107,9 +107,18 @@ int main(int argc, char* argv[])
                         // Si une touche est pressée
                         if (SDLK_ESCAPE == event.key.keysym.sym)
                         {
-                            bRunning = false;
+                            // TODO SRO : gérer le menu dans une classe dédiée
+                            if (bInMenu)
+                            {
+                                std::cout << "Menu out" << std::endl;
+                                bInMenu = false;
+                            }
+                            else
+                            {
+                                std::cout << "Menu in" << std::endl;
+                                bInMenu = true;
+                            }
                         }
-
                         break;
                     case SDL_MOUSEMOTION:
                         // Test de position de la souris vis à vis de l'arborescence des listes
@@ -135,8 +144,11 @@ int main(int argc, char* argv[])
                 }
             }
 
-            // TODO SRO déplacement de toutes les unités mobiles
-            //UnitList.move();
+            if (false == bInMenu)
+            {
+                // TODO SRO déplacement de toutes les unités mobiles
+                //UnitList.move();
+            }
 
             // Blit d'abord le background sur l'écran
             screen.blit(background);
@@ -144,24 +156,28 @@ int main(int argc, char* argv[])
             // Blit l'UI
             uiPtr->show(screen);
 
-			// TODO SRO animation de toutes les unités
-			/*
-            if (0 != entityPtr->getSpeed())
+            if (false == bInMenu)
             {
-                // Se base sur le temps qui passe pour animer l'entité
-                // TODO SRO : déplacer cette logique dans UnitPlayer
-                if (100 < (currentTick-animTick))
+			    // TODO SRO animation de toutes les unités
+			    /*
+                if (0 != entityPtr->getSpeed())
                 {
-                    animTick = currentTick;
-                    entityPtr->getAnimation()->next();
+                    // Se base sur le temps qui passe pour animer l'entité
+                    // TODO SRO : déplacer cette logique dans UnitPlayer
+                    if (100 < (currentTick-animTick))
+                    {
+                        animTick = currentTick;
+                        entityPtr->getAnimation()->next();
+                    }
                 }
+                // Blit ensuite l'entité (en statique, une image de l'animation)
+                entityPtr->show(screen);
+			    */
             }
-            // Blit ensuite l'entité (en statique, une image de l'animation)
-            entityPtr->show(screen);
-			*/
 
             // Mise à jour de l'écran (utilise le double buffering)
             screen.flip();
+
 
             // Calcul du framerate
             nbFrame++;
@@ -182,7 +198,7 @@ int main(int argc, char* argv[])
             {
                 SDL_Delay(60 - deltaTick);
             }
-            lastTick    = currentTick;
+            lastTick = currentTick;
         }
     }
     else
