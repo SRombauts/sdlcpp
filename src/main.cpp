@@ -19,8 +19,6 @@ const int SCREEN_WIDTH  = 800;
 const int SCREEN_HEIGHT = 480;
 
 
-void my_terminate_handler (void);
-
 std::terminate_handler _default_terminate_handler = NULL;
 void my_terminate_handler (void)
 {

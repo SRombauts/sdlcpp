@@ -7,7 +7,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-void signal_handler (const int aSigNum);
 
 /**
  * @brief  Handler des signaux critiques
@@ -45,20 +44,27 @@ void signal_handler (const int aSigNum)
 
 void install_signal_handler(void)
 {
-    signal (SIGHUP,  signal_handler);   // Hangup (POSIX)
-    signal (SIGINT,  signal_handler);   // CTRL-C / Interrupt (ANSI)
-    signal (SIGQUIT, signal_handler);   // Quit (POSIX)
-    signal (SIGILL , signal_handler);   // Illegal instruction (ANSI)
-    signal (SIGABRT, signal_handler);   // Abort (ANSI) : exception non catchée, assert(), abort () ou BOOST_ASSERT()
-    signal (SIGFPE,  signal_handler);   // Floating point error ou division par zéro
-//  signal (SIGKILL, signal_handler);   // kill -9 : n'est pas capturable
-    signal (SIGSEGV, signal_handler);   // Segmentation violation (ANSI) (Seg Fault)
-    signal (SIGPIPE, signal_handler);   // Broken pipe (POSIX)
-    signal (SIGTERM, signal_handler);   // kill (ou halt/shutdown)
-    signal (SIGSTKFLT,signal_handler);  // Stack fault
-//  signal (SIGSTOP, signal_handler);   // Stop, unblockable (POSIX)
-    signal (SIGTSTP, signal_handler);   // CTRL-Z / Keyboard stop (POSIX)
-    signal (SIGSYS,  signal_handler);   // Bad system call
+    struct sigaction  sa;
+
+    // Init de la structure sigaction
+    memset (&sa, 0, sizeof (sa));
+    sa.sa_handler = signal_handler;
+    sigaction (SIGHUP,  &sa, NULL); // Hangup (POSIX)
+
+    sigaction (SIGHUP,  &sa, NULL); // Hangup (POSIX)
+    sigaction (SIGINT,  &sa, NULL); // CTRL-C / Interrupt (ANSI)
+    sigaction (SIGQUIT, &sa, NULL); // Quit (POSIX)
+    sigaction (SIGILL , &sa, NULL); // Illegal instruction (ANSI)
+    sigaction (SIGABRT, &sa, NULL); // Abort (ANSI) : exception non catchée, assert(), abort () ou BOOST_ASSERT()
+    sigaction (SIGFPE,  &sa, NULL); // Floating point error ou division par zéro
+//  sigaction (SIGKILL, &sa, NULL); // kill -9 : n'est pas capturable
+    sigaction (SIGSEGV, &sa, NULL); // Segmentation violation (ANSI) (Seg Fault)
+    sigaction (SIGPIPE, &sa, NULL); // Broken pipe (POSIX)
+    sigaction (SIGTERM, &sa, NULL); // kill (ou halt/shutdown)
+    sigaction (SIGSTKFLT,&sa, NULL);// Stack fault
+//  sigaction (SIGSTOP, &sa, NULL); // Stop, unblockable (POSIX)
+    sigaction (SIGTSTP, &sa, NULL); // CTRL-Z / Keyboard stop (POSIX)
+    sigaction (SIGSYS,  &sa, NULL); // Bad system call
 }
 
 #else
