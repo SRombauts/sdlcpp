@@ -3,7 +3,7 @@
 #include "Zone.h"
 
 /**
- * @brief Gestion de la liste des #Zone racines.
+ * @brief Gestion des listes de #Zone.
  *
  * @author 2012/10/01 SRombauts
 */
@@ -18,15 +18,36 @@ public:
     void onMouseEvent (const unsigned int aX, const unsigned int aY, const bool abIsDown);
 
     /// Accesseurs simples
-    inline       Zone::List&  getList(void)
+    inline       Zone::List&  getMenuList(void)
     {
-        return mZoneList;
+        return mMenuList;
     }
-    inline const Zone::List&  getList(void) const
+    inline const Zone::List&  getMenuList(void) const
     {
-        return mZoneList;
+        return mMenuList;
+    }
+
+    inline       Zone::List&  getUiList(void)
+    {
+        return mUiList;
+    }
+    inline const Zone::List&  getUiList(void) const
+    {
+        return mUiList;
+    }
+
+    inline       Zone::List&  getTowerList(void)
+    {
+        return mTowerList;
+    }
+    inline const Zone::List&  getTowerList(void) const
+    {
+        return mTowerList;
     }
 
 private:
-    Zone::List  mZoneList;  //!< Liste des zones racines
+    // Listes de Zones dans par priorité décroissante
+    Zone::List  mMenuList;  //!< Liste des zones des écrans de menu/sous-menu
+    Zone::List  mUiList;    //!< Liste des zones de l'UI
+    Zone::List  mTowerList; //!< Liste des zones des tourelles
 };

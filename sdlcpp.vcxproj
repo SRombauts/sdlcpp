@@ -90,6 +90,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\UnitEnemy.cpp" />
+    <ClCompile Include="src\engine\UnitTower.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\engine\Animation.cpp" />
     <ClCompile Include="src\engine\Coord.cpp" />
@@ -119,6 +121,8 @@
     <ClInclude Include="src\engine\Sprite.h" />
     <ClInclude Include="src\engine\Surface.h" />
     <ClInclude Include="src\engine\UI.h" />
+    <ClInclude Include="src\engine\UnitEnemy.h" />
+    <ClInclude Include="src\engine\UnitTower.h" />
     <ClInclude Include="src\engine\Zone.h" />
     <ClInclude Include="src\engine\ZoneCallbacks.h" />
     <ClInclude Include="src\engine\ZoneManager.h" />

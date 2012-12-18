@@ -23,10 +23,10 @@ class Size;
 class UnitTower : public IZoneCallbacks
 {
 public:
-             UnitTower(const Sprite::Vector&       aSpritesOrientation,
-                        const Position&             aPosition,
-                        const Offset&               aOffset,
-                        const Size&                 aSize);
+             UnitTower( const Sprite::Vector&   aSpritesOrientation,
+                        const Position&         aPosition,
+                        const Offset&           aOffset,
+                        const Size&             aSize);
     virtual ~UnitTower(void);
 
     enum Orientation
