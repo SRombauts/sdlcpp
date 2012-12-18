@@ -1,7 +1,7 @@
 #include <iostream>
 #include "engine/Animation.h"
 #include "engine/Coord.h"
-#include "engine/UnitPlayer.h"
+#include "engine/UnitTower.h"
 #include "engine/Image.h"
 #include "engine/Screen.h"
 #include "engine/Size.h"
@@ -68,21 +68,40 @@ int main(int argc, char* argv[])
     res = SDL_Init(SDL_INIT_VIDEO);
     if (-1 != res)
     {
+        ZoneManager zoneManager;
+
         Screen screen(SCREEN_WIDTH, SCREEN_HEIGHT, "Hello World");
 
         Image       background  ("res/background.bmp");
-        Image::Ptr  imageUIPtr  = boost::make_shared<Image>("res/tower.bmp", 0, 0xFF, 0xFF);
-        Sprite::Ptr spriteUIPtr = boost::make_shared<Sprite>(imageUIPtr, 0, 0, 96, 96);
-        Image::Ptr  towersPtr   = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF, SDL_ALPHA_128);
-        Sprite::Ptr towerPtr    = boost::make_shared<Sprite>(towersPtr, 12, 12, 32, 32);
 
+        Image::Ptr  towersPtr       = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF);
+        Sprite::Ptr towerRightPtr   = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
+        Sprite::Ptr towerDownPtr    = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
+        Sprite::Ptr towerLeftPtr    = boost::make_shared<Sprite>(towersPtr, 12+64, 12, 32, 32);
+        Sprite::Ptr towerUpPtr      = boost::make_shared<Sprite>(towersPtr, 12, 12, 32, 32);
+        Sprite::Vector orientationTower;
+        orientationTower.push_back(towerRightPtr);
+        orientationTower.push_back(towerDownPtr);
+        orientationTower.push_back(towerLeftPtr);
+        orientationTower.push_back(towerUpPtr);
+        UnitTower::Vector   towerVector;
+        for (int i = 0; i < 10; i++)
+        {
+            Position    positionTower(10 + i*48, 100);
+            Offset      offsetTower;
+            Size        sizeTower(48, 48);
+            UnitTower::Ptr      towerPtr = boost::make_shared<UnitTower>(orientationTower, positionTower, offsetTower, sizeTower);
+            towerVector.push_back(towerPtr);
+            zoneManager.getTowerList().push_back(towerPtr->getZone());
+        }
+
+        Image::Ptr  imageUIPtr      = boost::make_shared<Image>("res/tower.bmp", 0, 0xFF, 0xFF);
+        Sprite::Ptr spriteUIPtr     = boost::make_shared<Sprite>(imageUIPtr, 0, 0, 96, 96);
+        Image::Ptr  towersTranspPtr = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF, SDL_ALPHA_128);
+        Sprite::Ptr towerTranspPtr  = boost::make_shared<Sprite>(towersTranspPtr, 8, 8, 48, 48);
         Coord       coordUI(800-104, 8);
         Size        sizeUI(96, 96);
-        UI::Ptr     uiPtr    = boost::make_shared<UI>(coordUI, sizeUI, spriteUIPtr, spriteUIPtr, spriteUIPtr, spriteUIPtr, towerPtr);
-
-        /// TODO SRO : sujet à mettre au propre à tête reposée ; le remove() !
-        ZoneManager zoneManager;
-//      zoneManager.getList().push_back(entityPtr->getZone());
+        UI::Ptr     uiPtr    = boost::make_shared<UI>(coordUI, sizeUI, spriteUIPtr, spriteUIPtr, spriteUIPtr, spriteUIPtr, towerDownPtr);
         zoneManager.getUiList().push_back(uiPtr->getZone());
 
         Uint32 firstTick = SDL_GetTicks();
@@ -156,6 +175,15 @@ int main(int argc, char* argv[])
             // Blit l'UI
             uiPtr->show(screen);
 
+            // Blit les tourelles
+            UnitTower::Vector::iterator iTower;
+            for (iTower  = towerVector.begin();
+                 iTower != towerVector.end();
+                 iTower++)
+            {
+                (*iTower)->show(screen);
+            }
+
             if (false == bInMenu)
             {
 			    // TODO SRO animation de toutes les unités
@@ -200,6 +228,18 @@ int main(int argc, char* argv[])
             }
             lastTick = currentTick;
         }
+
+        /// TODO SRO : sujet à mettre au propre à tête reposée ; le remove() automatique ?!
+        /*
+        zoneManager.getUiList().remove(uiPtr->getZone());
+        UnitTower::Vector::iterator iTower;
+        for (iTower  = towerVector.begin();
+             iTower != towerVector.end();
+             iTower++)
+        {
+            zoneManager.getUiList().remove((*iTower)->getZone());
+        }
+        */
     }
     else
     {
