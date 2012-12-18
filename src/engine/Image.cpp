@@ -22,9 +22,9 @@ Image::Image(const char* apFileName,
     if (NULL != pSurfaceUnoptimized)
     {
         // TODO SRombauts : à revoir avec le chargement des PNG avec transparence
-        if (   (255 != aR)
-            || (255 != aG)
-            || (255 != aB) )
+        if (   (0 != aR)
+            || (0 != aG)
+            || (0 != aB) )
         {
             // Définition de la couleur de transparence le cas échéant
             Uint32 colorkey = SDL_MapRGB(pSurfaceUnoptimized->format, aR, aG, aB);

@@ -2,6 +2,7 @@
 #include "engine/Animation.h"
 #include "engine/Coord.h"
 #include "engine/UnitTower.h"
+#include "engine/UnitEnemy.h"
 #include "engine/Image.h"
 #include "engine/Screen.h"
 #include "engine/Size.h"
@@ -47,7 +48,7 @@ void my_terminate_handler (void)
 int main(int argc, char* argv[])
 {
     bool        bRunning = true;
-    bool        bInMenu  = true;
+    bool        bInMenu  = false;
     int         res;
     SDL_Event   event;
 
@@ -72,35 +73,76 @@ int main(int argc, char* argv[])
 
         Image       background  ("res/background.bmp");
 
-        Image::Ptr  towersPtr       = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF);
-        Sprite::Ptr towerRightPtr   = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
-        Sprite::Ptr towerDownPtr    = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
-        Sprite::Ptr towerLeftPtr    = boost::make_shared<Sprite>(towersPtr, 12+64, 12, 32, 32);
-        Sprite::Ptr towerUpPtr      = boost::make_shared<Sprite>(towersPtr, 12, 12, 32, 32);
-        Sprite::Vector orientationTower;
-        orientationTower.push_back(towerRightPtr);
-        orientationTower.push_back(towerDownPtr);
-        orientationTower.push_back(towerLeftPtr);
-        orientationTower.push_back(towerUpPtr);
         UnitTower::Vector   towerVector;
-        for (int i = 0; i < 10; i++)
         {
-            Position    positionTower(10 + i*48, 100);
-            Offset      offsetTower;
-            Size        sizeTower(48, 48);
-            UnitTower::Ptr      towerPtr = boost::make_shared<UnitTower>(orientationTower, positionTower, offsetTower, sizeTower);
-            towerVector.push_back(towerPtr);
-            zoneManager.getTowerList().push_back(towerPtr->getZone());
+            Image::Ptr  towersPtr       = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF);
+            Sprite::Ptr towerRightPtr   = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
+            Sprite::Ptr towerDownPtr    = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
+            Sprite::Ptr towerLeftPtr    = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
+            Sprite::Ptr towerUpPtr      = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
+            Sprite::Vector orientationTower;
+            orientationTower.push_back(towerRightPtr);
+            orientationTower.push_back(towerDownPtr);
+            orientationTower.push_back(towerLeftPtr);
+            orientationTower.push_back(towerUpPtr);
+            for (int i = 0; i < 10; i++)
+            {
+                Position    positionTower(10 + i*48, 100);
+                Offset      offsetTower;
+                Size        sizeTower(48, 48);
+                UnitTower::Ptr      towerPtr = boost::make_shared<UnitTower>(orientationTower, positionTower, offsetTower, sizeTower);
+                towerVector.push_back(towerPtr);
+                zoneManager.getTowerList().push_back(towerPtr->getZone());
+            }
         }
 
-        Image::Ptr  imageUIPtr      = boost::make_shared<Image>("res/tower.bmp", 0, 0xFF, 0xFF);
-        Sprite::Ptr spriteUIPtr     = boost::make_shared<Sprite>(imageUIPtr, 0, 0, 96, 96);
-        Image::Ptr  towersTranspPtr = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF, SDL_ALPHA_128);
-        Sprite::Ptr towerTranspPtr  = boost::make_shared<Sprite>(towersTranspPtr, 8, 8, 48, 48);
-        Coord       coordUI(800-104, 8);
-        Size        sizeUI(96, 96);
-        UI::Ptr     uiPtr    = boost::make_shared<UI>(coordUI, sizeUI, spriteUIPtr, spriteUIPtr, spriteUIPtr, spriteUIPtr, towerDownPtr);
-        zoneManager.getUiList().push_back(uiPtr->getZone());
+        UnitEnemy::Vector   enemyVector;
+        {
+            Image::Ptr  enemiesPtr      = boost::make_shared<Image>("res/enemy-sprites.bmp", 0xFF, 0xFF, 0xFF);
+            Sprite::Ptr enemyRightPtr   = boost::make_shared<Sprite>(enemiesPtr, 8+110, 8+64, 48, 48);
+            Sprite::Vector enemyRightVector;
+            enemyRightVector.push_back(enemyRightPtr);
+            Animation::Ptr  animationRightPtr   = boost::make_shared<Animation>(enemyRightVector);
+            Sprite::Ptr enemyDownPtr    = boost::make_shared<Sprite>(enemiesPtr, 8, 8, 48, 48);
+            Sprite::Vector enemyDownVector;
+            enemyDownVector.push_back(enemyDownPtr);
+            Animation::Ptr  animationDownPtr   = boost::make_shared<Animation>(enemyDownVector);
+            Sprite::Ptr enemyLeftPtr    = boost::make_shared<Sprite>(enemiesPtr, 8, 8, 48, 48);
+            Sprite::Vector enemyLeftVector;
+            enemyLeftVector.push_back(enemyLeftPtr);
+            Animation::Ptr  animationLeftPtr   = boost::make_shared<Animation>(enemyLeftVector);
+            Sprite::Ptr enemyUpPtr      = boost::make_shared<Sprite>(enemiesPtr, 8, 8, 48, 48);
+            Sprite::Vector enemyUpVector;
+            enemyUpVector.push_back(enemyUpPtr);
+            Animation::Ptr  animationUpPtr   = boost::make_shared<Animation>(enemyUpVector);
+            Animation::Vector animationEnemy;
+            animationEnemy.push_back(animationRightPtr);
+            animationEnemy.push_back(animationDownPtr);
+            animationEnemy.push_back(animationLeftPtr);
+            animationEnemy.push_back(animationUpPtr);
+            for (int i = 0; i < 10; i++)
+            {
+                Position    positionEnemy(20 + i*48, 200);
+                Offset      offsetEnemy;
+                Size        sizeEnemy(48, 48);
+                int         speed = 100;
+                UnitEnemy::Ptr      enemyPtr = boost::make_shared<UnitEnemy>(animationEnemy, positionEnemy, offsetEnemy, sizeEnemy, speed);
+                enemyVector.push_back(enemyPtr);
+            }
+        }
+
+        UI::Vector  uiVector;
+        {
+            Image::Ptr  imageUIPtr      = boost::make_shared<Image>("res/tower.bmp", 0, 0xFF, 0xFF);
+            Sprite::Ptr spriteUIPtr     = boost::make_shared<Sprite>(imageUIPtr, 0, 0, 96, 96);
+            Image::Ptr  towersTranspPtr = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF, SDL_ALPHA_128);
+            Sprite::Ptr towerTranspPtr  = boost::make_shared<Sprite>(towersTranspPtr, 8, 8, 48, 48);
+            Coord       coordUI(800-104, 8);
+            Size        sizeUI(96, 96);
+            UI::Ptr     uiPtr    = boost::make_shared<UI>(coordUI, sizeUI, spriteUIPtr, spriteUIPtr, spriteUIPtr, spriteUIPtr, towerTranspPtr);
+            uiVector.push_back(uiPtr);
+            zoneManager.getUiList().push_back(uiPtr->getZone());
+        }
 
         Uint32 firstTick = SDL_GetTicks();
         Uint32 lastTick = firstTick;
@@ -111,6 +153,7 @@ int main(int argc, char* argv[])
         while (bRunning)
         {
             Uint32 currentTick  = SDL_GetTicks();
+            Uint32 deltaTick = (currentTick - lastTick);
 
             while (SDL_PollEvent(&event))
             {
@@ -163,15 +206,27 @@ int main(int argc, char* argv[])
 
             if (false == bInMenu)
             {
-                // TODO SRO déplacement de toutes les unités mobiles
-                //UnitList.move();
+                // Déplacement de toutes les unités mobiles
+                UnitEnemy::Vector::iterator iEnemy;
+                for (iEnemy  = enemyVector.begin();
+                     iEnemy != enemyVector.end();
+                     iEnemy++)
+                {
+                    (*iEnemy)->move(deltaTick);
+                }
             }
 
             // Blit d'abord le background sur l'écran
             screen.blit(background);
 
-            // Blit l'UI
-            uiPtr->show(screen);
+            // Blit les éléments d'UI
+            UI::Vector::iterator iUI;
+            for (iUI  = uiVector.begin();
+                 iUI != uiVector.end();
+                 iUI++)
+            {
+                (*iUI)->show(screen);
+            }
 
             // Blit les tourelles
             UnitTower::Vector::iterator iTower;
@@ -180,6 +235,15 @@ int main(int argc, char* argv[])
                  iTower++)
             {
                 (*iTower)->show(screen);
+            }
+
+            // Blit les ennemies
+            UnitEnemy::Vector::iterator iEnemy;
+            for (iEnemy  = enemyVector.begin();
+                 iEnemy != enemyVector.end();
+                 iEnemy++)
+            {
+                (*iEnemy)->show(screen);
             }
 
             if (false == bInMenu)
@@ -219,25 +283,12 @@ int main(int argc, char* argv[])
             }
 
             // Lissage du framerate vers 30 fps (33ms par frame)
-            Uint32 deltaTick = (currentTick - lastTick);
             if (deltaTick < 60)
             {
                 SDL_Delay(60 - deltaTick);
             }
             lastTick = currentTick;
         }
-
-        /// TODO SRO : sujet à mettre au propre à tête reposée ; le remove() automatique ?!
-        /*
-        zoneManager.getUiList().remove(uiPtr->getZone());
-        UnitTower::Vector::iterator iTower;
-        for (iTower  = towerVector.begin();
-             iTower != towerVector.end();
-             iTower++)
-        {
-            zoneManager.getUiList().remove((*iTower)->getZone());
-        }
-        */
     }
     else
     {
