@@ -1,8 +1,11 @@
+#include "Image.h"
+#include "Screen.h"
+
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-#include "Image.h"
-#include "Screen.h"
+
+#include <cassert>
 
 /// Constructeur RAII (exception en cas d'erreur : l'objet est toujours valide)
 Image::Image(const char* apFileName,
@@ -11,15 +14,15 @@ Image::Image(const char* apFileName,
              const unsigned char aB /* = 255 */,
              const unsigned char aAlpha /* = SDL_ALPHA_OPAQUE */)
 {
-    BOOST_ASSERT_MSG(NULL != apFileName, "Image ctor need a filename");
-    SDL_Surface* pSurfaceUnoptimized = NULL; // Surface tampon pour charger l'image non optimisé
+    assert(apFileName && "Image ctor need a filename");
+    SDL_Surface* pSurfaceUnoptimized = nullptr; // Surface tampon pour charger l'image non optimisé
 
     std::cout << "image: SDL_LoadBMP(" << apFileName << ")" << std::endl;
 
     // Chargement de l'image
     pSurfaceUnoptimized = SDL_LoadBMP(apFileName);
     // Si le chargement s'est bien passé
-    if (NULL != pSurfaceUnoptimized)
+    if (nullptr != pSurfaceUnoptimized)
     {
         // TODO SRombauts : à revoir avec le chargement des PNG avec transparence
         if (   (0 != aR)
@@ -61,7 +64,7 @@ Image::Image(const char* apFileName,
             // TODO voir si cela apporte qqch de ne pas utiliser SDL_DisplayFormatAlpha
             mpSurface = SDL_DisplayFormat(pSurfaceUnoptimized);
         }
-        if (NULL != mpSurface)
+        if (nullptr != mpSurface)
         {
             std::cout << "image: SDL_DisplayFormat/SDL_DisplayFormatAlpha ok" << std::endl;
             // Libération de l'image non optimisée

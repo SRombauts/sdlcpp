@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SDL/SDL.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <vector>
 
 #include "Rect.h"
@@ -42,7 +42,7 @@ public:
         return mRect;
     }
 
-    typedef boost::shared_ptr<Sprite>   Ptr;
+    typedef std::shared_ptr<Sprite>   Ptr;
     typedef std::vector<Sprite::Ptr>    Vector;
 
 private:

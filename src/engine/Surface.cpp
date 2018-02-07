@@ -7,14 +7,14 @@
 
 
 Surface::Surface(void) :
-    mpSurface(NULL)
+    mpSurface(nullptr)
 {
 }
 
 /// Destructeur : libération des ressources
 Surface::~Surface(void)
 {
-    if (NULL != mpSurface)
+    if (nullptr != mpSurface)
     {
         SDL_FreeSurface(mpSurface);
     }
@@ -23,7 +23,7 @@ Surface::~Surface(void)
 /// Blit la Surface passée en argument sur la surface courante (sans offset)
 bool Surface::blit(Surface& aSurface)
 {
-    bool bRet = (0 == SDL_BlitSurface(aSurface.mpSurface, NULL, mpSurface, NULL));
+    bool bRet = (0 == SDL_BlitSurface(aSurface.mpSurface, nullptr, mpSurface, nullptr));
     if (false == bRet)
     {
        std::cout << "Blit error: " << SDL_GetError() << std::endl;
@@ -34,7 +34,7 @@ bool Surface::blit(Surface& aSurface)
 /// Blit la Surface passée en argument (avec son offset) sur la surface courante
 bool Surface::blit(Surface& aSurface, Coord& aOffset)
 {
-    bool bRet = (0 == SDL_BlitSurface(aSurface.mpSurface, NULL, mpSurface, &aOffset.getRect()));
+    bool bRet = (0 == SDL_BlitSurface(aSurface.mpSurface, nullptr, mpSurface, &aOffset.getRect()));
     if (false == bRet)
     {
        std::cout << "Blit error: " << SDL_GetError() << std::endl;

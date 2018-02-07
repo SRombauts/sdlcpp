@@ -2,7 +2,7 @@
 
 #include <SDL/SDL.h>
 #include <vector>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "Coord.h"
 #include "Drag.h"
@@ -77,7 +77,7 @@ public:
         return mState;
     }
 
-    typedef boost::shared_ptr<UI>    Ptr;
+    typedef std::shared_ptr<UI>    Ptr;
     typedef std::vector<UI::Ptr>     Vector;
 
 private:

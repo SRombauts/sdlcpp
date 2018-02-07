@@ -2,7 +2,7 @@
 
 #include <SDL/SDL.h>
 #include <vector>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "Animation.h"
 #include "Coord.h"
@@ -107,7 +107,7 @@ public:
         mSpeed = aSpeed;
     }
 
-    typedef boost::shared_ptr<UnitEnemy>    Ptr;
+    typedef std::shared_ptr<UnitEnemy>    Ptr;
     typedef std::vector<UnitEnemy::Ptr>     Vector;
 
 private:

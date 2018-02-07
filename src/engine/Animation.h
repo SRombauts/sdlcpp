@@ -2,7 +2,7 @@
 
 #include <SDL/SDL.h>
 #include <vector>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "Sprite.h"
 
@@ -44,7 +44,7 @@ public:
         return mSpriteVector[aIndex];
     }
 
-    typedef boost::shared_ptr<Animation>    Ptr;
+    typedef std::shared_ptr<Animation>    Ptr;
     typedef std::vector<Animation::Ptr>     Vector;
 
 private:

@@ -23,7 +23,7 @@ UI::UI(const Coord&         aCoord,
 {
     if (!aSpriteDefaultPtr || !aSpriteDownPtr || !aSpriteFocusPtr || !aSpriteDisabledPtr || !aSpriteDragPtr)
     {
-        throw std::runtime_error("UI::UI: aSpriteDefaultPtr NULL");
+        throw std::runtime_error("UI::UI: aSpriteDefaultPtr nullptr");
     }
     mSprites.push_back(aSpriteDefaultPtr);  // eStateDefault   = 0,
     mSprites.push_back(aSpriteDownPtr);     // eStateDown      = 1,

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/intrusive/list.hpp>
+#include <list>
 
 class IZoneCallbacks;
 
@@ -16,16 +16,12 @@ class IZoneCallbacks;
  *
  * @author 2012/09/29 SRombauts
 */
-class Zone : public boost::intrusive::list_base_hook< boost::intrusive::link_mode<boost::intrusive::auto_unlink> > // Base hook with default tag, raw pointers and safe_link mode
+class Zone
 {
     friend class ZoneManager;
 
 public:
-    /// Liste intrusive doublement chaînée de #Zone (et non pas de pointeurs de #Zone)
-    /// => utilisée parce que les Zones sont des objets membres (composition)
-    ///    et qu'on veut donc simplement en faire une liste "light"
-    /// TODO SRO : sujet à mettre au propre à tête reposée
-    typedef boost::intrusive::list< Zone, boost::intrusive::constant_time_size<false> > List;
+    typedef std::list<Zone> List;
 
 public:
              Zone(IZoneCallbacks&    aZoneCallbacks,

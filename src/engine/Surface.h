@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SDL/SDL.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 class Coord;
 class Sprite;
@@ -27,22 +27,22 @@ public:
     /// Accesseurs simples
     inline const SDL_Surface&   getSurface(void) const
     {
-        return *mpSurface; // Jamais NULL une fois l'objet construit
+        return *mpSurface; // Jamais nullptr une fois l'objet construit
     }
     inline       SDL_Surface&   getSurface(void)
     {
-        return *mpSurface; // Jamais NULL une fois l'objet construit
+        return *mpSurface; // Jamais nullptr une fois l'objet construit
     }
     inline int getW(void) const
     {
-        return (*mpSurface).w; // Jamais NULL une fois l'objet construit
+        return (*mpSurface).w; // Jamais nullptr une fois l'objet construit
     }
     inline int getH(void) const
     {
-        return (*mpSurface).h; // Jamais NULL une fois l'objet construit
+        return (*mpSurface).h; // Jamais nullptr une fois l'objet construit
     }
 
-    typedef boost::shared_ptr<Surface>  Ptr;
+    typedef std::shared_ptr<Surface>  Ptr;
 
 private:
     /// @{ Interdiction de la copie d'instance, car cette classe gère une ressource allouée dynamiquement

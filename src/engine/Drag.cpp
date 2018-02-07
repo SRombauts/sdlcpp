@@ -12,7 +12,7 @@ Drag::Drag(const Sprite::Ptr&   aSpritePtr) :
 {
     if (!aSpritePtr)
     {
-        throw std::runtime_error("Drag::Drag: aSpritePtr NULL");
+        throw std::runtime_error("Drag::Drag: aSpritePtr nullptr");
     }
 }
 

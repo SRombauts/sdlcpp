@@ -10,7 +10,7 @@
 #include "engine/UI.h"
 #include "engine/ZoneManager.h"
 
-#include <boost/make_shared.hpp>
+#include <memory>
 
 #ifdef __GNUC__
     #include "backtrace.h"
@@ -22,13 +22,13 @@ const int SCREEN_WIDTH  = 800;
 const int SCREEN_HEIGHT = 480;
 
 
-std::terminate_handler _default_terminate_handler = NULL;
+std::terminate_handler _default_terminate_handler = nullptr;
 void my_terminate_handler (void)
 {
 #ifdef __GNUC__
     print_backtrace();
 #endif
-    if (NULL != _default_terminate_handler)
+    if (nullptr != _default_terminate_handler)
     {
         _default_terminate_handler();
     }
@@ -75,11 +75,11 @@ int main(int argc, char* argv[])
 
         UnitTower::Vector   towerVector;
         {
-            Image::Ptr  towersPtr       = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF);
-            Sprite::Ptr towerRightPtr   = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
-            Sprite::Ptr towerDownPtr    = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
-            Sprite::Ptr towerLeftPtr    = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
-            Sprite::Ptr towerUpPtr      = boost::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
+            Image::Ptr  towersPtr       = std::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF);
+            Sprite::Ptr towerRightPtr   = std::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
+            Sprite::Ptr towerDownPtr    = std::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
+            Sprite::Ptr towerLeftPtr    = std::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
+            Sprite::Ptr towerUpPtr      = std::make_shared<Sprite>(towersPtr, 8, 8, 48, 48);
             Sprite::Vector orientationTower;
             orientationTower.push_back(towerRightPtr);
             orientationTower.push_back(towerDownPtr);
@@ -90,7 +90,7 @@ int main(int argc, char* argv[])
                 Position    positionTower(10 + i*48, 100);
                 Offset      offsetTower;
                 Size        sizeTower(48, 48);
-                UnitTower::Ptr      towerPtr = boost::make_shared<UnitTower>(orientationTower, positionTower, offsetTower, sizeTower);
+                UnitTower::Ptr      towerPtr = std::make_shared<UnitTower>(orientationTower, positionTower, offsetTower, sizeTower);
                 towerVector.push_back(towerPtr);
                 zoneManager.getTowerList().push_back(towerPtr->getZone());
             }
@@ -98,23 +98,23 @@ int main(int argc, char* argv[])
 
         UnitEnemy::Vector   enemyVector;
         {
-            Image::Ptr  enemiesPtr      = boost::make_shared<Image>("res/enemy-sprites.bmp", 0xFF, 0xFF, 0xFF);
-            Sprite::Ptr enemyRightPtr   = boost::make_shared<Sprite>(enemiesPtr, 8+110, 8+64, 48, 48);
+            Image::Ptr  enemiesPtr      = std::make_shared<Image>("res/enemy-sprites.bmp", 0xFF, 0xFF, 0xFF);
+            Sprite::Ptr enemyRightPtr   = std::make_shared<Sprite>(enemiesPtr, 8+110, 8+64, 48, 48);
             Sprite::Vector enemyRightVector;
             enemyRightVector.push_back(enemyRightPtr);
-            Animation::Ptr  animationRightPtr   = boost::make_shared<Animation>(enemyRightVector);
-            Sprite::Ptr enemyDownPtr    = boost::make_shared<Sprite>(enemiesPtr, 8, 8, 48, 48);
+            Animation::Ptr  animationRightPtr   = std::make_shared<Animation>(enemyRightVector);
+            Sprite::Ptr enemyDownPtr    = std::make_shared<Sprite>(enemiesPtr, 8, 8, 48, 48);
             Sprite::Vector enemyDownVector;
             enemyDownVector.push_back(enemyDownPtr);
-            Animation::Ptr  animationDownPtr   = boost::make_shared<Animation>(enemyDownVector);
-            Sprite::Ptr enemyLeftPtr    = boost::make_shared<Sprite>(enemiesPtr, 8, 8, 48, 48);
+            Animation::Ptr  animationDownPtr   = std::make_shared<Animation>(enemyDownVector);
+            Sprite::Ptr enemyLeftPtr    = std::make_shared<Sprite>(enemiesPtr, 8, 8, 48, 48);
             Sprite::Vector enemyLeftVector;
             enemyLeftVector.push_back(enemyLeftPtr);
-            Animation::Ptr  animationLeftPtr   = boost::make_shared<Animation>(enemyLeftVector);
-            Sprite::Ptr enemyUpPtr      = boost::make_shared<Sprite>(enemiesPtr, 8, 8, 48, 48);
+            Animation::Ptr  animationLeftPtr   = std::make_shared<Animation>(enemyLeftVector);
+            Sprite::Ptr enemyUpPtr      = std::make_shared<Sprite>(enemiesPtr, 8, 8, 48, 48);
             Sprite::Vector enemyUpVector;
             enemyUpVector.push_back(enemyUpPtr);
-            Animation::Ptr  animationUpPtr   = boost::make_shared<Animation>(enemyUpVector);
+            Animation::Ptr  animationUpPtr   = std::make_shared<Animation>(enemyUpVector);
             Animation::Vector animationEnemy;
             animationEnemy.push_back(animationRightPtr);
             animationEnemy.push_back(animationDownPtr);
@@ -126,20 +126,20 @@ int main(int argc, char* argv[])
                 Offset      offsetEnemy;
                 Size        sizeEnemy(48, 48);
                 int         speed = 100;
-                UnitEnemy::Ptr      enemyPtr = boost::make_shared<UnitEnemy>(animationEnemy, positionEnemy, offsetEnemy, sizeEnemy, speed);
+                UnitEnemy::Ptr      enemyPtr = std::make_shared<UnitEnemy>(animationEnemy, positionEnemy, offsetEnemy, sizeEnemy, speed);
                 enemyVector.push_back(enemyPtr);
             }
         }
 
         UI::Vector  uiVector;
         {
-            Image::Ptr  imageUIPtr      = boost::make_shared<Image>("res/tower.bmp", 0, 0xFF, 0xFF);
-            Sprite::Ptr spriteUIPtr     = boost::make_shared<Sprite>(imageUIPtr, 0, 0, 96, 96);
-            Image::Ptr  towersTranspPtr = boost::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF, SDL_ALPHA_128);
-            Sprite::Ptr towerTranspPtr  = boost::make_shared<Sprite>(towersTranspPtr, 8, 8, 48, 48);
+            Image::Ptr  imageUIPtr      = std::make_shared<Image>("res/tower.bmp", 0, 0xFF, 0xFF);
+            Sprite::Ptr spriteUIPtr     = std::make_shared<Sprite>(imageUIPtr, 0, 0, 96, 96);
+            Image::Ptr  towersTranspPtr = std::make_shared<Image>("res/tower-sprites.bmp", 0, 0xFF, 0xFF, SDL_ALPHA_128);
+            Sprite::Ptr towerTranspPtr  = std::make_shared<Sprite>(towersTranspPtr, 8, 8, 48, 48);
             Coord       coordUI(800-104, 8);
             Size        sizeUI(96, 96);
-            UI::Ptr     uiPtr    = boost::make_shared<UI>(coordUI, sizeUI, spriteUIPtr, spriteUIPtr, spriteUIPtr, spriteUIPtr, towerTranspPtr);
+            UI::Ptr     uiPtr    = std::make_shared<UI>(coordUI, sizeUI, spriteUIPtr, spriteUIPtr, spriteUIPtr, spriteUIPtr, towerTranspPtr);
             uiVector.push_back(uiPtr);
             zoneManager.getUiList().push_back(uiPtr->getZone());
         }

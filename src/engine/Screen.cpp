@@ -13,9 +13,9 @@ Screen::Screen(const int aWidth, const int aHeight, const char* apTitle) :
 {
     // Chargement de l'icône AVANT SDL_SetVideoMode
     SDL_Surface* pSurfaceIcon = SDL_LoadBMP("res/sdl_icone.bmp");
-    if (NULL != pSurfaceIcon)
+    if (nullptr != pSurfaceIcon)
     {
-        SDL_WM_SetIcon(pSurfaceIcon, NULL);
+        SDL_WM_SetIcon(pSurfaceIcon, nullptr);
     }
     else
     {
@@ -24,10 +24,10 @@ Screen::Screen(const int aWidth, const int aHeight, const char* apTitle) :
 
     // Initialisation de la fenêtre principale
     mpSurface = SDL_SetVideoMode(aWidth, aHeight, SCREEN_BPP, SDL_HWSURFACE);
-    if (NULL != mpSurface)
+    if (nullptr != mpSurface)
     {
         // Mise en place de sa barre de titre
-        SDL_WM_SetCaption(apTitle, NULL);
+        SDL_WM_SetCaption(apTitle, nullptr);
     }
     else
     {

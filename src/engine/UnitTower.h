@@ -2,7 +2,7 @@
 
 #include <SDL/SDL.h>
 #include <vector>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "Animation.h"
 #include "Coord.h"
@@ -85,7 +85,7 @@ public:
     {
         mOrientation = aOrientation;
     }
-    typedef boost::shared_ptr<UnitTower>    Ptr;
+    typedef std::shared_ptr<UnitTower>    Ptr;
     typedef std::vector<UnitTower::Ptr>     Vector;
 
 private:
